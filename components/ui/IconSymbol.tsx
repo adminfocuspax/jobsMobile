@@ -13,6 +13,17 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'person.fill': 'person',
+  'gear': 'settings',
+  'bell.fill': 'notifications',
+  'doc.text.fill': 'description',
+  'bookmark.fill': 'bookmark',
+  'envelope.fill': 'email',
+  'globe': 'language',
+  'questionmark.circle.fill': 'help',
+  'rectangle.portrait.and.arrow.right': 'logout',
+  'magnifyingglass': 'search',
+  'xmark.circle.fill': 'cancel',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
@@ -33,11 +44,11 @@ export function IconSymbol({
   color,
   style,
 }: {
-  name: IconSymbolName;
+  name: import('expo-symbols').SymbolViewProps['name'];
   size?: number;
   color: string | OpaqueColorValue;
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  return <MaterialIcons color={color} size={size} name={MAPPING[name] || 'help-outline'} style={style} />;
 }
