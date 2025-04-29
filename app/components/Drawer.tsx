@@ -1,11 +1,13 @@
 import { ThemedText } from "@/components/ThemedText";
-import { StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, ScrollView, GestureResponderEvent } from 'react-native';
 import { Drawer, DrawerBackdrop, DrawerContent, DrawerHeader, DrawerBody } from "@/components/ui/drawer";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
 import { SymbolViewProps } from 'expo-symbols';
 import i18n from "../i18n/i18n";
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from "@/components/ui/avatar";
+import ProfileAvatar from "./ProfileAvatar";
 
 interface MenuItem {
   icon: SymbolViewProps['name'];
@@ -16,13 +18,13 @@ interface MenuItem {
 
 function JobsDrawer() {
   const [showDrawer, setShowDrawer] = useState(false);
-  
+
   // Function to toggle language
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'ta' : 'en';
     i18n.changeLanguage(newLang);
   };
-  
+
   const menuItems: MenuItem[] = [
     { icon: "person.fill", text: "My Profile", color: "#000" },
     { icon: "gear", text: "Settings", color: "#000" },
@@ -39,7 +41,11 @@ function JobsDrawer() {
     { icon: "questionmark.circle.fill", text: "Help & Support", color: "#000" },
     { icon: "rectangle.portrait.and.arrow.right", text: "Logout", color: "#CC0000" },
   ];
-  
+
+  function handleProfilePress(event: GestureResponderEvent): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <Pressable onPress={() => setShowDrawer(true)}>
@@ -52,19 +58,25 @@ function JobsDrawer() {
       <Drawer
         isOpen={showDrawer}
         onClose={() => setShowDrawer(false)}
-        size="lg" 
+        size="lg"
         anchor="left"
       >
         <DrawerBackdrop />
         <DrawerContent>
           <DrawerHeader style={styles.menuHeader}>
-            <Image
+            {/* <Image
               source={require('@/assets/images/home-logo.png')}
               style={styles.logoImage}
-            />
+            /> */}
+           
+            <ProfileAvatar
+            style={styles.logoImage} 
+            size="2xl" 
+          />
+
           </DrawerHeader>
           <DrawerBody>
-            <ScrollView 
+            <ScrollView
               style={styles.menuList}
               showsVerticalScrollIndicator={true}
               contentContainerStyle={styles.menuListContent}
@@ -76,7 +88,7 @@ function JobsDrawer() {
                     styles.menuItem,
                     index === menuItems.length - 1 && styles.menuItemLast
                   ]}
-                  onPress={item.onPress || (() => {})}
+                  onPress={item.onPress || (() => { })}
                 >
                   <IconSymbol
                     name={item.icon}
@@ -104,11 +116,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   logoImage: {
-    width: 160,
-    height: 160,
-    marginRight: 8,
-    marginLeft: 24,
-    marginTop: 8,
+    margin: "auto",
+    marginBottom: 8,
+    marginTop: 24,
   },
   menuList: {
     maxHeight: 900,

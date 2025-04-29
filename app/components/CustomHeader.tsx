@@ -56,7 +56,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
               />
             </View>
           </View>
-          <TouchableOpacity 
+          {/* <TouchableOpacity 
             onPress={handleProfilePress}
             activeOpacity={0.8}
           >
@@ -69,7 +69,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
               />
               <AvatarBadge />
             </Avatar>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
 
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginRight: 8,
-    marginLeft: 24,
-    marginTop: -8,
+    marginLeft: -16,
+    marginTop: 0,
   },
   subText: {
     fontSize: 14,

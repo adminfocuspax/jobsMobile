@@ -4,6 +4,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 import { HomeBanner } from '@/components/Home';
 import '../i18n/i18n'; // Import the i18n configuration
+import CompleteProfile from '../components/completeProfile';
 
 export default function HomeScreen() {
   return (
@@ -13,7 +14,7 @@ export default function HomeScreen() {
       
       {/* Main content goes here */}
       <ThemedView style={styles.mainContent}>
-
+        <CompleteProfile/>
         <ThemedText type='subtitle'>Your journey to a better career starts here.</ThemedText>
       </ThemedView>
       
@@ -23,7 +24,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   mainContent: {
-    padding: 20,
+    margin: 0,
+    padding: 0,
   }
 });
 
