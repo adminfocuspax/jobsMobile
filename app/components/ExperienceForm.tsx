@@ -631,18 +631,18 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   suggestionsContainer: {
-    position: 'absolute',
-    top: '100%',
+
     left: 0,
     right: 0,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 4,
-    zIndex: 1000,
+    zIndex: 8000,
     elevation: 5,
     maxHeight: 200,
     marginTop: 4,
+    opacity: 1,
   },
   suggestionsScrollView: {
     maxHeight: 200,
