@@ -12,63 +12,87 @@ import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
+import CenterAligned from '../components/CenterAligned';
+import { JobPreference, SUPERMARKET_JOB_PREFERENCES } from '@/constants/supermarketJobOptions';
+import JobPreferencesSelector from '../components/JobPreferencesSelector';
 
 const TRANSLATION_KEY = 'userInfo.preferences';
 
 const Preferences: React.FC = () => {
-  // State for form fields
-  const { values, primaryColor } = useResponsive();
+  const { values } = useResponsive();
   const { t } = useTranslation();
-  
+  const [selectedPreferences, setSelectedPreferences] = useState<JobPreference[]>([]);
+
+  // Handle selection changes from the JobPreferencesSelector
+  const handleSelectionChange = (preferences: JobPreference[]) => {
+    setSelectedPreferences(preferences);
+    console.log('Selected preferences:', preferences);
+  };
+
   // Handle form submission
   const handleSubmit = () => {
-    console.log('Preferences submitted');
-    // Navigate to the next page or complete the profile
-    router.push('/');
+    console.log('Job preferences submitted:', selectedPreferences);
+    // Navigate to the next page
+    router.push('/(tabs)');
   };
 
   // Handle back button
   const handleBack = () => {
-    // Navigate back to experience page
     router.push('/userDetails/experience');
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <JobsBreadcrumb currentStep="preferences" />
-      <Box style={styles.container}>
-        <VStack space="xl" style={styles.content}>
-          <Heading size="xl" style={styles.heading}>Your Preferences</Heading>
-          
-          <Text style={styles.encouragementText}>
-            Tell us about your job preferences to help us find the best matches for you.
-          </Text>
-          
-          {/* Preferences content would go here */}
-          <Text>Preferences form will be implemented here.</Text>
-        </VStack>
+    <View style={{ flex: 1 }}>
+      <Box
+        style={styles.scrollContainer}
+      >
+        <JobsBreadcrumb currentStep="preferences" />
+        
+        <Box style={styles.container}>
+          <VStack space="xl" style={styles.content}>
+            <Heading size="xl" style={styles.heading}>
+              {t(`${TRANSLATION_KEY}.title`, 'Job Preferences')}
+            </Heading>
 
-        {/* Navigation Buttons */}
-        <HStack style={styles.buttonContainer} space="md">
-          <GradientButton
-            width={values.buttonWidth / 2.2}
-            padding={values.buttonPadding}
-            fontSize={values.fontSize}
-            text="Back"
-            colors={["#888", "#666"]}
-            onPress={handleBack}
-          />
-          
-          <GradientButton
-            width={values.buttonWidth / 2.2}
-            padding={values.buttonPadding}
-            fontSize={values.fontSize}
-            text="Complete"
-            onPress={handleSubmit}
-          />
-        </HStack>
+            <Text style={styles.encouragementText}>
+              {t(
+                `${TRANSLATION_KEY}.encouragement`,
+                'Select the job roles you are interested in. This helps us find the best matches for you.'
+              )}
+            </Text>
+
+            <JobPreferencesSelector
+              preferences={SUPERMARKET_JOB_PREFERENCES}
+              onSelectionChange={handleSelectionChange}
+              maxSelections={5}
+            />
+          </VStack>
+        </Box>
       </Box>
-    </ScrollView>
+
+      {/* Navigation Buttons */}
+      <CenterAligned style={styles.buttonContainer}>
+      <VStack space="md" style={styles.buttonRow}>
+            <GradientButton
+              width={"100%"}
+              padding={values.buttonPadding}
+              fontSize={values.fontSize}
+              text="Back"
+              colors={["#888", "#666"]}
+              onPress={handleBack}
+            />
+
+            <GradientButton
+              width={"100%"}
+              padding={values.buttonPadding}
+              fontSize={values.fontSize}
+              text="Next"
+              onPress={handleSubmit}
+              disabled={selectedPreferences.length === 0}
+            />
+          </VStack>
+      </CenterAligned>
+    </View>
   );
 };
 
@@ -76,15 +100,16 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     paddingVertical: 24,
+    backgroundColor: '#FFFFFF',
   },
   container: {
     flex: 1,
-    padding: 16,
     backgroundColor: '#FFFFFF',
+    width: '100%',
   },
   content: {
-    flex: 1,
     width: '100%',
+    paddingBottom: 250, // Space for the fixed button container
   },
   heading: {
     textAlign: 'center',
@@ -95,12 +120,16 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
     marginBottom: 16,
-    lineHeight: 22,
+    paddingHorizontal: 16,
   },
-  buttonContainer: {
+  buttonContainer:{
+    backgroundColor: '#FFFFFF',
+  },
+  buttonRow: {
     width: '100%',
-    paddingVertical: 16,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
 });
 

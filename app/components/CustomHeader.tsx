@@ -45,9 +45,9 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.greetingContainer}>
-          <View>
+          {/* <View>
             <JobsDrawer />
-          </View>
+          </View> */}
           <View style={styles.greetingTextContainer}>
             <View style={styles.greetingRow}>
               <Image 

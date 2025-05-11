@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, useWindowDimensions, StyleProp, ViewStyle } from 'react-native';
 
 interface CenterAlignedProps {
   children: ReactNode;
-  style?: object;
+  style?: StyleProp<ViewStyle>;
   padding?: number;
 }
 
@@ -14,7 +14,7 @@ interface CenterAlignedProps {
  * - Centered horizontally on the screen
  * 
  * @param {ReactNode} children - The content to be displayed inside the container
- * @param {object} style - Additional styles to apply to the container (optional)
+ * @param {StyleProp<ViewStyle>} style - Additional styles to apply to the container (optional)
  * @param {number} padding - Padding to apply to the container (default: 16)
  */
 const CenterAligned: React.FC<CenterAlignedProps> = ({ 
@@ -29,10 +29,11 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
       <View 
         style={[
           styles.container,
-          { 
+          {
             maxWidth: 520,
             width: width < 520 ? '100%' : 520,
-            padding: padding
+            padding: padding,
+            backgroundColor: 'white',
           },
           style
         ]}
@@ -48,10 +49,12 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFFFF',
   },
   container: {
     backgroundColor: 'white',
     borderRadius: 8,
+    
 
   }
 });

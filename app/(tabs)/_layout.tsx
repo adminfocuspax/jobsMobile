@@ -47,17 +47,20 @@ export default function TabLayout() {
           ),
         }}
       />
+    
+      
       <Tabs.Screen
-        name="explore"
+        name="user-info/page"
         options={{
-          title: 'Explore',
-          headerShown: true,
+          title: 'Settings',
+          headerShown: false,
           headerSearchEnabled:false,
           tabBarIcon: ({ color }: { color: string }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <IconSymbol size={28} name="person.fill" color={color} />
           ),
         }}
       />
+      
     </Tabs>
   );
 }
