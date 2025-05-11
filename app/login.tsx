@@ -129,7 +129,7 @@ export default function LoginScreen() {
             text={t('auth.login')}
             onPress={() => {
               if (acceptedTerms) {
-                router.replace('/(tabs)');
+                router.replace('./userDetails/userInfo');
               } else {
                 alert('Please accept the Terms and Conditions to continue');
               }

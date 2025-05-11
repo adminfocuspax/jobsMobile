@@ -1,6 +1,7 @@
 import { Stack, router } from 'expo-router';
 import { useEffect } from 'react';
 import { ThemedView } from '@/components/ThemedView';
+import { Button, View, Text } from 'react-native';
 
 export default function IndexScreen() {
   useEffect(() => {
@@ -12,7 +13,19 @@ export default function IndexScreen() {
     return () => clearTimeout(timer);
   }, []);
 
+  // This function can be used for direct navigation to user details flow
+  const navigateToUserDetails = () => {
+    router.push('/userDetails/userInfo');
+  };
+
   return (
-    <ThemedView style={{ flex: 1, backgroundColor: '#FFFFFF' }} />
+    <ThemedView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+      {/* Optional: Add a button to directly navigate to user details */}
+      {/* 
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button title="Go to Profile Setup" onPress={navigateToUserDetails} />
+      </View>
+      */}
+    </ThemedView>
   );
-} 
+}

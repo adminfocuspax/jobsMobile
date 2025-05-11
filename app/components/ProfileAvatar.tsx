@@ -2,12 +2,14 @@
 import React from 'react';
 import { TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import { ThemedText } from '@/components/ThemedText';
 
 interface ProfileAvatarProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   avatarUrl?: string;
   userName?: string;
   showBadge?: boolean;
+  showChangeText?:boolean
   onPress?: (event: GestureResponderEvent) => void;
   className?: string;
   style?:StyleProp<ViewStyle>
@@ -17,6 +19,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
   size = 'md',
   className,
   showBadge = true,
+  showChangeText=false,
   style,
   onPress,
 }) => {
@@ -37,7 +40,13 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
       onPress={handleProfilePress}
       activeOpacity={0.8}
       className={className}
-      style={style}
+      style={[
+        showChangeText && { 
+          alignItems: 'center',
+          justifyContent: 'center'
+        },
+        style
+      ]}
     >
       <Avatar size={size}>
         <AvatarFallbackText>{userName}</AvatarFallbackText>
@@ -50,6 +59,7 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         )}
         {showBadge && <AvatarBadge />}
       </Avatar>
+      {showChangeText && <ThemedText type="small">Tap to change profile picture</ThemedText>}
     </TouchableOpacity>
   );
 };
