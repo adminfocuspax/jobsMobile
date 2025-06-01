@@ -8,9 +8,10 @@ import { Heading } from '@/components/ui/heading';
 import { Input, InputField } from '@/components/ui/input';
 import { Button, ButtonText, ButtonIcon } from '@/components/ui/button';
 import { FormControl, FormControlLabel, FormControlLabelText, FormControlHelperText } from '@/components/ui/form-control';
+import { Select, SelectTrigger, SelectInput, SelectIcon, SelectPortal, SelectBackdrop, SelectContent, SelectDragIndicatorWrapper, SelectDragIndicator, SelectItem } from '@/components/ui/select';
 import { useTranslation } from 'react-i18next';
-import { JOB_TITLES } from '@/constants/experienceOptions';
-import { AddIcon, Icon, TrashIcon } from '@/components/ui/icon';
+import { JOB_TITLES, INDUSTRIES_EXPERIENCED_IN } from '@/constants/experienceOptions';
+import { AddIcon, Icon, TrashIcon, ChevronDownIcon } from '@/components/ui/icon';
 
 const TRANSLATION_KEY = 'userInfo.experience';
 
@@ -18,6 +19,7 @@ export interface Experience {
   id: string;
   company: string;
   jobTitle: string;
+  industry?: string;       // Industry field
   companyAddress?: string; // Optional company address
   companyCity?: string;    // Optional company city
   companyArea?: string;    // Optional company area/region
@@ -149,6 +151,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
         id: Date.now().toString(),
         company: '',
         jobTitle: '',
+        industry: '',
         companyAddress: '',
         companyCity: '',
         companyArea: '',
@@ -392,6 +395,41 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                 </ScrollView>
               </Box>
             )}
+          </FormControl>
+          
+          {/* Industry Selection */}
+          <FormControl size="md" style={styles.formField}>
+            <FormControlLabel>
+              <FormControlLabelText>{t(`${TRANSLATION_KEY}.industry`)}</FormControlLabelText>
+            </FormControlLabel>
+            <Select
+              selectedValue={experience.industry}
+              onValueChange={(value: string | boolean) => updateExperience(experience.id, 'industry', value)}
+            >
+              <SelectTrigger variant="outline" size="md">
+                <SelectInput 
+                  placeholder={t(`${TRANSLATION_KEY}.select_industry`)}
+                />
+                <SelectIcon >
+                  <ChevronDownIcon />
+                </SelectIcon>
+              </SelectTrigger>
+              <SelectPortal>
+                <SelectBackdrop />
+                <SelectContent>
+                  <SelectDragIndicatorWrapper>
+                    <SelectDragIndicator />
+                  </SelectDragIndicatorWrapper>
+                  {INDUSTRIES_EXPERIENCED_IN.map((option) => (
+                    <SelectItem
+                      key={option.id}
+                      label={t(`${TRANSLATION_KEY}.${option.label}`)}
+                      value={option.value}
+                    />
+                  ))}
+                </SelectContent>
+              </SelectPortal>
+            </Select>
           </FormControl>
           
           {/* Start Date */}

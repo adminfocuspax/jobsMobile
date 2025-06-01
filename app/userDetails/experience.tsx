@@ -25,6 +25,7 @@ const ExperienceDetails: React.FC = () => {
       id: '1',
       company: '',
       jobTitle: '',
+      industry: '',
       companyAddress: '',
       companyCity: '',
       companyArea: '',

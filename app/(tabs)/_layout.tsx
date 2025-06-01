@@ -47,7 +47,18 @@ export default function TabLayout() {
           ),
         }}
       />
-    
+
+      <Tabs.Screen
+        name="yourjobs"
+        options={{
+          title: 'Yourjobs',
+          headerShown: true,
+          headerSearchEnabled: false,
+          tabBarIcon: ({ color }: { color: string }) => (
+            <IconSymbol size={28} name="briefcase.fill" color={color} />
+          ),
+        }}
+      />
       
       <Tabs.Screen
         name="user-info/page"

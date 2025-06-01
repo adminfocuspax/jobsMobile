@@ -25,10 +25,45 @@ const UserInfo: React.FC = () => {
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
+  const [userStatus, setUserStatus] = useState<string[]>([]);
+
+  // Status options
+  const statusOptions = [
+    'Student',
+    'Resident',
+    'Retired',
+    'Non-Resident',
+    'Veteran',
+    'None'
+  ];
+
+  // Toggle status selection
+  const toggleStatus = (status: string) => {
+    if (userStatus.includes(status)) {
+      // If "None" is selected, remove all other selections
+      if (status === 'None') {
+        setUserStatus([]);
+      } else {
+        // Remove the status
+        setUserStatus(userStatus.filter(item => item !== status));
+      }
+    } else {
+      // If "None" is selected, clear all other selections
+      if (status === 'None') {
+        setUserStatus(['None']);
+      } else {
+        // If adding a status other than "None", remove "None" if it's selected
+        const newStatus = userStatus.includes('None') 
+          ? [status] 
+          : [...userStatus, status];
+        setUserStatus(newStatus);
+      }
+    }
+  };
 
   // Handle form submission
   const handleSubmit = () => {
-    console.log('Form submitted:', { fullName, email, age, gender });
+    console.log('Form submitted:', { fullName, email, age, gender, userStatus });
     // Navigate to the education page
     router.push('/userDetails/educations');
   };
@@ -148,6 +183,38 @@ const UserInfo: React.FC = () => {
                 </Pressable>
               </VStack>
             </FormControl>
+
+
+
+            {/* User Status Selection (Multi-select) */}
+            <FormControl size="md">
+              <FormControlLabel>
+                <FormControlLabelText>Status (Select all that apply)</FormControlLabelText>
+              </FormControlLabel>
+              <VStack space="sm" style={styles.statusContainer}>
+                {statusOptions.map((status) => (
+                  <Pressable
+                    key={status}
+                    style={Object.assign({},
+                      styles.checkboxOption,
+                      userStatus.includes(status) ? styles.checkboxOptionSelected : {}
+                    )}
+                    onPress={() => toggleStatus(status)}
+                  >
+                    <Box style={Object.assign({},
+                      styles.checkbox,
+                      userStatus.includes(status) ? { borderColor: primaryColor, backgroundColor: primaryColor } : {}
+                    )}>
+                      {userStatus.includes(status) && (
+                        <Text style={styles.checkmark}>✓</Text>
+                      )}
+                    </Box>
+                    <Text style={styles.checkboxText}>{status}</Text>
+                  </Pressable>
+                ))}
+              </VStack>
+            </FormControl>
+            
           </VStack>
         {/* Next Button */}
   
@@ -165,6 +232,8 @@ const UserInfo: React.FC = () => {
             disabled={false}
           />
         </Box>
+
+
     </ScrollView>
   );
 };
@@ -199,6 +268,9 @@ const styles = StyleSheet.create({
   genderContainer: {
     marginTop: 8,
   },
+  statusContainer: {
+    marginTop: 8,
+  },
   radioOption: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -229,6 +301,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
+  // Checkbox styles for multi-select
+  checkboxOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  checkboxOptionSelected: {
+    // You can add styles for the selected option if needed
+  },
+  checkbox: {
+    height: 20,
+    width: 20,
+    borderRadius: 4,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: "#000",
+    marginRight: 10,
+  },
+  checkmark: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  checkboxText: {
+    fontSize: 16,
+    color: '#333',
+  },
+
   buttonContainer: {
     width: '90%',
     paddingVertical: 16,

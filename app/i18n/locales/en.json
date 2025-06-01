@@ -27,7 +27,12 @@
       "education_level" : "Education Level",
       "highest_level_edu":"Select your highest level of education",
       "degree_optional":"Degree (Optional)",
-      "specify_degree":"Specify your degree to help employers understand your qualifications"
+      "specify_degree":"Specify your degree to help employers understand your qualifications",
+      "less_than_tenth":"Less Than Tenth",
+      "tenth":"Tenth",
+      "intermediate":"Intermediate",
+      "graduation":"Graduation",
+      "post_graduate":"Post Graduate"
     },
     "experience":{
       "experience_details": "Work Experience",
@@ -63,7 +68,12 @@
       "invalid_date_range": "Invalid Date Range",
       "end_after_start": "End date must be after start date.",
       "please_complete_all_fields": "Please complete all required fields for each experience entry. Company name, job title, start date, and end date (if not current job) are required.",
-      "no_experience": "I don't have any work experience"
+      "no_experience": "I don't have any work experience",
+      "industry": "Industry",
+      "select_industry": "Select your industry",
+      "retail":"Retail",
+      "restuarnt":"Restaurant",
+      "other":"Other"
     }
   },
   "header": {

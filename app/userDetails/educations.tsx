@@ -123,7 +123,7 @@ const EducationDetails: React.FC = () => {
                         ]}
                         onPress={() => setEducationLevel(option.value)}
                       >
-                        <ButtonText>{option.label}</ButtonText>
+                        <ButtonText>{t(`${TRANSLATION_KEY}.${option.value}`)}</ButtonText>
                       </Button>
                     ))}
                   </HStack>
@@ -140,7 +140,23 @@ const EducationDetails: React.FC = () => {
                         ]}
                         onPress={() => setEducationLevel(option.value)}
                       >
-                        <ButtonText>{option.label}</ButtonText>
+                        <ButtonText>{t(`${TRANSLATION_KEY}.${option.value}`)}</ButtonText>
+                      </Button>
+                    ))}
+                  </HStack>
+                  <HStack style={styles.optionsRow}>
+                    {EDUCATION_LEVELS.slice(4, 5).map((option) => (
+                      <Button
+                        key={option.id}
+                        variant="outline"
+                        action={educationLevel === option.value ? 'primary' : 'secondary'}
+                        style={[
+                          styles.educationOption,
+                          educationLevel === option.value && styles.selectedOption
+                        ]}
+                        onPress={() => setEducationLevel(option.value)}
+                      >
+                         <ButtonText>{t(`${TRANSLATION_KEY}.${option.value}`)}</ButtonText>
                       </Button>
                     ))}
                   </HStack>
@@ -148,7 +164,7 @@ const EducationDetails: React.FC = () => {
               </FormControl>
 
               {/* Degree Input with Suggestions */}
-              {educationLevel === 'graduate_and_above' && (
+              {(educationLevel === 'graduation' || (educationLevel === 'post_graduate')) && (
                 <FormControl size="md">
                   <FormControlLabel>
                     <FormControlLabelText>{t(`${TRANSLATION_KEY}.degree_optional`)}</FormControlLabelText>

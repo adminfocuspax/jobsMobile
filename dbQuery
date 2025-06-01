@@ -1,0 +1,363 @@
+CREATE TABLE organization_types (
+    organization_type_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    type_name VARCHAR(255) UNIQUE NOT NULL, -- e.g., 'retail', 'restaurant', 'petrol_bunk'
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+CREATE TABLE organizations (
+    organization_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_name TEXT NOT NULL,
+    organization_description TEXT,
+    contact_person VARCHAR(255),
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(255),
+    secondary_contact_person VARCHAR(255),
+    secondary_contact_phone VARCHAR(255),
+    secondary_phone VARCHAR(255),
+    address VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    postal_code VARCHAR(255),
+    logo_url VARCHAR(255),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    account_status VARCHAR(255) CHECK (account_status IN ('active', 'inactive', 'suspended')),
+    description TEXT,
+    website_url VARCHAR(255),
+    google_place_id VARCHAR(255),
+    google_maps_url VARCHAR(255),
+    google_business_category VARCHAR(255)
+);
+
+ALTER TABLE organizations ADD column created_by UUID REFERENCES users(user_id); 
+ALTER TABLE organizations ADD column primary_owner UUID REFERENCES users(user_id); 
+ALTER TABLE organizations ADD column secondary_owner UUID REFERENCES users(user_id); 
+
+
+CREATE TABLE organization_organization_types (
+    organization_organization_type_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID REFERENCES organizations(organization_id),
+    organization_type_id UUID REFERENCES organization_types(organization_type_id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(organization_id, organization_type_id) -- Ensure no duplicate type associations for an organization
+);
+
+
+
+
+CREATE TABLE sites (
+    site_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID REFERENCES organizations(organization_id),
+    site_name TEXT NOT NULL,
+    site_description TEXT,
+    address TEXT,
+    contact_person TEXT,
+    contact_email TEXT,
+    contact_phone TEXT,
+    google_location TEXT,
+    google_business_information TEXT,
+    status VARCHAR(255) CHECK (status IN ('active', 'inactive', 'suspended')),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+CREATE TABLE departments (
+    department_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID REFERENCES organizations(organization_id),
+    department_name TEXT NOT NULL,
+    department_description TEXT,
+    status VARCHAR(255) CHECK (status IN ('active', 'inactive', 'suspended')),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+CREATE TABLE roles (
+    role_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID REFERENCES organizations(organization_id),
+    role_name TEXT NOT NULL UNIQUE,
+    role_description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE ethnicities (
+    ethnicity_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    ethnicity_name VARCHAR(255) NOT NULL,
+    country_code VARCHAR(3) -- ISO 3166-1 alpha-3 country code
+);
+
+
+CREATE TABLE users (
+    user_id UUID  PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_auth_id UUID REFERENCES auth.users(id), -- Correct foreign key
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255),
+    gender VARCHAR(255) CHECK (gender IN ('male', 'female', 'other', 'prefer not to say')),
+    email VARCHAR(255) UNIQUE,
+    date_of_birth DATE,
+    phone VARCHAR(255),
+    address VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    postal_code VARCHAR(255),
+    resume_url VARCHAR(255),
+    image_url VARCHAR(255),
+    linkedin_url VARCHAR(255),
+    current_job_title VARCHAR(255),
+    last_sign_in_at DATE,
+    current_job_org VARCHAR(255),
+    active_status BOOLEAN DEFAULT TRUE,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE user_ethnicities (
+    user_ethnicity_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(user_id),
+    ethnicity_id UUID REFERENCES ethnicities(ethnicity_id),
+    UNIQUE (user_id, ethnicity_id)
+);
+
+
+
+
+CREATE TABLE employees (
+    employee_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    site_id UUID REFERENCES sites(site_id),
+    department_id UUID REFERENCES departments(department_id),
+    organization_id UUID REFERENCES organizations(organization_id),
+    role_id UUID REFERENCES roles(role_id),
+    first_name TEXT NOT NULL,
+    last_name TEXT,
+    email TEXT UNIQUE,
+    phone TEXT,
+    address TEXT,
+    image_url VARCHAR(255),
+    linkedin_url VARCHAR(255),
+    job_title TEXT,
+    hire_date DATE,
+    status VARCHAR(255) CHECK (status IN (
+    'active',
+    'pendingStart',
+    'suspended',
+    'onNotice',
+    'resigned',
+    'terminated',
+    'dismissed',
+    'noShow',
+    'onLeave',
+    'retired'
+    )),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE employees 
+ADD column gender VARCHAR(255) CHECK (gender IN ('male', 'female', 'other', 'prefer not to say')),
+ADD column data_of_birth DATE;
+
+CREATE TABLE user_job_history (
+    job_history_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(user_id),
+    company_name VARCHAR(255),
+    job_title VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+CREATE TABLE user_languages (
+    language_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(user_id),
+    language_name VARCHAR(255),
+    proficiency VARCHAR(255) CHECK (proficiency IN ('basic', 'conversational', 'fluent', 'native')),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE user_education (
+    education_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(user_id),
+    institution_name VARCHAR(255),
+    degree VARCHAR(255),
+    field_of_study VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+
+
+CREATE TABLE plans (
+    plan_id uuid PRIMARY KEY,
+    plan_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) DEFAULT 'USD',
+    is_free_trail_avail BOOLEAN DEFAULT FALSE,
+    free_trail_period INTERVAL,
+    duration_days INTEGER, -- e.g., 30 for monthly, 365 for yearly
+    features JSONB, -- Store plan-specific features as JSON (e.g., number of job postings, access to premium features)
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+CREATE TABLE organization_plans (
+    organization_plan_id uuid PRIMARY KEY,
+    organization_id uuid REFERENCES organizations(organization_id),
+    plan_id uuid REFERENCES plans(plan_id),
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP NOT NULL,
+    payment_status VARCHAR(255) CHECK (payment_status IN ('pending', 'paid', 'failed', 'refunded','freetrail')),
+    payment_id VARCHAR(255),
+    ends_at TIMESTAMP,
+    free_trail_ends_at  TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE, -- Added
+    cancelled_at TIMESTAMP, -- Added
+    renewal_date TIMESTAMP, -- Added
+    payment_method VARCHAR(255), -- Added
+    billing_cycle VARCHAR(255), -- Added
+    quantity INTEGER, -- Added
+    discount_applied BOOLEAN, -- added
+    notes TEXT, -- Added
+    trial_end_notification_sent BOOLEAN DEFAULT FALSE, --added
+    UNIQUE (organization_id, plan_id)
+);
+
+CREATE TABLE apps (
+    app_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    app_name VARCHAR(255) NOT NULL,
+    app_description TEXT,
+    app_version VARCHAR(255),
+    app_icon_url VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    app_category VARCHAR(255),
+    developer VARCHAR(255),
+    release_date DATE,
+    required_permissions JSONB,
+    external_url VARCHAR(255),
+    app_settings_schema JSONB
+);
+
+CREATE TABLE plan_apps (
+    plan_app_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    plan_id UUID REFERENCES plans(plan_id),
+    app_id UUID REFERENCES apps(app_id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (plan_id, app_id)
+);
+
+CREATE TABLE organization_apps (
+    organization_app_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    organization_id UUID REFERENCES organizations(organization_id),
+    app_id UUID REFERENCES apps(app_id),
+    organization_plan_id UUID REFERENCES organization_plans(organization_plan_id),
+    installation_date TIMESTAMPTZ DEFAULT NOW(),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (organization_id, app_id)
+);
+
+
+CREATE TABLE job_categories (
+    category_id uuid PRIMARY KEY,
+    category_name VARCHAR(255),
+    organization_id UUID REFERENCES organizations(organization_id)
+);
+
+
+CREATE TABLE jobs (
+    job_id uuid PRIMARY KEY,
+    site_id UUID REFERENCES sites(site_id),
+    department_id UUID REFERENCES departments(department_id),
+    organization_id UUID REFERENCES organizations(organization_id),
+    organization_type_id UUID REFERENCES organization_types(organization_type_id),
+    job_title VARCHAR(255),
+    job_description TEXT,
+    job_type VARCHAR(255) CHECK (job_type IN ('full-time', 'part-time', 'contract', 'internship', 'temporary')),
+    salary_range_min DECIMAL,
+    salary_range_max DECIMAL,
+    currency VARCHAR(3) DEFAULT 'INR',
+    location VARCHAR(255),
+    city VARCHAR(255),
+    state VARCHAR(255),
+    country VARCHAR(255),
+    postal_code VARCHAR(255),
+    experience_required VARCHAR(255),
+    education_required VARCHAR(255),
+    skills_required TEXT,
+    posting_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    application_deadline DATE,
+    status VARCHAR(255) CHECK (status IN ('open', 'closed', 'filled','draft')),
+    job_category uuid REFERENCES job_categories(category_id),
+    is_internal BOOLEAN DEFAULT FALSE, -- New: Internal vs. External
+    created_by UUID REFERENCES users(user_id), -- New: Job creator
+    approved_by UUID REFERENCES users(user_id), -- New: Job approver
+    approval_date TIMESTAMP -- New: Job approval date
+);
+
+CREATE TABLE skills (
+    skill_id uuid PRIMARY KEY,
+    skill_name VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE job_skills (
+    job_skill_id uuid PRIMARY KEY,
+    job_id uuid REFERENCES jobs(job_id),
+    skill_id uuid REFERENCES skills(skill_id)
+);
+
+CREATE TABLE user_skills (
+    user_skill_id uuid PRIMARY KEY,
+    user_id uuid REFERENCES users(user_id),
+    skill_id uuid REFERENCES skills(skill_id)
+);
+
+CREATE TABLE saved_jobs (
+    saved_job_id uuid PRIMARY KEY,
+    user_id uuid REFERENCES users(user_id),
+    job_id uuid REFERENCES jobs(job_id),
+    saved_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE notifications (
+    notification_id uuid PRIMARY KEY,
+    user_id uuid REFERENCES users(user_id),
+    message TEXT,
+    notification_type VARCHAR(255), -- E.g., 'application', 'job_update', 'message'
+    related_id uuid, -- Reference to related entity (job_id, application_id, etc.)
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- EmployeeHierarchy Table
+CREATE TABLE employee_hierarchy(
+    hierarchy_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    employee_id UUID REFERENCES employees(employee_id),
+    manager_employee_id UUID REFERENCES employees(employee_id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);

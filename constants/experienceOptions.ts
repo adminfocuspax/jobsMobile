@@ -15,3 +15,11 @@ export const JOB_TITLES = [
   { id: 14, value: 'Graphic Designer', label: 'Graphic Designer' },
   { id: 15, value: 'Network Administrator', label: 'Network Administrator' }
 ];
+
+
+
+export const INDUSTRIES_EXPERIENCED_IN = [
+  { id: 1, value: 'Retail', label: 'retail' },
+  { id: 2, value: 'Restuarant', label: 'restuarnt' },
+  { id: 3, value: 'Other', label: 'other' }
+];

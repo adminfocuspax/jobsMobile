@@ -9,14 +9,20 @@ export const EDUCATION_LEVELS = [
     label: 'Tenth',
     value: 'tenth'
   },
-  {     id: 'twelfth',
-    label: 'Twelfth',
-    value: 'twelfth'
+  { 
+    id: 'intermediate',
+    label: 'intermediate',
+    value: 'intermediate'
   },
   {
-    id: 'graduate_and_above',
-    label: 'Graduate and Above',
-    value: 'graduate_and_above'
+    id: 'graduation',
+    label: 'Graduate',
+    value: 'graduation'
+  },
+  {
+    id: 'post_graduate',
+    label: 'Post Graduate',
+    value: 'post_graduate'
   }
 ];
 
