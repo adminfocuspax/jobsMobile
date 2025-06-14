@@ -4,21 +4,15 @@ import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 import { HomeBanner } from '@/components/Home';
 import '../i18n/i18n'; // Import the i18n configuration
-import CompleteProfile from '../components/completeProfile';
+import CompleteProfile from '../components/CompleteProfile';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#FFF', dark: '#FFF' }}
-      headerImage={<HomeBanner />}>
-      
-      {/* Main content goes here */}
+  return (      
       <ThemedView style={styles.mainContent}>
-        <CompleteProfile/>
-        <ThemedText type='subtitle'>Your journey to a better career starts here.</ThemedText>
+        {/* <ThemedText type='subtitle'>Your journey to a better career starts here.</ThemedText> */}
+
       </ThemedView>
       
-    </ParallaxScrollView>
   );
 }
 

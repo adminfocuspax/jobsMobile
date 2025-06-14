@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import '../i18n/i18n';
 import JobsDrawer from './Drawer';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import CompleteProfile from './CompleteProfile';
 
 interface CustomHeaderProps {
   title: string;
@@ -43,6 +44,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
 
   return (
     <View style={styles.container}>
+      <CompleteProfile/>
       <View style={styles.header}>
         <View style={styles.greetingContainer}>
           {/* <View>
@@ -51,7 +53,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
           <View style={styles.greetingTextContainer}>
             <View style={styles.greetingRow}>
               <Image 
-                source={require('@/assets/images/home-logo.png')} 
+                source={require('@/assets/images/header-logo.png')} 
                 style={styles.logoImage}
               />
             </View>
@@ -71,8 +73,9 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
             </Avatar>
           </TouchableOpacity> */}
         </View>
+    
       </View>
-
+      
       {showSearch && (
         <View style={styles.searchWrapper}>
           <ThemedText style={styles.subText} type="subtitle">
@@ -136,13 +139,13 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 24,
-    paddingVertical: 24,
+    paddingVertical: 0,
     backgroundColor: '#FFFFFF',
-    marginTop: 8
+    marginTop: 0
   },
   greetingContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
   greetingTextContainer: {
@@ -150,12 +153,12 @@ const styles = StyleSheet.create({
   },
   greetingRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     gap: 8,
   },
   logoImage: {
-    width: 60,
+    width: 190,
     height: 60,
     marginRight: 8,
     marginLeft: -16,

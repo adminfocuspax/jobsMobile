@@ -19,6 +19,7 @@ export default function LoginScreen() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { values, width, height } = useResponsive();
   const { t } = useTranslation();
+  console.log('WIDTH WIDTH WIDTH +++++++++++=',width);
 
   const openTermsAndConditions = () => {
     Linking.openURL('https://example.com');

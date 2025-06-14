@@ -334,10 +334,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 0,
+    bottom:50,
     left: 0,
     right: 0,
-    elevation: 3,
+    elevation: 0,
   },
   buttonRow: {
     maxWidth: 520,

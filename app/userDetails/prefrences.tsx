@@ -123,7 +123,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   buttonContainer:{
+    width: '100%',
+    paddingVertical: 16,
     backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom:30,
+    left: 0,
+    right: 0,
+    elevation: 0,
   },
   buttonRow: {
     width: '100%',

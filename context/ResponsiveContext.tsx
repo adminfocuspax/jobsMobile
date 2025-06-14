@@ -41,12 +41,18 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const isLargeScreen = dimensions.width >= 414; // iPhone 12 Pro Max, etc.
   const isTablet = dimensions.width >= 768; // iPad, etc.
   const isWeb = Platform.OS === 'web';
+
+  console.log("isSmallScreen", isSmallScreen);
+  console.log("isMediumScreen", isMediumScreen);
+  console.log("isLargeScreen", isLargeScreen);
+  console.log("isTablet", isTablet);
+  console.log("isWeb", isWeb);
   
   // Calculate responsive values
   const values: ResponsiveValues = {
     logoHeight: isSmallScreen ? 90 : isMediumScreen ? 100 : isTablet ? 120 : 110,
     inputHeight: isSmallScreen ? 45 : isMediumScreen ? 50 : isTablet ? 60 : 55,
-    buttonWidth: isSmallScreen ? dimensions.width * 0.7 : isMediumScreen ? dimensions.width * 0.75 : isTablet ? dimensions.width * 0.2 : dimensions.width * 0.2,
+    buttonWidth: isSmallScreen ? dimensions.width * 0.7 : isMediumScreen ? dimensions.width * 0.75 : isTablet ? dimensions.width * 0.2 : dimensions.width * 0.7,
     fontSize: isSmallScreen ? 16 : isMediumScreen ? 18 : isTablet ? 20 : 20,
     padding: isSmallScreen ? 15 : isMediumScreen ? 18 : isTablet ? 24 : 20,
     buttonPadding: isSmallScreen ? 10 : isMediumScreen ? 10 : isTablet ? 10 : 10,
