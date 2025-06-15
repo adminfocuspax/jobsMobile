@@ -1,40 +1,40 @@
 {
-  "auth":{
-    "authMessage":"Signin or create account",
-    "email":"Email or mobile phone",
-    "emailMessage":"Enter your email or mobile number to continue",
-    "password":"Password",
-    "forgot_password":"Forgot Password?",
-    "remember_me":"Remember Me",
-    "login":"Contiune",
-    "create_account":"Create Account",
-    "or_continue_with":"Or continue with",
-    "continue_with_google":"Continue With Google",
-    "continue_with_facebook":"Continue With Facebook",
-    "allirightReserved":"All rights reserved. imartJobs.com"
+  "auth": {
+    "authMessage": "Signin or create account",
+    "email": "Email or mobile phone",
+    "emailMessage": "Enter your email or mobile number to continue",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember Me",
+    "login": "Contiune",
+    "create_account": "Create Account",
+    "or_continue_with": "Or continue with",
+    "continue_with_google": "Continue With Google",
+    "continue_with_facebook": "Continue With Facebook",
+    "allirightReserved": "All rights reserved. imartJobs.com"
   },
-  "userInfo":{
-    "fullName":"Full Name",
-    "email":"Email",
-    "age":"Age",
-    "gender":"Gender",
-    "male":"Male",
-    "female":"Female",
-    "other":"Other",
-    "education" : {
-      "education_details" : "Education Details",
-      "education_encouragement":"Providing your education details helps employers understand your qualifications better and match you with suitable job opportunities.",
-      "education_level" : "Education Level",
-      "highest_level_edu":"Select your highest level of education",
-      "degree_optional":"Degree (Optional)",
-      "specify_degree":"Specify your degree to help employers understand your qualifications",
-      "less_than_tenth":"Less Than Tenth",
-      "tenth":"Tenth",
-      "intermediate":"Intermediate",
-      "graduation":"Graduation",
-      "post_graduate":"Post Graduate"
+  "userInfo": {
+    "fullName": "Full Name",
+    "email": "Email",
+    "age": "Age",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "education": {
+      "education_details": "Education Details",
+      "education_encouragement": "Providing your education details helps employers understand your qualifications better and match you with suitable job opportunities.",
+      "education_level": "Education Level",
+      "highest_level_edu": "Select your highest level of education",
+      "degree_optional": "Degree (Optional)",
+      "specify_degree": "Specify your degree to help employers understand your qualifications",
+      "less_than_tenth": "Less Than Tenth",
+      "tenth": "Tenth",
+      "intermediate": "Intermediate",
+      "graduation": "Graduation",
+      "post_graduate": "Post Graduate"
     },
-    "experience":{
+    "experience": {
       "experience_details": "Work Experience",
       "experience_encouragement": "Tell us about your work experience to help us find the best job matches for you.",
       "total_experience": "Total Experience: {{years}} year{{yearPlural}} {{months}} month{{monthPlural}}",
@@ -71,9 +71,9 @@
       "no_experience": "I don't have any work experience",
       "industry": "Industry",
       "select_industry": "Select your industry",
-      "retail":"Retail",
-      "restuarnt":"Restaurant",
-      "other":"Other"
+      "retail": "Retail",
+      "restuarnt": "Restaurant",
+      "other": "Other"
     }
   },
   "header": {
@@ -89,7 +89,7 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "menu":{
+    "menu": {
       "profile": "Profile",
       "dashboard": "Dashboard",
       "settings": "Settings",
@@ -97,32 +97,30 @@
       "contact": "Contact Us",
       "language": "Language"
     }
-    },
-    "banner": {
-        "exploreJobs": "Explore Jobs",
-        "description": "1k+ jobs waiting for you"
-    },
-    "common":{
-      "next":"Next",
-      "previous":"Previous",
-      "save":"Save",
-      "cancel":"Cancel",
-      "close":"Close",
-      "submit":"Submit",
-      "yes":"Yes",
-      "no":"No",
-      "ok":"Ok",
-      "error":"Error",
-      "success":"Success",
-      "warning":"Warning",
-      "info":"Info",
-      "loading":"Loading...",
-      "please_wait":"Please wait...",
-      "are_you_sure":"Are you sure?",
-      "confirm":"Confirm",
-      "back":"Back",
-      "home":"Home"
-    }
-
-    
+  },
+  "banner": {
+    "exploreJobs": "Explore Jobs",
+    "description": "1k+ jobs waiting for you"
+  },
+  "common": {
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "submit": "Submit",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "Ok",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "loading": "Loading...",
+    "please_wait": "Please wait...",
+    "are_you_sure": "Are you sure?",
+    "confirm": "Confirm",
+    "back": "Back",
+    "home": "Home"
   }
+}

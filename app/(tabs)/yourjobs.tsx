@@ -5,7 +5,9 @@ export default function YourJobsScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Jobs</Text>
-      <Text style={styles.subtitle}>Here you can view and manage your job applications</Text>
+      <Text style={styles.subtitle}>
+        Here you can view and manage your job applications
+      </Text>
     </View>
   );
 }

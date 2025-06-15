@@ -2,31 +2,37 @@ import { View, StyleSheet, ImageBackground } from 'react-native';
 import { useState } from 'react';
 import { Skeleton } from '@rneui/themed';
 import { LinearGradient } from '@/components/ui/linear-gradient';
-import { Button, ButtonText } from "@/components/ui/button";
+import { Button, ButtonText } from '@/components/ui/button';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 
-
 export const HomeBanner = () => {
-  const [imageStatus, setImageStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [imageStatus, setImageStatus] = useState<
+    'loading' | 'loaded' | 'error'
+  >('loading');
   const { width, isLargeScreen } = useResponsive();
   const { t } = useTranslation();
 
   return (
-    <ThemedView style={{backgroundColor: "#fff", paddingTop: 0}} className={`flex-1 justify-center items-center w-full`}>
+    <ThemedView
+      style={{ backgroundColor: '#fff', paddingTop: 0 }}
+      className={`flex-1 justify-center items-center w-full`}
+    >
       {imageStatus !== 'loaded' && (
         <Skeleton
           LinearGradientComponent={LinearGradient}
-          width="100%"
+          width='100%'
           height={isLargeScreen ? 278 : 178}
           style={{ position: 'absolute', borderRadius: 8 }}
         />
       )}
 
       <ImageBackground
-        source={{uri: 'https://media.istockphoto.com/id/1426460279/photo/female-worker-using-digital-tablet-while-working-at-supermarket.jpg?s=612x612&w=0&k=20&c=vElyunJfBvVJ_xWuAARlgrBwYl38uNPxsDIzeg5qtLc='}}
+        source={{
+          uri: 'https://media.istockphoto.com/id/1426460279/photo/female-worker-using-digital-tablet-while-working-at-supermarket.jpg?s=612x612&w=0&k=20&c=vElyunJfBvVJ_xWuAARlgrBwYl38uNPxsDIzeg5qtLc=',
+        }}
         style={styles.backgroundImage}
         className={'rounded-lg'}
         onLoad={() => setImageStatus('loaded')}
@@ -39,10 +45,10 @@ export const HomeBanner = () => {
             <ThemedText style={styles.bannerSubtitle}>
               {t('banner.description')}
             </ThemedText>
-            <Button 
-              size={isLargeScreen? 'lg':'sm'}
-              variant="solid"
-              action="positive"
+            <Button
+              size={isLargeScreen ? 'lg' : 'sm'}
+              variant='solid'
+              action='positive'
             >
               <ButtonText>{t('banner.exploreJobs')}</ButtonText>
             </Button>

@@ -17,38 +17,36 @@ interface MenuItem {
 }
 
 export default function UserInfoPage() {
-
-
   // Function to toggle language
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'ta' : 'en';
     i18n.changeLanguage(newLang);
   };
   const menuItems: MenuItem[] = [
-    { icon: "person.fill", text: "My Profile", color: "#000" },
-    { icon: "gear", text: "Settings", color: "#000" },
-    { icon: "bell.fill", text: "Notifications", color: "#000" },
-    { icon: "doc.text.fill", text: "My Applications", color: "#000" },
-    { icon: "bookmark.fill", text: "Saved Jobs", color: "#000" },
-    { icon: "envelope.fill", text: "Messages", color: "#000" },
+    { icon: 'person.fill', text: 'My Profile', color: '#000' },
+    { icon: 'gear', text: 'Settings', color: '#000' },
+    { icon: 'bell.fill', text: 'Notifications', color: '#000' },
+    { icon: 'doc.text.fill', text: 'My Applications', color: '#000' },
+    { icon: 'bookmark.fill', text: 'Saved Jobs', color: '#000' },
+    { icon: 'envelope.fill', text: 'Messages', color: '#000' },
     {
-      icon: "globe",
-      text: i18n.language === 'en' ? "Switch to Tamil" : "Switch to English",
-      color: "#000",
-      onPress: toggleLanguage
+      icon: 'globe',
+      text: i18n.language === 'en' ? 'Switch to Tamil' : 'Switch to English',
+      color: '#000',
+      onPress: toggleLanguage,
     },
-    { icon: "questionmark.circle.fill", text: "Help & Support", color: "#000" },
-    { icon: "rectangle.portrait.and.arrow.right", text: "Logout", color: "#CC0000" },
+    { icon: 'questionmark.circle.fill', text: 'Help & Support', color: '#000' },
+    {
+      icon: 'rectangle.portrait.and.arrow.right',
+      text: 'Logout',
+      color: '#CC0000',
+    },
   ];
 
   return (
     <>
       <Box style={styles.avatarContainer}>
-        <ProfileAvatar
-          size="xl"
-          className="mb-0"
-          showChangeText={true}
-        />
+        <ProfileAvatar size='xl' className='mb-0' showChangeText={true} />
       </Box>
       <ScrollView
         style={styles.menuList}
@@ -60,9 +58,9 @@ export default function UserInfoPage() {
             key={item.text}
             style={[
               styles.menuItem,
-              index === menuItems.length - 1 && styles.menuItemLast
+              index === menuItems.length - 1 && styles.menuItemLast,
             ]}
-            onPress={item.onPress || (() => { })}
+            onPress={item.onPress || (() => {})}
           >
             <IconSymbol
               name={item.icon}
@@ -76,11 +74,9 @@ export default function UserInfoPage() {
           </TouchableOpacity>
         ))}
       </ScrollView>
-
     </>
   );
 }
-
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -89,10 +85,10 @@ const styles = StyleSheet.create({
   menuHeader: {
     borderColor: '#ccc',
     borderStyle: 'solid',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   logoImage: {
-    margin: "auto",
+    margin: 'auto',
     marginBottom: 8,
     marginTop: 24,
   },

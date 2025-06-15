@@ -8,7 +8,7 @@ type ResponsiveValues = {
   buttonWidth: number;
   fontSize: number;
   padding: number;
-  buttonPadding:number;
+  buttonPadding: number;
   marginBottom: number;
   maxWidth: number;
   inputStyle: 'outline' | 'underlined';
@@ -24,18 +24,22 @@ type ResponsiveContextType = {
   width: number;
   height: number;
   values: ResponsiveValues;
-  primaryColor:string;
-  secondaryColor:string;
+  primaryColor: string;
+  secondaryColor: string;
 };
 
 // Create the context with a default value
-const ResponsiveContext = createContext<ResponsiveContextType | undefined>(undefined);
+const ResponsiveContext = createContext<ResponsiveContextType | undefined>(
+  undefined
+);
 
 // Provider component
-export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   // Get initial dimensions
   const [dimensions, setDimensions] = useState(() => Dimensions.get('window'));
-  
+
   // Calculate screen size breakpoints
   const isSmallScreen = dimensions.width < 375; // iPhone SE, etc.
   const isMediumScreen = dimensions.width >= 375 && dimensions.width < 414; // iPhone 12, etc.
@@ -43,23 +47,41 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const isTablet = dimensions.width >= 768; // iPad, etc.
   const isWeb = Platform.OS === 'web';
 
-  console.log("isSmallScreen", isSmallScreen);
-  console.log("isMediumScreen", isMediumScreen);
-  console.log("isLargeScreen", isLargeScreen);
-  console.log("isTablet", isTablet);
-  console.log("isWeb", isWeb);
-  
+  console.log('isSmallScreen', isSmallScreen);
+  console.log('isMediumScreen', isMediumScreen);
+  console.log('isLargeScreen', isLargeScreen);
+  console.log('isTablet', isTablet);
+  console.log('isWeb', isWeb);
+
   // Calculate responsive values
   const values: ResponsiveValues = {
-    logoHeight: isSmallScreen ? 90 : isMediumScreen ? 100 : isTablet ? 120 : 110,
+    logoHeight: isSmallScreen
+      ? 90
+      : isMediumScreen
+        ? 100
+        : isTablet
+          ? 120
+          : 110,
     inputHeight: isSmallScreen ? 45 : isMediumScreen ? 50 : isTablet ? 60 : 55,
-    buttonWidth: isSmallScreen ? dimensions.width * 0.7 : isMediumScreen ? dimensions.width * 0.75 : isTablet ? dimensions.width * 0.2 : dimensions.width * 0.7,
+    buttonWidth: isSmallScreen
+      ? dimensions.width * 0.7
+      : isMediumScreen
+        ? dimensions.width * 0.75
+        : isTablet
+          ? dimensions.width * 0.2
+          : dimensions.width * 0.7,
     fontSize: isSmallScreen ? 16 : isMediumScreen ? 18 : isTablet ? 20 : 20,
     padding: isSmallScreen ? 15 : isMediumScreen ? 18 : isTablet ? 24 : 20,
-    buttonPadding: isSmallScreen ? 10 : isMediumScreen ? 10 : isTablet ? 10 : 10,
+    buttonPadding: isSmallScreen
+      ? 10
+      : isMediumScreen
+        ? 10
+        : isTablet
+          ? 10
+          : 10,
     marginBottom: isSmallScreen ? 20 : isMediumScreen ? 25 : isTablet ? 30 : 30,
     maxWidth: isTablet ? 500 : dimensions.width,
-    inputStyle: (isMediumScreen || isSmallScreen) ? 'outline' : 'outline'
+    inputStyle: isMediumScreen || isSmallScreen ? 'outline' : 'outline',
   };
 
   // Listen for dimension changes

@@ -67,7 +67,7 @@ function generateResponsiveNumColumns({ gridClass }: { gridClass: string }) {
   const regex = /^(?:(\w+):)?grid-cols-?(\d+)$/;
   const result: any = {};
 
-  numColumns.forEach((classname) => {
+  numColumns.forEach(classname => {
     const match = classname.match(regex);
     if (match) {
       const prefix = match[1] || 'default';
@@ -197,7 +197,7 @@ const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
           className={gridStyle({
             class: className + ' ' + gridClassMerged,
           })}
-          onLayout={(event) => {
+          onLayout={event => {
             const paddingLeftToSubtract =
               props?.paddingStart || props?.paddingLeft || props?.padding || 0;
 
@@ -277,7 +277,7 @@ const GridItem = forwardRef<React.ComponentRef<typeof View>, IGridItemProps>(
         responsiveColSpan > 0
       ) {
         // find out in which row of itemsPerRow the current item's index is
-        const row = Object.keys(itemsPerRow).find((key) => {
+        const row = Object.keys(itemsPerRow).find(key => {
           return itemsPerRow[key].includes(props?.index);
         });
 

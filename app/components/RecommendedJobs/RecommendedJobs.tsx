@@ -19,27 +19,30 @@ interface RecommendedJobsProps {
 const defaultJobs: JobData[] = [
   {
     id: '1',
-    companyLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+    companyLogo:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
     companyName: 'Reliance Digital',
     location: 'Banglore, KA',
     jobTitle: 'Sales personal assistant',
-    postedDate: '2 days ago'
+    postedDate: '2 days ago',
   },
   {
     id: '2',
-    companyLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNDuMGOi4Jtk04Gk78ZGmZ3_Zjcnz9_EjFg&s',
+    companyLogo:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNDuMGOi4Jtk04Gk78ZGmZ3_Zjcnz9_EjFg&s',
     companyName: 'Super Saravana Stores ',
     location: 'Chennai, TN',
     jobTitle: 'Floor Manager',
-    postedDate: '1 day ago'
+    postedDate: '1 day ago',
   },
   {
     id: '3',
-    companyLogo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlDVSE1ggAU0qm7V0mpumwYE8FP_Xse21LFw&s',
+    companyLogo:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlDVSE1ggAU0qm7V0mpumwYE8FP_Xse21LFw&s',
     companyName: 'Tata Tanisq',
     location: 'Trichy, TN',
     jobTitle: 'Receptionist',
-    postedDate: '3 days ago'
+    postedDate: '3 days ago',
   },
   {
     id: '4',
@@ -47,7 +50,7 @@ const defaultJobs: JobData[] = [
     companyName: 'Meta',
     location: 'Menlo Park, CA',
     jobTitle: 'Data Scientist',
-    postedDate: '5 days ago'
+    postedDate: '5 days ago',
   },
   {
     id: '5',
@@ -55,13 +58,13 @@ const defaultJobs: JobData[] = [
     companyName: 'LinkedIn',
     location: 'San Francisco, CA',
     jobTitle: 'Frontend Developer',
-    postedDate: '1 week ago'
-  }
+    postedDate: '1 week ago',
+  },
 ];
 
 const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
   console.log('JobCard rendering for:', job.jobTitle);
-  
+
   return (
     <View style={styles.cardContainer}>
       <LinearGradient
@@ -79,12 +82,8 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
               style={styles.companyLogo}
             />
             <View style={styles.companyInfo}>
-              <Text style={styles.companyName}>
-                {job.companyName}
-              </Text>
-              <Text style={styles.location}>
-                {job.location}
-              </Text>
+              <Text style={styles.companyName}>{job.companyName}</Text>
+              <Text style={styles.location}>{job.location}</Text>
             </View>
           </View>
 
@@ -94,31 +93,24 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
           </Text>
 
           {/* Posted Date */}
-          <Text style={styles.postedDate}>
-            Posted {job.postedDate}
-          </Text>
+          <Text style={styles.postedDate}>Posted {job.postedDate}</Text>
         </View>
       </LinearGradient>
     </View>
   );
 };
 
-export const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ 
-  jobs = defaultJobs, 
-  title = "Recommended Jobs" 
+export const RecommendedJobs: React.FC<RecommendedJobsProps> = ({
+  jobs = defaultJobs,
+  title = 'Recommended Jobs',
 }) => {
-  
   return (
     <View style={styles.container}>
       {/* Section Title */}
-      <Text style={styles.sectionTitle}>
-        {title}
-      </Text>
+      <Text style={styles.sectionTitle}>{title}</Text>
 
       {/* Debug info */}
-      <Text style={styles.debugText}>
-        Found {jobs?.length || 0} jobs
-      </Text>
+      <Text style={styles.debugText}>Found {jobs?.length || 0} jobs</Text>
 
       {/* Horizontal Scrollable Cards */}
       <ScrollView
@@ -128,14 +120,12 @@ export const RecommendedJobs: React.FC<RecommendedJobsProps> = ({
         style={styles.scrollView}
       >
         {jobs && jobs.length > 0 ? (
-          jobs.map((job) => {
+          jobs.map(job => {
             console.log('Rendering job:', job.id, job.jobTitle);
             return <JobCard key={job.id} job={job} />;
           })
         ) : (
-          <Text style={styles.noJobsText}>
-            No jobs available
-          </Text>
+          <Text style={styles.noJobsText}>No jobs available</Text>
         )}
       </ScrollView>
     </View>

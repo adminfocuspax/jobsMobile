@@ -1,7 +1,17 @@
 'use client';
 import React from 'react';
-import { TouchableOpacity, GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
-import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import {
+  TouchableOpacity,
+  GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
+} from '@/components/ui/avatar';
 import { ThemedText } from '@/components/ThemedText';
 
 interface ProfileAvatarProps {
@@ -9,21 +19,22 @@ interface ProfileAvatarProps {
   avatarUrl?: string;
   userName?: string;
   showBadge?: boolean;
-  showChangeText?:boolean
+  showChangeText?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   className?: string;
-  style?:StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
 }
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
   size = 'md',
   className,
   showBadge = true,
-  showChangeText=false,
+  showChangeText = false,
   style,
   onPress,
 }) => {
-  const avatarUrl = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80";
+  const avatarUrl =
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
   const userName = 'Jane Doe';
   // Default handler if no onPress is provided
   const handleProfilePress = (event: GestureResponderEvent): void => {
@@ -41,11 +52,11 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
       activeOpacity={0.8}
       className={className}
       style={[
-        showChangeText && { 
+        showChangeText && {
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
         },
-        style
+        style,
       ]}
     >
       <Avatar size={size}>
@@ -59,7 +70,9 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         )}
         {showBadge && <AvatarBadge />}
       </Avatar>
-      {showChangeText && <ThemedText type="small">Tap to change profile picture</ThemedText>}
+      {showChangeText && (
+        <ThemedText type='small'>Tap to change profile picture</ThemedText>
+      )}
     </TouchableOpacity>
   );
 };

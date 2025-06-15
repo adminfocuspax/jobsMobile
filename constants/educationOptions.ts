@@ -2,28 +2,28 @@ export const EDUCATION_LEVELS = [
   {
     id: 'less_than_tenth',
     label: 'Less than Tenth',
-    value: 'less_than_tenth'
+    value: 'less_than_tenth',
   },
   {
     id: 'tenth',
     label: 'Tenth',
-    value: 'tenth'
+    value: 'tenth',
   },
-  { 
+  {
     id: 'intermediate',
     label: 'intermediate',
-    value: 'intermediate'
+    value: 'intermediate',
   },
   {
     id: 'graduation',
     label: 'Graduate',
-    value: 'graduation'
+    value: 'graduation',
   },
   {
     id: 'post_graduate',
     label: 'Post Graduate',
-    value: 'post_graduate'
-  }
+    value: 'post_graduate',
+  },
 ];
 
 export const DEGREE_OPTIONS = [
@@ -41,5 +41,5 @@ export const DEGREE_OPTIONS = [
   { id: 12, value: 'MBA', label: 'Master of Business Administration (MBA)' },
   { id: 13, value: 'Ph.D.', label: 'Doctor of Philosophy (Ph.D.)' },
   { id: 14, value: 'Diploma', label: 'Diploma' },
-  { id: 15, value: 'Certificate', label: 'Certificate Course' }
+  { id: 15, value: 'Certificate', label: 'Certificate Course' },
 ];

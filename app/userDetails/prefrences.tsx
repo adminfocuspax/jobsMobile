@@ -6,14 +6,21 @@ import { VStack } from '@/components/ui/vstack';
 import { HStack } from '@/components/ui/hstack';
 import { Text } from '@/components/ui/text';
 import { Heading } from '@/components/ui/heading';
-import { FormControl, FormControlLabel, FormControlLabelText } from '@/components/ui/form-control';
+import {
+  FormControl,
+  FormControlLabel,
+  FormControlLabelText,
+} from '@/components/ui/form-control';
 import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
 import CenterAligned from '../components/CenterAligned';
-import { JobPreference, SUPERMARKET_JOB_PREFERENCES } from '@/constants/supermarketJobOptions';
+import {
+  JobPreference,
+  SUPERMARKET_JOB_PREFERENCES,
+} from '@/constants/supermarketJobOptions';
 import JobPreferencesSelector from '../components/JobPreferencesSelector';
 
 const TRANSLATION_KEY = 'userInfo.preferences';
@@ -21,7 +28,9 @@ const TRANSLATION_KEY = 'userInfo.preferences';
 const Preferences: React.FC = () => {
   const { values } = useResponsive();
   const { t } = useTranslation();
-  const [selectedPreferences, setSelectedPreferences] = useState<JobPreference[]>([]);
+  const [selectedPreferences, setSelectedPreferences] = useState<
+    JobPreference[]
+  >([]);
 
   // Handle selection changes from the JobPreferencesSelector
   const handleSelectionChange = (preferences: JobPreference[]) => {
@@ -43,14 +52,12 @@ const Preferences: React.FC = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Box
-        style={styles.scrollContainer}
-      >
-        <JobsBreadcrumb currentStep="preferences" />
-        
+      <Box style={styles.scrollContainer}>
+        <JobsBreadcrumb currentStep='preferences' />
+
         <Box style={styles.container}>
-          <VStack space="xl" style={styles.content}>
-            <Heading size="xl" style={styles.heading}>
+          <VStack space='xl' style={styles.content}>
+            <Heading size='xl' style={styles.heading}>
               {t(`${TRANSLATION_KEY}.title`, 'Job Preferences')}
             </Heading>
 
@@ -72,25 +79,25 @@ const Preferences: React.FC = () => {
 
       {/* Navigation Buttons */}
       <CenterAligned style={styles.buttonContainer}>
-      <VStack space="md" style={styles.buttonRow}>
-            <GradientButton
-              width={"100%"}
-              padding={values.buttonPadding}
-              fontSize={values.fontSize}
-              text="Back"
-              colors={["#888", "#666"]}
-              onPress={handleBack}
-            />
+        <VStack space='md' style={styles.buttonRow}>
+          <GradientButton
+            width={'100%'}
+            padding={values.buttonPadding}
+            fontSize={values.fontSize}
+            text='Back'
+            colors={['#888', '#666']}
+            onPress={handleBack}
+          />
 
-            <GradientButton
-              width={"100%"}
-              padding={values.buttonPadding}
-              fontSize={values.fontSize}
-              text="Next"
-              onPress={handleSubmit}
-              disabled={selectedPreferences.length === 0}
-            />
-          </VStack>
+          <GradientButton
+            width={'100%'}
+            padding={values.buttonPadding}
+            fontSize={values.fontSize}
+            text='Next'
+            onPress={handleSubmit}
+            disabled={selectedPreferences.length === 0}
+          />
+        </VStack>
       </CenterAligned>
     </View>
   );
@@ -122,17 +129,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 16,
   },
-  buttonContainer:{
+  buttonContainer: {
     width: '100%',
     backgroundColor: '#FFFFFF',
-
   },
   buttonRow: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    marginBottom:32
+    marginBottom: 32,
   },
 });
 

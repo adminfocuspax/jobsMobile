@@ -7,7 +7,9 @@ import JobsBreadcrumb from './JobsBreadcrumb';
 import { BreadcrumbItem } from './Breadcrumb';
 
 const BreadcrumbExample: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<'profile' | 'preferences' | 'jobs'>('profile');
+  const [currentStep, setCurrentStep] = useState<
+    'profile' | 'preferences' | 'jobs'
+  >('profile');
 
   const handleBreadcrumbPress = (item: BreadcrumbItem) => {
     if (item.label === 'Profile') {
@@ -37,41 +39,41 @@ const BreadcrumbExample: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <JobsBreadcrumb 
-        currentStep={currentStep} 
-        onItemPress={handleBreadcrumbPress} 
+      <JobsBreadcrumb
+        currentStep={currentStep}
+        onItemPress={handleBreadcrumbPress}
       />
-      
+
       <View style={styles.content}>
-        <Text size="xl" bold style={styles.title}>
+        <Text size='xl' bold style={styles.title}>
           {currentStep === 'profile' && 'Complete Your Profile'}
           {currentStep === 'preferences' && 'Set Your Preferences'}
           {currentStep === 'jobs' && 'Available Jobs'}
         </Text>
-        
+
         <Text style={styles.description}>
-          {currentStep === 'profile' && 'Please fill in your personal information to continue.'}
-          {currentStep === 'preferences' && 'Select your job preferences to find the best matches.'}
-          {currentStep === 'jobs' && 'Browse through available job opportunities.'}
+          {currentStep === 'profile' &&
+            'Please fill in your personal information to continue.'}
+          {currentStep === 'preferences' &&
+            'Select your job preferences to find the best matches.'}
+          {currentStep === 'jobs' &&
+            'Browse through available job opportunities.'}
         </Text>
       </View>
-      
+
       <View style={styles.buttonContainer}>
         {currentStep !== 'profile' && (
-          <Button 
-            variant="outline" 
+          <Button
+            variant='outline'
             onPress={handlePreviousStep}
             style={styles.button}
           >
             <ButtonText>Previous</ButtonText>
           </Button>
         )}
-        
+
         {currentStep !== 'jobs' && (
-          <Button 
-            onPress={handleNextStep}
-            style={styles.button}
-          >
+          <Button onPress={handleNextStep} style={styles.button}>
             <ButtonText>Next</ButtonText>
           </Button>
         )}

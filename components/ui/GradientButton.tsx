@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, StyleProp, ViewStyle, TextStyle, DimensionValue } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  DimensionValue,
+} from 'react-native';
 import { Pressable } from '@/components/ui/pressable';
 import { LinearGradient } from '@/components/ui/linear-gradient';
 import { ThemedText } from '@/components/ThemedText';
@@ -13,7 +19,7 @@ interface GradientButtonProps {
   colors?: string[];
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  disabled?:boolean
+  disabled?: boolean;
 }
 
 export const GradientButton = ({
@@ -22,35 +28,27 @@ export const GradientButton = ({
   width,
   padding,
   fontSize,
-  colors = ["#c00", "#c00"],
+  colors = ['#c00', '#c00'],
   style,
   textStyle,
-  disabled= false,
+  disabled = false,
 }: GradientButtonProps) => {
   return (
-    <Pressable 
-      style={[
-        width !== undefined ? { width } : undefined,
-        style
-      ]}
+    <Pressable
+      style={[width !== undefined ? { width } : undefined, style]}
       disabled={disabled}
       onPress={onPress}
     >
       <LinearGradient
-        className="rounded-[8vw] items-center justify-center"
-        style={[
-          styles.button,
-          { padding: padding }
-        ]}
+        className='rounded-[8vw] items-center justify-center'
+        style={[styles.button, { padding: padding }]}
         colors={colors}
         start={[0, 0]}
         end={[1, 0]}
       >
-        <ThemedText style={[
-          styles.buttonText,
-          { fontSize: fontSize },
-          textStyle
-        ]}>
+        <ThemedText
+          style={[styles.buttonText, { fontSize: fontSize }, textStyle]}
+        >
           {text}
         </ThemedText>
       </LinearGradient>
@@ -74,5 +72,5 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontWeight: '600',
-  }
+  },
 });

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.expo/
+android/
+ios/
+web-build/
+dist/
+
+# Generated files
+*.log
+*.tgz
+*.tar.gz
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Config files that should maintain their formatting
+*.config.js
+*.config.ts
+babel.config.js
+metro.config.js
+tailwind.config.js

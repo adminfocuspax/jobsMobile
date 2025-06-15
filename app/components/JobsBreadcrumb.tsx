@@ -7,9 +7,9 @@ interface JobsBreadcrumbProps {
   onItemPress?: (item: BreadcrumbItem) => void;
 }
 
-const JobsBreadcrumb: React.FC<JobsBreadcrumbProps> = ({ 
+const JobsBreadcrumb: React.FC<JobsBreadcrumbProps> = ({
   currentStep = 'profile',
-  onItemPress 
+  onItemPress,
 }) => {
   // Define paths as constants to ensure type safety
   const PROFILE_PATH = '/userInfo' as const;
@@ -34,14 +34,24 @@ const JobsBreadcrumb: React.FC<JobsBreadcrumbProps> = ({
     },
     {
       label: 'Preferences',
-      path: currentStep === 'profile' || currentStep === 'education' || currentStep === 'experience' ? undefined : PREFERENCES_PATH,
+      path:
+        currentStep === 'profile' ||
+        currentStep === 'education' ||
+        currentStep === 'experience'
+          ? undefined
+          : PREFERENCES_PATH,
       isActive: currentStep === 'preferences',
     },
     {
       label: 'See Jobs',
-      path: currentStep === 'jobs' ? undefined : (currentStep === 'preferences' ? JOBS_PATH : undefined),
+      path:
+        currentStep === 'jobs'
+          ? undefined
+          : currentStep === 'preferences'
+            ? JOBS_PATH
+            : undefined,
       isActive: currentStep === 'jobs',
-      isJobsItem:true
+      isJobsItem: true,
     },
   ];
 

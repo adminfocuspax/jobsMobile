@@ -14,15 +14,15 @@ const MAPPING = {
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
   'person.fill': 'person',
-  'gear': 'settings',
+  gear: 'settings',
   'bell.fill': 'notifications',
   'doc.text.fill': 'description',
   'bookmark.fill': 'bookmark',
   'envelope.fill': 'email',
-  'globe': 'language',
+  globe: 'language',
   'questionmark.circle.fill': 'help',
   'rectangle.portrait.and.arrow.right': 'logout',
-  'magnifyingglass': 'search',
+  magnifyingglass: 'search',
   'xmark.circle.fill': 'cancel',
 } as Partial<
   Record<
@@ -50,5 +50,12 @@ export function IconSymbol({
   style?: StyleProp<ViewStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name] || 'help-outline'} style={style} />;
+  return (
+    <MaterialIcons
+      color={color}
+      size={size}
+      name={MAPPING[name] || 'help-outline'}
+      style={style}
+    />
+  );
 }

@@ -6,11 +6,11 @@ import ta from './locales/ta.json';
 // the translations
 const resources = {
   en: {
-    translation: en
+    translation: en,
   },
   ta: {
-    translation: ta
-  }
+    translation: ta,
+  },
 };
 
 i18n
@@ -20,8 +20,8 @@ i18n
     lng: 'en', // default language
     fallbackLng: 'en', // fallback language
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
 
 export default i18n;

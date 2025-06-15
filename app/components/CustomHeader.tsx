@@ -1,4 +1,11 @@
-import { StyleSheet, View, TextInput, TouchableOpacity, FlatList, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Image,
+} from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { useNavigation } from 'expo-router';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -6,7 +13,12 @@ import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18n/i18n';
 import JobsDrawer from './Drawer';
-import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
+} from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
 import CompleteProfile from './CompleteProfile';
 import CenterAligned from './CenterAligned';
@@ -17,7 +29,11 @@ interface CustomHeaderProps {
   showSearch?: boolean;
 }
 
-export default function CustomHeader({ title, showBack = false, showSearch = false }: CustomHeaderProps) {
+export default function CustomHeader({
+  title,
+  showBack = false,
+  showSearch = false,
+}: CustomHeaderProps) {
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
   const [searchText, setSearchText] = useState('');
@@ -35,7 +51,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
         `${text} - Software Engineer`,
         `${text} - Product Manager`,
         `${text} - Designer`,
-        `${text} - Developer`
+        `${text} - Developer`,
       ]);
       setShowSuggestions(true);
     } else {
@@ -45,23 +61,21 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
   }, []);
 
   return (
-
-      <View style={styles.container}>
-
-        <View style={styles.header}>
-          <View style={styles.greetingContainer}>
-            {/* <View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.greetingContainer}>
+          {/* <View>
       <JobsDrawer />
     </View> */}
-            <View style={styles.greetingTextContainer}>
-              <View style={styles.greetingRow}>
-                <Image
-                  source={require('@/assets/images/header-logo.png')}
-                  style={styles.logoImage}
-                />
-              </View>
+          <View style={styles.greetingTextContainer}>
+            <View style={styles.greetingRow}>
+              <Image
+                source={require('@/assets/images/header-logo.png')}
+                style={styles.logoImage}
+              />
             </View>
-            {/* <TouchableOpacity 
+          </View>
+          {/* <TouchableOpacity 
       onPress={handleProfilePress}
       activeOpacity={0.8}
     >
@@ -75,26 +89,30 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
         <AvatarBadge />
       </Avatar>
     </TouchableOpacity> */}
-          </View>
-
         </View>
-        <CenterAligned >
+      </View>
+      <CenterAligned>
         <Box style={{ height: 120 }}>
           <CompleteProfile />
         </Box>
         {showSearch && (
           <View style={styles.searchWrapper}>
-            <ThemedText style={styles.subText} type="subtitle">
+            <ThemedText style={styles.subText} type='subtitle'>
               {t('header.opportunity')}
             </ThemedText>
             <View style={styles.searchContainer}>
-              <IconSymbol size={20} name="magnifyingglass" color="#666" style={styles.searchIcon} />
+              <IconSymbol
+                size={20}
+                name='magnifyingglass'
+                color='#666'
+                style={styles.searchIcon}
+              />
               <TextInput
                 style={styles.searchInput}
-                placeholder="Search jobs..."
+                placeholder='Search jobs...'
                 value={searchText}
                 onChangeText={handleSearch}
-                placeholderTextColor="#666"
+                placeholderTextColor='#666'
               />
               {searchText.length > 0 && (
                 <TouchableOpacity
@@ -104,7 +122,7 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
                   }}
                   style={styles.clearButton}
                 >
-                  <IconSymbol size={20} name="xmark.circle.fill" color="#666" />
+                  <IconSymbol size={20} name='xmark.circle.fill' color='#666' />
                 </TouchableOpacity>
               )}
             </View>
@@ -124,19 +142,21 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
                     setShowSuggestions(false);
                   }}
                 >
-                  <IconSymbol size={16} name="magnifyingglass" color="#666" style={styles.suggestionIcon} />
+                  <IconSymbol
+                    size={16}
+                    name='magnifyingglass'
+                    color='#666'
+                    style={styles.suggestionIcon}
+                  />
                   <ThemedText style={styles.suggestionText}>{item}</ThemedText>
                 </TouchableOpacity>
               )}
-              keyboardShouldPersistTaps="handled"
+              keyboardShouldPersistTaps='handled'
             />
           </View>
         )}
-        </CenterAligned>
-        
-
-
-      </View>
+      </CenterAligned>
+    </View>
   );
 }
 
@@ -145,13 +165,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
-    marginTop: 40
+    marginTop: 40,
   },
   header: {
     paddingHorizontal: 24,
     paddingVertical: 0,
     backgroundColor: '#FFFFFF',
-    marginTop: 0
+    marginTop: 0,
   },
   greetingContainer: {
     flexDirection: 'row',

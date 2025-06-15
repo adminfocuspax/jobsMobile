@@ -1,6 +1,11 @@
 'use client';
 import React from 'react';
-import { View, StyleSheet, GestureResponderEvent, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  TouchableOpacity,
+} from 'react-native';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
@@ -10,8 +15,6 @@ import { Card } from '@/components/ui/card';
 import ProfileAvatar from './ProfileAvatar';
 import { ChevronRightIcon, Icon } from '@/components/ui/icon';
 
-
-
 const CompleteProfile: React.FC = () => {
   // Calculate the border percentage for the avatar
   const profilePercentage = 10;
@@ -19,35 +22,35 @@ const CompleteProfile: React.FC = () => {
   // Default handler if no onProfilePress is provided
 
   return (
-    <Card style={styles.completeSetup} size="sm" variant="elevated" className='p-0 m-0 mt-4'>
-      <HStack space="sm" reversed={false} className="items-center">
-        <Box style={styles.avatarContainer}> 
-          <ProfileAvatar 
-            size="md" 
-          />
+    <Card
+      style={styles.completeSetup}
+      size='sm'
+      variant='elevated'
+      className='p-0 m-0 mt-4'
+    >
+      <HStack space='sm' reversed={false} className='items-center'>
+        <Box style={styles.avatarContainer}>
+          <ProfileAvatar size='md' />
         </Box>
-        <Box className="flex-1" style={styles.textContainer}>
-          <Text size="xs" style={styles.whiteText}>
+        <Box className='flex-1' style={styles.textContainer}>
+          <Text size='xs' style={styles.whiteText}>
             Complete profile
           </Text>
-          <Text size="xs" style={styles.percentageText}>
+          <Text size='xs' style={styles.percentageText}>
             {profilePercentage}%
           </Text>
         </Box>
         <TouchableOpacity style={styles.iconTouchable} onPress={() => null}>
           <View style={styles.iconContainer}>
-            <Icon as={ChevronRightIcon} size="xs" style={styles.whiteIcon} />
+            <Icon as={ChevronRightIcon} size='xs' style={styles.whiteIcon} />
           </View>
         </TouchableOpacity>
       </HStack>
 
       {/* Compact progress bar */}
       <View style={styles.progressBar}>
-        <View 
-          style={[
-            styles.progressFill, 
-            { width: `${profilePercentage}%` }
-          ]} 
+        <View
+          style={[styles.progressFill, { width: `${profilePercentage}%` }]}
         />
       </View>
     </Card>
@@ -55,7 +58,7 @@ const CompleteProfile: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  completeSetup:{
+  completeSetup: {
     borderWidth: 2,
     borderColor: '#dc2626',
     borderRadius: 12,
@@ -99,14 +102,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 2,
-
   },
   percentageText: {
     color: '#fff',
     fontSize: 14,
     opacity: 0.9,
     fontWeight: '500',
-
   },
   whiteIcon: {
     color: '#fff',

@@ -14,11 +14,10 @@ import CenterAligned from '../components/CenterAligned';
 
 const TRANSLATION_KEY = 'userInfo.experience';
 
-
 const ExperienceDetails: React.FC = () => {
   const { values } = useResponsive();
   const { t } = useTranslation();
-  
+
   // State for experiences
   const [experiences, setExperiences] = useState<Experience[]>([
     {
@@ -35,16 +34,16 @@ const ExperienceDetails: React.FC = () => {
       endYear: '',
       years: '',
       months: '',
-      isCurrent: false
-    }
+      isCurrent: false,
+    },
   ]);
-  
+
   // State to track if all experiences are valid
   const [areExperiencesValid, setAreExperiencesValid] = useState(false);
-  
+
   // State to track if user has no experience
   const [hasNoExperience, setHasNoExperience] = useState(false);
-  
+
   // Handle form submission
   const handleSubmit = () => {
     // Check if experiences are valid before submission
@@ -55,50 +54,49 @@ const ExperienceDetails: React.FC = () => {
       );
       return;
     }
-    
+
     console.log('Experience details submitted:', experiences);
     // Navigate to the preferences page
     router.push('/userDetails/prefrences');
   };
-  
+
   // Handle back button
   const handleBack = () => {
     // Navigate back to education page
     router.push('/userDetails/educations');
   };
-  
+
   // Handle validation change from the ExperienceForm component
   const handleValidationChange = (isValid: boolean) => {
     setAreExperiencesValid(isValid);
   };
-  
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <JobsBreadcrumb currentStep="experience" />
+      <JobsBreadcrumb currentStep='experience' />
       <Box style={styles.container}>
         {/* Experience Form Component */}
-        <CenterAligned >
-        <ExperienceForm 
-          initialExperiences={experiences}
-          onExperiencesChange={setExperiences}
-          onValidationChange={handleValidationChange}
-          initialHasNoExperience={hasNoExperience}
-          onHasNoExperienceChange={setHasNoExperience}
-        />
+        <CenterAligned>
+          <ExperienceForm
+            initialExperiences={experiences}
+            onExperiencesChange={setExperiences}
+            onValidationChange={handleValidationChange}
+            initialHasNoExperience={hasNoExperience}
+            onHasNoExperienceChange={setHasNoExperience}
+          />
         </CenterAligned>
 
-
         {/* Navigation Buttons */}
-        <VStack style={styles.buttonContainer} space="md">
+        <VStack style={styles.buttonContainer} space='md'>
           <GradientButton
             width={'100%'}
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text={t('common.back')}
-            colors={["#888", "#666"]}
+            colors={['#888', '#666']}
             onPress={handleBack}
           />
-          
+
           <GradientButton
             width={'100%'}
             padding={values.buttonPadding}
@@ -123,19 +121,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   buttonContainer: {
     justifyContent: 'center',
     alignContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
     marginTop: 16,
     marginBottom: 0,
-    width:'90%',
-    maxWidth:520,
+    width: '90%',
+    maxWidth: 520,
   },
 });
 
-
 export default ExperienceDetails;
-
