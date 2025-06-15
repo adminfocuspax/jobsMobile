@@ -12,6 +12,7 @@ import { Select, SelectTrigger, SelectInput, SelectIcon, SelectPortal, SelectBac
 import { useTranslation } from 'react-i18next';
 import { JOB_TITLES, INDUSTRIES_EXPERIENCED_IN } from '@/constants/experienceOptions';
 import { AddIcon, Icon, TrashIcon, ChevronDownIcon } from '@/components/ui/icon';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 const TRANSLATION_KEY = 'userInfo.experience';
 
@@ -48,6 +49,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   onHasNoExperienceChange
 }) => {
   const { t } = useTranslation();
+  const { primaryColor } = useResponsive();
+  const styles = createStyles(primaryColor);
   
   // State for experiences
   const [experiences, setExperiences] = useState<Experience[]>(initialExperiences);
@@ -302,7 +305,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                 onPress={() => removeExperience(experience.id)}
                 style={styles.removeButton}
               >
-                <ButtonIcon as={TrashIcon} color="#CC0000" />
+                <ButtonIcon as={TrashIcon} color={primaryColor} />
               </Button>
             )}
           </HStack>
@@ -573,7 +576,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   content: {
     flex: 1,
     width: '100%',
@@ -645,8 +648,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   checkboxChecked: {
-    backgroundColor: '#4CAF50',
-    borderColor: '#4CAF50',
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
   },
   checkmark: {
     color: '#fff',

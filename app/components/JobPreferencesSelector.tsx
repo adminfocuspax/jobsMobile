@@ -15,6 +15,7 @@ import { Icon } from '@/components/ui/icon';
 import { JobPreference } from '@/constants/supermarketJobOptions';
 import CenterAligned from './CenterAligned';
 import { FlashList } from '@shopify/flash-list';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 interface JobPreferencesSelectorProps {
   preferences: JobPreference[];
@@ -30,6 +31,8 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
   maxSelections = 5
 }) => {
   const { width } = useWindowDimensions();
+  const { primaryColor } = useResponsive();
+  const styles = createStyles(primaryColor);
   const [searchQuery, setSearchQuery] = useState('');
   
   // Initialize selectedPreferences with initialSelections if available
@@ -307,7 +310,7 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
@@ -377,8 +380,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   selectedCard: {
-    backgroundColor: '#CC0000',
-    borderColor: '#AA0000',
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
   },
   cardContent: {
     alignItems: 'center',

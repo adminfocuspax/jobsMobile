@@ -22,6 +22,7 @@ const EducationDetails: React.FC = () => {
   // State for form fields
   const { values, primaryColor } = useResponsive();
   const { t } = useTranslation();
+  const styles = createStyles(primaryColor);
   const [educationLevel, setEducationLevel] = useState('');
   const [degree, setDegree] = useState('');
   const [showDegreeOptions, setShowDegreeOptions] = useState(false);
@@ -274,7 +275,7 @@ const EducationDetails: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     paddingVertical: 24,  
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   selectedOption: {
-    borderColor: '#CC0000',
+    borderColor: primaryColor,
     borderWidth: 2,
   },
   buttonContainer: {

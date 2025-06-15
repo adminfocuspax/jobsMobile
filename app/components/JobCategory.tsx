@@ -3,8 +3,11 @@ import { View, StyleSheet } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
 import JobCategorySelector, { JobCategoryInterface } from './JobCategorySelector';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 const JobCategory: React.FC = () => {
+  const { primaryColor } = useResponsive();
+  const styles = createStyles(primaryColor);
   const [selectedCategory, setSelectedCategory] = useState<JobCategoryInterface | null>(null);
 
   const handleCategorySelect = (category: JobCategoryInterface | null) => {
@@ -43,7 +46,7 @@ const JobCategory: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
@@ -64,12 +67,12 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#CC0000',
+    borderColor: primaryColor,
   },
   selectedTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#CC0000',
+    color: primaryColor,
     marginBottom: 8,
   },
   selectedText: {

@@ -5,6 +5,7 @@ import { Text } from '@/components/ui/text';
 import { HStack } from '@/components/ui/hstack';
 import { ChevronRightIcon, Icon, SunIcon, CheckIcon } from '@/components/ui/icon';
 import { router } from 'expo-router';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 export interface BreadcrumbItem {
   label: string;
@@ -22,6 +23,8 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
   items, 
   onItemPress 
 }) => {
+  const { primaryColor } = useResponsive();
+  const styles = createStyles(primaryColor);
   // Create a ref for the ScrollView
   const scrollViewRef = React.useRef(null);
   
@@ -137,11 +140,11 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   container: {
     marginTop: 10,
     paddingVertical: 24,
-    backgroundColor: '#CC0000',
+    backgroundColor: primaryColor,
   },
   scrollContentContainer: {
     paddingHorizontal: 16,
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   numberText: {
-    color: '#CC0000',
+    color: primaryColor,
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
