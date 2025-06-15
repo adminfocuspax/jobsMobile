@@ -124,21 +124,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     width: '100%',
-    paddingVertical: 16,
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom:30,
-    left: 0,
-    right: 0,
-    elevation: 0,
+
   },
   buttonRow: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    marginBottom:32
   },
 });
 

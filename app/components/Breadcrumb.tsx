@@ -39,7 +39,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         const scrollPosition = Math.max(0, (activeIndex * 84) - 40); // Item width (80) + margin (2+2), centered
         
         // @ts-ignore - scrollTo exists on ScrollView ref
-        scrollViewRef.current.scrollTo({
+        scrollViewRef?.current?.scrollTo({
           x: scrollPosition,
           animated: true
         });

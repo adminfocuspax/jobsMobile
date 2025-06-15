@@ -42,49 +42,49 @@ export default function UserInfoPage() {
   ];
 
   return (
-  <>
-     <Box style={styles.avatarContainer}>
-              <ProfileAvatar
-                size="xl"
-                className="mb-0"
-                showChangeText={true}
-              />
-            </Box>
-            <ScrollView
-    style={styles.menuList}
-    showsVerticalScrollIndicator={true}
-    contentContainerStyle={styles.menuListContent}
-  >
-    {menuItems.map((item, index) => (
-      <TouchableOpacity
-        key={item.text}
-        style={[
-          styles.menuItem,
-          index === menuItems.length - 1 && styles.menuItemLast
-        ]}
-        onPress={item.onPress || (() => { })}
-      >
-        <IconSymbol
-          name={item.icon}
-          size={18}
-          color={item.color}
-          style={styles.menuIcon}
+    <>
+      <Box style={styles.avatarContainer}>
+        <ProfileAvatar
+          size="xl"
+          className="mb-0"
+          showChangeText={true}
         />
-        <ThemedText style={[styles.menuText, { color: item.color }]}>
-          {item.text}
-        </ThemedText>
-      </TouchableOpacity>
-    ))}
-  </ScrollView>
+      </Box>
+      <ScrollView
+        style={styles.menuList}
+        showsVerticalScrollIndicator={true}
+        contentContainerStyle={styles.menuListContent}
+      >
+        {menuItems.map((item, index) => (
+          <TouchableOpacity
+            key={item.text}
+            style={[
+              styles.menuItem,
+              index === menuItems.length - 1 && styles.menuItemLast
+            ]}
+            onPress={item.onPress || (() => { })}
+          >
+            <IconSymbol
+              name={item.icon}
+              size={18}
+              color={item.color}
+              style={styles.menuIcon}
+            />
+            <ThemedText style={[styles.menuText, { color: item.color }]}>
+              {item.text}
+            </ThemedText>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
 
-  </>
-);
+    </>
+  );
 }
 
 
 const styles = StyleSheet.create({
-  avatarContainer:{
-    marginTop:30,
+  avatarContainer: {
+    marginTop: 56,
   },
   menuHeader: {
     borderColor: '#ccc',

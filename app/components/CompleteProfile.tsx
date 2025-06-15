@@ -23,7 +23,7 @@ const CompleteProfile: React.FC = () => {
       <HStack space="sm" reversed={false} className="items-center">
         <Box style={styles.avatarContainer}> 
           <ProfileAvatar 
-            size="xs" 
+            size="md" 
           />
         </Box>
         <Box className="flex-1" style={styles.textContainer}>
@@ -56,60 +56,78 @@ const CompleteProfile: React.FC = () => {
 
 const styles = StyleSheet.create({
   completeSetup:{
-    borderWidth: 1,
-    borderColor: '#c00',
-    borderRadius: 8,
-    backgroundColor: '#c00',
-    margin: 2,
-    padding: 6,
-    height: 40,
-    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: '#dc2626',
+    borderRadius: 12,
+    backgroundColor: '#dc2626',
+    margin: 8,
+    marginTop: 16,
+    padding: 20,
+    minHeight: 100,
+    justifyContent: 'flex-start',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
   avatarContainer: {
-    width: 32,
-    height: 32,
+    width: 48,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textContainer: {
-    paddingHorizontal: 4,
+    paddingHorizontal: 12,
+    flex: 1,
+    justifyContent: 'center',
+    paddingVertical: 4,
   },
   iconTouchable: {
-    width: 20,
-    height: 20,
+    width: 32,
+    height: 32,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   whiteText: {
     color: '#fff',
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 2,
+
   },
   percentageText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 14,
     opacity: 0.9,
+    fontWeight: '500',
+
   },
   whiteIcon: {
     color: '#fff',
   },
   progressBar: {
-    height: 1,
+    height: 4,
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 1,
-    marginTop: 2,
-    marginHorizontal: 4,
+    borderRadius: 2,
+    marginTop: 12,
+    marginHorizontal: 0,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
     backgroundColor: '#fff',
-    borderRadius: 1,
+    borderRadius: 2,
   },
   iconContainer: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',

@@ -21,6 +21,7 @@ const UserInfo: React.FC = () => {
   // State for form fields
   const { values, primaryColor } = useResponsive();
   const { t } = useTranslation();
+  const styles = createStyles(primaryColor);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
@@ -238,7 +239,7 @@ const UserInfo: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (primaryColor: string) => StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     paddingVertical: 24,
@@ -294,7 +295,7 @@ const styles = StyleSheet.create({
     width: 10,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#c00',
+    borderColor: primaryColor,
     backgroundColor: 'white',
   },
   radioText: {

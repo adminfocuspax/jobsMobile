@@ -7,7 +7,9 @@ import { useTranslation } from 'react-i18next';
 import '../i18n/i18n';
 import JobsDrawer from './Drawer';
 import { Avatar, AvatarBadge, AvatarFallbackText, AvatarImage } from '@/components/ui/avatar';
+import { Box } from '@/components/ui/box';
 import CompleteProfile from './CompleteProfile';
+import CenterAligned from './CenterAligned';
 
 interface CustomHeaderProps {
   title: string;
@@ -43,90 +45,98 @@ export default function CustomHeader({ title, showBack = false, showSearch = fal
   }, []);
 
   return (
-    <View style={styles.container}>
-      <CompleteProfile/>
-      <View style={styles.header}>
-        <View style={styles.greetingContainer}>
-          {/* <View>
-            <JobsDrawer />
-          </View> */}
-          <View style={styles.greetingTextContainer}>
-            <View style={styles.greetingRow}>
-              <Image 
-                source={require('@/assets/images/header-logo.png')} 
-                style={styles.logoImage}
+
+      <View style={styles.container}>
+
+        <View style={styles.header}>
+          <View style={styles.greetingContainer}>
+            {/* <View>
+      <JobsDrawer />
+    </View> */}
+            <View style={styles.greetingTextContainer}>
+              <View style={styles.greetingRow}>
+                <Image
+                  source={require('@/assets/images/header-logo.png')}
+                  style={styles.logoImage}
+                />
+              </View>
+            </View>
+            {/* <TouchableOpacity 
+      onPress={handleProfilePress}
+      activeOpacity={0.8}
+    >
+      <Avatar size="md">
+        <AvatarFallbackText>Jane Doe</AvatarFallbackText>
+        <AvatarImage
+          source={{
+            uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+          }}
+        />
+        <AvatarBadge />
+      </Avatar>
+    </TouchableOpacity> */}
+          </View>
+
+        </View>
+        <CenterAligned >
+        <Box style={{ height: 120 }}>
+          <CompleteProfile />
+        </Box>
+        {showSearch && (
+          <View style={styles.searchWrapper}>
+            <ThemedText style={styles.subText} type="subtitle">
+              {t('header.opportunity')}
+            </ThemedText>
+            <View style={styles.searchContainer}>
+              <IconSymbol size={20} name="magnifyingglass" color="#666" style={styles.searchIcon} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search jobs..."
+                value={searchText}
+                onChangeText={handleSearch}
+                placeholderTextColor="#666"
               />
+              {searchText.length > 0 && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setSearchText('');
+                    setShowSuggestions(false);
+                  }}
+                  style={styles.clearButton}
+                >
+                  <IconSymbol size={20} name="xmark.circle.fill" color="#666" />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
-          {/* <TouchableOpacity 
-            onPress={handleProfilePress}
-            activeOpacity={0.8}
-          >
-            <Avatar size="md">
-              <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                }}
-              />
-              <AvatarBadge />
-            </Avatar>
-          </TouchableOpacity> */}
-        </View>
-    
-      </View>
-      
-      {showSearch && (
-        <View style={styles.searchWrapper}>
-          <ThemedText style={styles.subText} type="subtitle">
-            {t('header.opportunity')}
-          </ThemedText>
-          <View style={styles.searchContainer}>
-            <IconSymbol size={20} name="magnifyingglass" color="#666" style={styles.searchIcon} />
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search jobs..."
-              value={searchText}
-              onChangeText={handleSearch}
-              placeholderTextColor="#666"
-            />
-            {searchText.length > 0 && (
-              <TouchableOpacity 
-                onPress={() => {
-                  setSearchText('');
-                  setShowSuggestions(false);
-                }}
-                style={styles.clearButton}
-              >
-                <IconSymbol size={20} name="xmark.circle.fill" color="#666" />
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
-      )}
+        )}
 
-      {showSuggestions && suggestions.length > 0 && (
-        <View style={styles.suggestionsContainer}>
-          <FlatList
-            data={suggestions}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.suggestionItem}
-                onPress={() => {
-                  setSearchText(item);
-                  setShowSuggestions(false);
-                }}
-              >
-                <IconSymbol size={16} name="magnifyingglass" color="#666" style={styles.suggestionIcon} />
-                <ThemedText style={styles.suggestionText}>{item}</ThemedText>
-              </TouchableOpacity>
-            )}
-            keyboardShouldPersistTaps="handled"
-          />
-        </View>
-      )}
-    </View>
+        {showSuggestions && suggestions.length > 0 && (
+          <View style={styles.suggestionsContainer}>
+            <FlatList
+              data={suggestions}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.suggestionItem}
+                  onPress={() => {
+                    setSearchText(item);
+                    setShowSuggestions(false);
+                  }}
+                >
+                  <IconSymbol size={16} name="magnifyingglass" color="#666" style={styles.suggestionIcon} />
+                  <ThemedText style={styles.suggestionText}>{item}</ThemedText>
+                </TouchableOpacity>
+              )}
+              keyboardShouldPersistTaps="handled"
+            />
+          </View>
+        )}
+        </CenterAligned>
+        
+
+
+      </View>
   );
 }
 
@@ -135,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
-    marginTop: 8
+    marginTop: 40
   },
   header: {
     paddingHorizontal: 24,

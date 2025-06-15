@@ -8,12 +8,13 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import CustomHeader from '../components/CustomHeader';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import CenterAligned from '../components/CenterAligned';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
+      <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].primaryColor,
         headerShown: true,
