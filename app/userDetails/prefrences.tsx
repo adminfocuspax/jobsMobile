@@ -11,16 +11,16 @@ import {
   FormControlLabel,
   FormControlLabelText,
 } from '@/components/ui/form-control';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
-import CenterAligned from '../components/CenterAligned';
 import {
   JobPreference,
   SUPERMARKET_JOB_PREFERENCES,
 } from '@/constants/supermarketJobOptions';
+import CenterAligned from '../components/CenterAligned';
+import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import JobPreferencesSelector from '../components/JobPreferencesSelector';
 
 const TRANSLATION_KEY = 'userInfo.preferences';
@@ -81,7 +81,7 @@ const Preferences: React.FC = () => {
       <CenterAligned style={styles.buttonContainer}>
         <VStack space='md' style={styles.buttonRow}>
           <GradientButton
-            width={'100%'}
+            width='100%'
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text='Back'
@@ -90,7 +90,7 @@ const Preferences: React.FC = () => {
           />
 
           <GradientButton
-            width={'100%'}
+            width='100%'
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text='Next'
@@ -104,41 +104,41 @@ const Preferences: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-    paddingVertical: 24,
+  buttonContainer: {
     backgroundColor: '#FFFFFF',
+    width: '100%',
+  },
+  buttonRow: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    marginBottom: 32,
+    width: '100%',
   },
   container: {
-    flex: 1,
     backgroundColor: '#FFFFFF',
+    flex: 1,
     width: '100%',
   },
   content: {
-    width: '100%',
-    paddingBottom: 250, // Space for the fixed button container
-  },
-  heading: {
-    textAlign: 'center',
-    marginBottom: 8,
+    paddingBottom: 250,
+    width: '100%', // Space for the fixed button container
   },
   encouragementText: {
-    fontSize: 16,
     color: '#666',
-    textAlign: 'center',
+    fontSize: 16,
     marginBottom: 16,
     paddingHorizontal: 16,
+    textAlign: 'center',
   },
-  buttonContainer: {
-    width: '100%',
-    backgroundColor: '#FFFFFF',
+  heading: {
+    marginBottom: 8,
+    textAlign: 'center',
   },
-  buttonRow: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  scrollContainer: {
     backgroundColor: '#FFFFFF',
-    marginBottom: 32,
+    flexGrow: 1,
+    paddingVertical: 24,
   },
 });
 

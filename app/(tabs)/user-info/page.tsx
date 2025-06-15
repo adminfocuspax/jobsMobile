@@ -9,6 +9,7 @@ import { SymbolViewProps } from 'expo-symbols';
 import i18n from '@/app/i18n/i18n';
 import { Box } from '@/components/ui/box';
 import ProfileAvatar from '@/app/components/ProfileAvatar';
+
 interface MenuItem {
   icon: SymbolViewProps['name'];
   text: string;
@@ -46,11 +47,11 @@ export default function UserInfoPage() {
   return (
     <>
       <Box style={styles.avatarContainer}>
-        <ProfileAvatar size='xl' className='mb-0' showChangeText={true} />
+        <ProfileAvatar size='xl' className='mb-0' showChangeText />
       </Box>
       <ScrollView
         style={styles.menuList}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator
         contentContainerStyle={styles.menuListContent}
       >
         {menuItems.map((item, index) => (
@@ -82,35 +83,35 @@ const styles = StyleSheet.create({
   avatarContainer: {
     marginTop: 56,
   },
-  menuHeader: {
-    borderColor: '#ccc',
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-  },
   logoImage: {
     margin: 'auto',
     marginBottom: 8,
     marginTop: 24,
   },
-  menuList: {
-    maxHeight: 900,
-    flex: 1,
+  menuHeader: {
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    borderStyle: 'solid',
   },
-  menuListContent: {
-    paddingBottom: 4,
+  menuIcon: {
+    marginRight: 10,
   },
   menuItem: {
-    flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    padding: 16,
   },
   menuItemLast: {
     borderBottomWidth: 0,
   },
-  menuIcon: {
-    marginRight: 10,
+  menuList: {
+    flex: 1,
+    maxHeight: 900,
+  },
+  menuListContent: {
+    paddingBottom: 4,
   },
   menuText: {
     fontSize: 15,

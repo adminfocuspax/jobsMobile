@@ -13,12 +13,12 @@ import {
   FormControlLabel,
   FormControlLabelText,
 } from '@/components/ui/form-control';
-import ProfileAvatar from '../components/ProfileAvatar';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
+import JobsBreadcrumb from '../components/JobsBreadcrumb';
+import ProfileAvatar from '../components/ProfileAvatar';
 import CenterAligned from '../components/CenterAligned';
 
 const UserInfo: React.FC = () => {
@@ -91,7 +91,7 @@ const UserInfo: React.FC = () => {
 
             {/* Profile Avatar */}
             <Box style={styles.avatarContainer}>
-              <ProfileAvatar size='xl' className='mb-0' showChangeText={true} />
+              <ProfileAvatar size='xl' className='mb-0' showChangeText />
             </Box>
             {/* Full Name Input */}
             <FormControl size='md'>
@@ -145,19 +145,19 @@ const UserInfo: React.FC = () => {
               </FormControlLabel>
               <VStack space='sm' style={styles.genderContainer}>
                 <Pressable
-                  style={Object.assign(
-                    {},
-                    styles.radioOption,
-                    gender === 'male' ? styles.radioOptionSelected : {}
-                  )}
+                  style={{
+                    ...styles.radioOption,
+                    ...(gender === 'male' ? styles.radioOptionSelected : {}),
+                  }}
                   onPress={() => setGender('male')}
                 >
                   <Box
-                    style={Object.assign(
-                      {},
-                      styles.radioCircle,
-                      gender === 'male' ? { borderColor: primaryColor } : {}
-                    )}
+                    style={{
+                      ...styles.radioCircle,
+                      ...(gender === 'male'
+                        ? { borderColor: primaryColor }
+                        : {}),
+                    }}
                   >
                     {gender === 'male' && (
                       <Box style={styles.radioInnerCircle} />
@@ -166,19 +166,19 @@ const UserInfo: React.FC = () => {
                   <Text style={styles.radioText}>Male</Text>
                 </Pressable>
                 <Pressable
-                  style={Object.assign(
-                    {},
-                    styles.radioOption,
-                    gender === 'female' ? styles.radioOptionSelected : {}
-                  )}
+                  style={{
+                    ...styles.radioOption,
+                    ...(gender === 'female' ? styles.radioOptionSelected : {}),
+                  }}
                   onPress={() => setGender('female')}
                 >
                   <Box
-                    style={Object.assign(
-                      {},
-                      styles.radioCircle,
-                      gender === 'female' ? { borderColor: primaryColor } : {}
-                    )}
+                    style={{
+                      ...styles.radioCircle,
+                      ...(gender === 'female'
+                        ? { borderColor: primaryColor }
+                        : {}),
+                    }}
                   >
                     {gender === 'female' && (
                       <Box style={styles.radioInnerCircle} />
@@ -188,19 +188,19 @@ const UserInfo: React.FC = () => {
                 </Pressable>
 
                 <Pressable
-                  style={Object.assign(
-                    {},
-                    styles.radioOption,
-                    gender === 'other' ? styles.radioOptionSelected : {}
-                  )}
+                  style={{
+                    ...styles.radioOption,
+                    ...(gender === 'other' ? styles.radioOptionSelected : {}),
+                  }}
                   onPress={() => setGender('other')}
                 >
                   <Box
-                    style={Object.assign(
-                      {},
-                      styles.radioCircle,
-                      gender === 'other' ? { borderColor: primaryColor } : {}
-                    )}
+                    style={{
+                      ...styles.radioCircle,
+                      ...(gender === 'other'
+                        ? { borderColor: primaryColor }
+                        : {}),
+                    }}
                   >
                     {gender === 'other' && (
                       <Box style={styles.radioInnerCircle} />
@@ -222,26 +222,24 @@ const UserInfo: React.FC = () => {
                 {statusOptions.map(status => (
                   <Pressable
                     key={status}
-                    style={Object.assign(
-                      {},
-                      styles.checkboxOption,
-                      userStatus.includes(status)
+                    style={{
+                      ...styles.checkboxOption,
+                      ...(userStatus.includes(status)
                         ? styles.checkboxOptionSelected
-                        : {}
-                    )}
+                        : {}),
+                    }}
                     onPress={() => toggleStatus(status)}
                   >
                     <Box
-                      style={Object.assign(
-                        {},
-                        styles.checkbox,
-                        userStatus.includes(status)
+                      style={{
+                        ...styles.checkbox,
+                        ...(userStatus.includes(status)
                           ? {
                               borderColor: primaryColor,
                               backgroundColor: primaryColor,
                             }
-                          : {}
-                      )}
+                          : {}),
+                      }}
                     >
                       {userStatus.includes(status) && (
                         <Text style={styles.checkmark}>✓</Text>
@@ -258,7 +256,7 @@ const UserInfo: React.FC = () => {
       </Box>
       <Box style={styles.buttonContainer}>
         <GradientButton
-          width={'100%'}
+          width='100%'
           padding={values.buttonPadding}
           fontSize={values.fontSize}
           text={t('common.next')}
@@ -273,10 +271,10 @@ const UserInfo: React.FC = () => {
 const createStyles = (primaryColor: string) =>
   StyleSheet.create({
     scrollContainer: {
-      flexGrow: 1,
-      paddingVertical: 24,
       backgroundColor: '#FFFFFF',
+      flexGrow: 1,
       justifyContent: 'space-between',
+      paddingVertical: 24,
     },
     container: {
       flex: 1,
@@ -287,8 +285,8 @@ const createStyles = (primaryColor: string) =>
       width: '100%',
     },
     heading: {
-      textAlign: 'center',
       marginBottom: 0,
+      textAlign: 'center',
     },
     formContainer: {},
     avatarContainer: {
@@ -302,53 +300,53 @@ const createStyles = (primaryColor: string) =>
       marginTop: 8,
     },
     radioOption: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       paddingVertical: 8,
     },
     radioOptionSelected: {
       // You can add styles for the selected option if needed
     },
     radioCircle: {
-      height: 20,
-      width: 20,
+      alignItems: 'center',
+      borderColor: '#000',
       borderRadius: 10,
       borderWidth: 2,
-      alignItems: 'center',
+      height: 20,
       justifyContent: 'center',
-      borderColor: '#000',
       marginRight: 10,
+      width: 20,
     },
     radioInnerCircle: {
-      height: 10,
-      width: 10,
+      backgroundColor: 'white',
+      borderColor: primaryColor,
       borderRadius: 10,
       borderWidth: 2,
-      borderColor: primaryColor,
-      backgroundColor: 'white',
+      height: 10,
+      width: 10,
     },
     radioText: {
-      fontSize: 16,
       color: '#333',
+      fontSize: 16,
     },
     // Checkbox styles for multi-select
     checkboxOption: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
       paddingVertical: 8,
     },
     checkboxOptionSelected: {
       // You can add styles for the selected option if needed
     },
     checkbox: {
-      height: 20,
-      width: 20,
+      alignItems: 'center',
+      borderColor: '#000',
       borderRadius: 4,
       borderWidth: 2,
-      alignItems: 'center',
+      height: 20,
       justifyContent: 'center',
-      borderColor: '#000',
       marginRight: 10,
+      width: 20,
     },
     checkmark: {
       color: 'white',
@@ -356,23 +354,23 @@ const createStyles = (primaryColor: string) =>
       fontWeight: 'bold',
     },
     checkboxText: {
-      fontSize: 16,
       color: '#333',
+      fontSize: 16,
     },
 
     buttonContainer: {
-      width: '90%',
-      paddingVertical: 16,
-      display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
-      maxWidth: 520,
-      marginHorizontal: 'auto',
       alignSelf: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      marginHorizontal: 'auto',
+      maxWidth: 520,
+      paddingVertical: 16,
+      width: '90%',
     },
     button: {
-      width: '100%',
       backgroundColor: '#4F46E5',
+      width: '100%',
     },
   });
 

@@ -52,7 +52,7 @@ const UIDrawer = createDrawer({
   CloseButton: Pressable,
   Footer: View,
   Header: View,
-  AnimatePresence: AnimatePresence,
+  AnimatePresence,
 });
 
 cssInterop(AnimatedPressable, { className: 'style' });
@@ -182,55 +182,51 @@ type IDrawerCloseButtonProps = React.ComponentProps<
 const Drawer = React.forwardRef<
   React.ComponentRef<typeof UIDrawer>,
   IDrawerProps
->(function Drawer({ className, size = 'sm', anchor = 'left', ...props }, ref) {
-  return (
-    <UIDrawer
-      ref={ref}
-      {...props}
-      pointerEvents='box-none'
-      className={drawerStyle({ size, anchor, class: className })}
-      context={{ size, anchor }}
-    />
-  );
-});
+>(({ className, size = 'sm', anchor = 'left', ...props }, ref) => (
+  <UIDrawer
+    ref={ref}
+    {...props}
+    pointerEvents='box-none'
+    className={drawerStyle({ size, anchor, class: className })}
+    context={{ size, anchor }}
+  />
+));
 
 const DrawerBackdrop = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.Backdrop>,
   IDrawerBackdropProps
->(function DrawerBackdrop({ className, ...props }, ref) {
-  return (
-    <UIDrawer.Backdrop
-      ref={ref}
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 0.5,
-      }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        type: 'spring',
-        damping: 18,
-        stiffness: 250,
-        opacity: {
-          type: 'timing',
-          duration: 250,
-        },
-      }}
-      {...props}
-      className={drawerBackdropStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIDrawer.Backdrop
+    ref={ref}
+    initial={{
+      opacity: 0,
+    }}
+    animate={{
+      opacity: 0.5,
+    }}
+    exit={{
+      opacity: 0,
+    }}
+    transition={{
+      type: 'spring',
+      damping: 18,
+      stiffness: 250,
+      opacity: {
+        type: 'timing',
+        duration: 250,
+      },
+    }}
+    {...props}
+    className={drawerBackdropStyle({
+      class: className,
+    })}
+  />
+));
 
 const DrawerContent = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.Content>,
   IDrawerContentProps
->(function DrawerContent({ className, ...props }, ref) {
+>(({ className, ...props }, ref) => {
   const { size: parentSize, anchor: parentAnchor } = useStyleContext(SCOPE);
 
   const drawerHeight = screenHeight * (sizes[parentSize] || sizes.md);
@@ -278,62 +274,54 @@ const DrawerContent = React.forwardRef<
 const DrawerHeader = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.Header>,
   IDrawerHeaderProps
->(function DrawerHeader({ className, ...props }, ref) {
-  return (
-    <UIDrawer.Header
-      ref={ref}
-      {...props}
-      className={drawerHeaderStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIDrawer.Header
+    ref={ref}
+    {...props}
+    className={drawerHeaderStyle({
+      class: className,
+    })}
+  />
+));
 
 const DrawerBody = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.Body>,
   IDrawerBodyProps
->(function DrawerBody({ className, ...props }, ref) {
-  return (
-    <UIDrawer.Body
-      ref={ref}
-      {...props}
-      className={drawerBodyStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIDrawer.Body
+    ref={ref}
+    {...props}
+    className={drawerBodyStyle({
+      class: className,
+    })}
+  />
+));
 
 const DrawerFooter = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.Footer>,
   IDrawerFooterProps
->(function DrawerFooter({ className, ...props }, ref) {
-  return (
-    <UIDrawer.Footer
-      ref={ref}
-      {...props}
-      className={drawerFooterStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIDrawer.Footer
+    ref={ref}
+    {...props}
+    className={drawerFooterStyle({
+      class: className,
+    })}
+  />
+));
 
 const DrawerCloseButton = React.forwardRef<
   React.ComponentRef<typeof UIDrawer.CloseButton>,
   IDrawerCloseButtonProps
->(function DrawerCloseButton({ className, ...props }, ref) {
-  return (
-    <UIDrawer.CloseButton
-      ref={ref}
-      {...props}
-      className={drawerCloseButtonStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIDrawer.CloseButton
+    ref={ref}
+    {...props}
+    className={drawerCloseButtonStyle({
+      class: className,
+    })}
+  />
+));
 
 Drawer.displayName = 'Drawer';
 DrawerBackdrop.displayName = 'DrawerBackdrop';

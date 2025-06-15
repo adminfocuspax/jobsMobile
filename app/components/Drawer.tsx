@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   GestureResponderEvent,
+  Pressable,
 } from 'react-native';
 import {
   Drawer,
@@ -14,9 +15,7 @@ import {
   DrawerBody,
 } from '@/components/ui/drawer';
 import React, { useState } from 'react';
-import { Pressable } from 'react-native';
 import { SymbolViewProps } from 'expo-symbols';
-import i18n from '../i18n/i18n';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import {
   Avatar,
@@ -24,6 +23,7 @@ import {
   AvatarFallbackText,
   AvatarImage,
 } from '@/components/ui/avatar';
+import i18n from '../i18n/i18n';
 import ProfileAvatar from './ProfileAvatar';
 
 interface MenuItem {
@@ -95,7 +95,7 @@ function JobsDrawer() {
           <DrawerBody>
             <ScrollView
               style={styles.menuList}
-              showsVerticalScrollIndicator={true}
+              showsVerticalScrollIndicator
               contentContainerStyle={styles.menuListContent}
             >
               {menuItems.map((item, index) => (
@@ -127,35 +127,35 @@ function JobsDrawer() {
 }
 
 const styles = StyleSheet.create({
-  menuHeader: {
-    borderColor: '#ccc',
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-  },
   logoImage: {
     margin: 'auto',
     marginBottom: 8,
     marginTop: 24,
   },
-  menuList: {
-    maxHeight: 900,
-    flex: 1,
+  menuHeader: {
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    borderStyle: 'solid',
   },
-  menuListContent: {
-    paddingBottom: 4,
+  menuIcon: {
+    marginRight: 10,
   },
   menuItem: {
-    flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    padding: 16,
   },
   menuItemLast: {
     borderBottomWidth: 0,
   },
-  menuIcon: {
-    marginRight: 10,
+  menuList: {
+    flex: 1,
+    maxHeight: 900,
+  },
+  menuListContent: {
+    paddingBottom: 4,
   },
   menuText: {
     fontSize: 15,

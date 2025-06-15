@@ -10,6 +10,7 @@ import {
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
 import { createSelect } from '@gluestack-ui/select';
 import { cssInterop } from 'nativewind';
+import { Pressable, View, TextInput } from 'react-native';
 import {
   Actionsheet,
   ActionsheetContent,
@@ -24,14 +25,11 @@ import {
   ActionsheetSectionList,
   ActionsheetSectionHeaderText,
 } from './select-actionsheet';
-import { Pressable, View, TextInput } from 'react-native';
 
 const SelectTriggerWrapper = React.forwardRef<
   React.ComponentRef<typeof Pressable>,
   React.ComponentProps<typeof Pressable>
->(function SelectTriggerWrapper({ ...props }, ref) {
-  return <Pressable {...props} ref={ref} />;
-});
+>(({ ...props }, ref) => <Pressable {...props} ref={ref} />);
 
 const selectIconStyle = tva({
   base: 'text-background-500 fill-none',
@@ -136,17 +134,15 @@ type ISelectProps = VariantProps<typeof selectStyle> &
 const Select = React.forwardRef<
   React.ComponentRef<typeof UISelect>,
   ISelectProps
->(function Select({ className, ...props }, ref) {
-  return (
-    <UISelect
-      className={selectStyle({
-        class: className,
-      })}
-      ref={ref}
-      {...props}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UISelect
+    className={selectStyle({
+      class: className,
+    })}
+    ref={ref}
+    {...props}
+  />
+));
 
 type ISelectTriggerProps = VariantProps<typeof selectTriggerStyle> &
   React.ComponentProps<typeof UISelect.Trigger> & { className?: string };
@@ -154,23 +150,18 @@ type ISelectTriggerProps = VariantProps<typeof selectTriggerStyle> &
 const SelectTrigger = React.forwardRef<
   React.ComponentRef<typeof UISelect.Trigger>,
   ISelectTriggerProps
->(function SelectTrigger(
-  { className, size = 'md', variant = 'outline', ...props },
-  ref
-) {
-  return (
-    <UISelect.Trigger
-      className={selectTriggerStyle({
-        class: className,
-        size,
-        variant,
-      })}
-      ref={ref}
-      context={{ size, variant }}
-      {...props}
-    />
-  );
-});
+>(({ className, size = 'md', variant = 'outline', ...props }, ref) => (
+  <UISelect.Trigger
+    className={selectTriggerStyle({
+      class: className,
+      size,
+      variant,
+    })}
+    ref={ref}
+    context={{ size, variant }}
+    {...props}
+  />
+));
 
 type ISelectInputProps = VariantProps<typeof selectInputStyle> &
   React.ComponentProps<typeof UISelect.Input> & { className?: string };
@@ -178,7 +169,7 @@ type ISelectInputProps = VariantProps<typeof selectInputStyle> &
 const SelectInput = React.forwardRef<
   React.ComponentRef<typeof UISelect.Input>,
   ISelectInputProps
->(function SelectInput({ className, ...props }, ref) {
+>(({ className, ...props }, ref) => {
   const { size: parentSize, variant: parentVariant } = useStyleContext();
   return (
     <UISelect.Input
@@ -201,7 +192,7 @@ type ISelectIcon = VariantProps<typeof selectIconStyle> &
 const SelectIcon = React.forwardRef<
   React.ComponentRef<typeof UISelect.Icon>,
   ISelectIcon
->(function SelectIcon({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext();
   if (typeof size === 'number') {
     return (
@@ -212,8 +203,9 @@ const SelectIcon = React.forwardRef<
         size={size}
       />
     );
-  } else if (
-    //@ts-expect-error : web only
+  }
+  if (
+    // @ts-expect-error : web only
     (props?.height !== undefined || props?.width !== undefined) &&
     size === undefined
   ) {

@@ -18,7 +18,7 @@ export const HomeBanner = () => {
   return (
     <ThemedView
       style={{ backgroundColor: '#fff', paddingTop: 0 }}
-      className={`flex-1 justify-center items-center w-full`}
+      className='flex-1 justify-center items-center w-full'
     >
       {imageStatus !== 'loaded' && (
         <Skeleton
@@ -34,7 +34,7 @@ export const HomeBanner = () => {
           uri: 'https://media.istockphoto.com/id/1426460279/photo/female-worker-using-digital-tablet-while-working-at-supermarket.jpg?s=612x612&w=0&k=20&c=vElyunJfBvVJ_xWuAARlgrBwYl38uNPxsDIzeg5qtLc=',
         }}
         style={styles.backgroundImage}
-        className={'rounded-lg'}
+        className='rounded-lg'
         onLoad={() => setImageStatus('loaded')}
         onError={() => setImageStatus('error')}
       >
@@ -61,29 +61,29 @@ export const HomeBanner = () => {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    width: '100%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    width: '100%',
   },
   bannerContent: {
-    width: '80%',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '80%',
   },
   bannerSubtitle: {
     color: '#FFFFFF',
     fontSize: 16,
-    textAlign: 'center',
     marginBottom: 20,
+    textAlign: 'center',
+  },
+  overlay: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
   },
 });
 

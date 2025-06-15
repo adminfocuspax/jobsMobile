@@ -1,9 +1,9 @@
 'use client';
 import React, { useEffect, useLayoutEffect } from 'react';
-import { config } from './config';
 import { OverlayProvider } from '@gluestack-ui/overlay';
 import { ToastProvider } from '@gluestack-ui/toast';
 import { setFlushStyles } from '@gluestack-ui/nativewind-utils/flush';
+import { config } from './config';
 import { script } from './script';
 
 export type ModeType = 'light' | 'dark' | 'system';
@@ -47,7 +47,7 @@ export function GluestackUIProvider({
 
   useSafeLayoutEffect(() => {
     if (mode !== 'system') {
-      const documentElement = document.documentElement;
+      const { documentElement } = document;
       if (documentElement) {
         documentElement.classList.add(mode);
         documentElement.classList.remove(mode === 'light' ? 'dark' : 'light');
@@ -67,7 +67,7 @@ export function GluestackUIProvider({
 
   useSafeLayoutEffect(() => {
     if (typeof window !== 'undefined') {
-      const documentElement = document.documentElement;
+      const { documentElement } = document;
       if (documentElement) {
         const head = documentElement.querySelector('head');
         let style = head?.querySelector(`[id='${variableStyleTagId}']`);

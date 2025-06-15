@@ -103,71 +103,40 @@ const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
 export const RecommendedJobs: React.FC<RecommendedJobsProps> = ({
   jobs = defaultJobs,
   title = 'Recommended Jobs',
-}) => {
-  return (
-    <View style={styles.container}>
-      {/* Section Title */}
-      <Text style={styles.sectionTitle}>{title}</Text>
+}) => (
+  <View style={styles.container}>
+    {/* Section Title */}
+    <Text style={styles.sectionTitle}>{title}</Text>
 
-      {/* Debug info */}
-      <Text style={styles.debugText}>Found {jobs?.length || 0} jobs</Text>
+    {/* Debug info */}
+    <Text style={styles.debugText}>Found {jobs?.length || 0} jobs</Text>
 
-      {/* Horizontal Scrollable Cards */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContainer}
-        style={styles.scrollView}
-      >
-        {jobs && jobs.length > 0 ? (
-          jobs.map(job => {
-            console.log('Rendering job:', job.id, job.jobTitle);
-            return <JobCard key={job.id} job={job} />;
-          })
-        ) : (
-          <Text style={styles.noJobsText}>No jobs available</Text>
-        )}
-      </ScrollView>
-    </View>
-  );
-};
+    {/* Horizontal Scrollable Cards */}
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContainer}
+      style={styles.scrollView}
+    >
+      {jobs && jobs.length > 0 ? (
+        jobs.map(job => {
+          console.log('Rendering job:', job.id, job.jobTitle);
+          return <JobCard key={job.id} job={job} />;
+        })
+      ) : (
+        <Text style={styles.noJobsText}>No jobs available</Text>
+      )}
+    </ScrollView>
+  </View>
+);
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 16,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1f2937',
-    marginBottom: 16,
-    paddingHorizontal: 16,
-  },
-  debugText: {
-    fontSize: 14,
-    color: '#6b7280',
-    marginBottom: 8,
-    paddingHorizontal: 16,
-  },
-  scrollView: {
-    minHeight: 200,
-  },
-  scrollContainer: {
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
-  noJobsText: {
-    fontSize: 14,
-    color: '#6b7280',
-    paddingHorizontal: 16,
-  },
   cardContainer: {
-    width: 280,
+    borderRadius: 12,
+    elevation: 4,
     height: 180,
     marginRight: 16,
-    borderRadius: 12,
     overflow: 'hidden',
-    elevation: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -175,53 +144,82 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-  },
-  gradientBackground: {
-    flex: 1,
-    padding: 8,
-    justifyContent: 'center',
-  },
-  contentBox: {
-    backgroundColor: '#71c6eb',
-    borderRadius: 8,
-    padding: 24,
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  companySection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  companyLogo: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-    marginRight: 12,
+    width: 280,
   },
   companyInfo: {
     flex: 1,
   },
+  companyLogo: {
+    borderRadius: 8,
+    height: 40,
+    marginRight: 12,
+    width: 40,
+  },
   companyName: {
+    color: '#1f2937',
     fontSize: 14,
     fontWeight: '600',
-    color: '#1f2937',
     marginBottom: 2,
   },
-  location: {
-    fontSize: 12,
+  companySection: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 12,
+  },
+  container: {
+    paddingVertical: 16,
+  },
+  contentBox: {
+    backgroundColor: '#71c6eb',
+    borderRadius: 8,
+    flex: 1,
+    justifyContent: 'space-between',
+    padding: 24,
+  },
+  debugText: {
     color: '#6b7280',
+    fontSize: 14,
+    marginBottom: 8,
+    paddingHorizontal: 16,
+  },
+  gradientBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 8,
   },
   jobTitle: {
+    color: '#000',
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
     lineHeight: 24,
     marginBottom: 8,
   },
-  postedDate: {
+  location: {
+    color: '#6b7280',
     fontSize: 12,
+  },
+  noJobsText: {
+    color: '#6b7280',
+    fontSize: 14,
+    paddingHorizontal: 16,
+  },
+  postedDate: {
     color: '#000',
+    fontSize: 12,
+  },
+  scrollContainer: {
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  scrollView: {
+    minHeight: 200,
+  },
+  sectionTitle: {
+    color: '#1f2937',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    paddingHorizontal: 16,
   },
 });
 

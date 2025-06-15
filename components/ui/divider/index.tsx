@@ -20,20 +20,18 @@ type IUIDividerProps = React.ComponentPropsWithoutRef<typeof View> &
 const Divider = React.forwardRef<
   React.ComponentRef<typeof View>,
   IUIDividerProps
->(function Divider({ className, orientation = 'horizontal', ...props }, ref) {
-  return (
-    <View
-      ref={ref}
-      {...props}
-      aria-orientation={orientation}
-      role={Platform.OS === 'web' ? 'separator' : undefined}
-      className={dividerStyle({
-        orientation,
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, orientation = 'horizontal', ...props }, ref) => (
+  <View
+    ref={ref}
+    {...props}
+    aria-orientation={orientation}
+    role={Platform.OS === 'web' ? 'separator' : undefined}
+    className={dividerStyle({
+      orientation,
+      class: className,
+    })}
+  />
+));
 
 Divider.displayName = 'Divider';
 

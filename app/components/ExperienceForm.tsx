@@ -174,7 +174,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
     // Convert excess months to years
     if (totalMonths >= 12) {
       totalYears += Math.floor(totalMonths / 12);
-      totalMonths = totalMonths % 12;
+      totalMonths %= 12;
     }
 
     setTotalExperience({ years: totalYears, months: totalMonths });
@@ -718,75 +718,18 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
 
 const createStyles = (primaryColor: string) =>
   StyleSheet.create({
-    content: {
-      flex: 1,
-      width: '100%',
-    },
-    noExperienceContainer: {
-      marginBottom: 16,
-    },
-    noExperienceText: {
-      fontSize: 16,
-      color: '#333',
-    },
-    heading: {
-      textAlign: 'center',
-      marginBottom: 8,
-    },
-    encouragementText: {
-      fontSize: 16,
-      color: '#666',
-      textAlign: 'center',
-      marginBottom: 16,
-    },
-    totalExperienceBox: {
-      backgroundColor: '#f5f5f5',
-      padding: 16,
-      borderRadius: 8,
-      marginBottom: 16,
-      alignItems: 'center',
-    },
-    totalExperienceText: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#333',
-    },
-    experienceCard: {
-      borderWidth: 1,
-      borderColor: '#ddd',
-      borderRadius: 8,
-      padding: 16,
-      marginBottom: 16,
-      backgroundColor: '#fff',
-    },
-    experienceHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 16,
-    },
-    experienceTitle: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: '#333',
-    },
-    removeButton: {
-      padding: 0,
-    },
-    formField: {
-      marginBottom: 16,
-    },
-    durationInput: {
-      flex: 1,
+    addButton: {
+      marginBottom: 24,
+      marginTop: 8,
     },
     checkbox: {
-      width: 24,
-      height: 24,
-      borderWidth: 2,
+      alignItems: 'center',
       borderColor: '#666',
       borderRadius: 4,
+      borderWidth: 2,
+      height: 24,
       justifyContent: 'center',
-      alignItems: 'center',
+      width: 24,
     },
     checkboxChecked: {
       backgroundColor: primaryColor,
@@ -797,49 +740,106 @@ const createStyles = (primaryColor: string) =>
       fontSize: 16,
       fontWeight: 'bold',
     },
+    content: {
+      flex: 1,
+      width: '100%',
+    },
     durationDisplay: {
       backgroundColor: '#f0f8ff',
-      padding: 12,
       borderRadius: 6,
       marginTop: 8,
+      padding: 12,
+    },
+    durationInput: {
+      flex: 1,
     },
     durationText: {
-      fontSize: 14,
       color: '#333',
+      fontSize: 14,
       textAlign: 'center',
     },
-    addButton: {
-      marginTop: 8,
-      marginBottom: 24,
+    encouragementText: {
+      color: '#666',
+      fontSize: 16,
+      marginBottom: 16,
+      textAlign: 'center',
     },
-    suggestionsContainer: {
-      left: 0,
-      right: 0,
-      backgroundColor: '#FFF',
-      borderWidth: 1,
+    experienceCard: {
+      backgroundColor: '#fff',
       borderColor: '#ddd',
-      borderRadius: 4,
-      zIndex: 8000,
-      elevation: 5,
-      maxHeight: 200,
-      marginTop: 4,
-      opacity: 1,
+      borderRadius: 8,
+      borderWidth: 1,
+      marginBottom: 16,
+      padding: 16,
     },
-    suggestionsScrollView: {
-      maxHeight: 200,
+    experienceHeader: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 16,
+    },
+    experienceTitle: {
+      color: '#333',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    formField: {
+      marginBottom: 16,
+    },
+    heading: {
+      marginBottom: 8,
+      textAlign: 'center',
+    },
+    noExperienceContainer: {
+      marginBottom: 16,
+    },
+    noExperienceText: {
+      color: '#333',
+      fontSize: 16,
+    },
+    noResultsText: {
+      color: '#666',
+      padding: 12,
+      textAlign: 'center',
+    },
+    removeButton: {
+      padding: 0,
     },
     suggestionItem: {
-      padding: 12,
-      borderBottomWidth: 1,
       borderBottomColor: '#eee',
+      borderBottomWidth: 1,
+      padding: 12,
     },
     suggestionText: {
       fontSize: 14,
     },
-    noResultsText: {
-      padding: 12,
-      textAlign: 'center',
-      color: '#666',
+    suggestionsContainer: {
+      backgroundColor: '#FFF',
+      borderColor: '#ddd',
+      borderRadius: 4,
+      borderWidth: 1,
+      elevation: 5,
+      left: 0,
+      marginTop: 4,
+      maxHeight: 200,
+      opacity: 1,
+      right: 0,
+      zIndex: 8000,
+    },
+    suggestionsScrollView: {
+      maxHeight: 200,
+    },
+    totalExperienceBox: {
+      alignItems: 'center',
+      backgroundColor: '#f5f5f5',
+      borderRadius: 8,
+      marginBottom: 16,
+      padding: 16,
+    },
+    totalExperienceText: {
+      color: '#333',
+      fontSize: 16,
+      fontWeight: 'bold',
     },
   });
 

@@ -13,9 +13,9 @@ import { Text } from '@/components/ui/text';
 import { Input, InputField } from '@/components/ui/input';
 import { Icon } from '@/components/ui/icon';
 import { JobPreference } from '@/constants/supermarketJobOptions';
-import CenterAligned from './CenterAligned';
 import { FlashList } from '@shopify/flash-list';
 import { useResponsive } from '@/context/ResponsiveContext';
+import CenterAligned from './CenterAligned';
 
 interface JobPreferencesSelectorProps {
   preferences: JobPreference[];
@@ -56,14 +56,13 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
   const filteredPreferences = React.useMemo(() => {
     if (searchQuery.trim() === '') {
       return preferences;
-    } else {
-      return preferences.filter(
-        pref =>
-          pref.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          pref.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          pref.value.toLowerCase().includes(searchQuery.toLowerCase())
-      );
     }
+    return preferences.filter(
+      pref =>
+        pref.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pref.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pref.value.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   }, [searchQuery, preferences]);
 
   // Handle preference selection/deselection
@@ -97,9 +96,7 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
   };
 
   // Calculate number of columns based on screen width
-  const getNumColumns = () => {
-    return 1;
-  };
+  const getNumColumns = () => 1;
 
   // Calculate number of columns based on screen width
 
@@ -151,63 +148,60 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
   const renderAllPreferences = () => {
     // Create an enhanced data array that includes selection state
     // This forces FlashList to re-render when selection state changes
-    const enhancedData = React.useMemo(() => {
-      return filteredPreferences.map(pref => ({
-        ...pref,
-        isSelected: selectedPreferences.some(p => p.id === pref.id),
-      }));
-    }, [filteredPreferences, selectedPreferences]);
+    const enhancedData = React.useMemo(
+      () =>
+        filteredPreferences.map(pref => ({
+          ...pref,
+          isSelected: selectedPreferences.some(p => p.id === pref.id),
+        })),
+      [filteredPreferences, selectedPreferences]
+    );
 
     // Use FlashList with try/catch fallback for native platforms
     try {
       return (
         <FlashList
           data={enhancedData}
-          renderItem={({ item }) => {
-            return (
-              <Pressable
-                style={Object.assign(
-                  {},
-                  styles.preferenceCard,
-                  item.isSelected && styles.selectedCard
-                )}
-                onPress={() => togglePreferenceSelection(item)}
-              >
-                <HStack space='md' style={styles.cardContent}>
-                  <Box style={styles.iconContainer}>
-                    {/* <Icon 
+          renderItem={({ item }) => (
+            <Pressable
+              style={{
+                ...styles.preferenceCard,
+                ...(item.isSelected && styles.selectedCard),
+              }}
+              onPress={() => togglePreferenceSelection(item)}
+            >
+              <HStack space='md' style={styles.cardContent}>
+                <Box style={styles.iconContainer}>
+                  {/* <Icon 
                       name={item.icon} 
                       size="xl" 
                       color={item.isSelected ? "#FFFFFF" : "#333333"} 
                     /> */}
-                  </Box>
-                  <VStack style={styles.textContainer}>
+                </Box>
+                <VStack style={styles.textContainer}>
+                  <Text
+                    style={{
+                      ...styles.cardTitle,
+                      ...(item.isSelected && styles.selectedText),
+                    }}
+                  >
+                    {item.label}
+                  </Text>
+                  {item.description && (
                     <Text
-                      style={Object.assign(
-                        {},
-                        styles.cardTitle,
-                        item.isSelected && styles.selectedText
-                      )}
+                      style={{
+                        ...styles.cardDescription,
+                        ...(item.isSelected && styles.selectedText),
+                      }}
+                      numberOfLines={2}
                     >
-                      {item.label}
+                      {item.description}
                     </Text>
-                    {item.description && (
-                      <Text
-                        style={Object.assign(
-                          {},
-                          styles.cardDescription,
-                          item.isSelected && styles.selectedText
-                        )}
-                        numberOfLines={2}
-                      >
-                        {item.description}
-                      </Text>
-                    )}
-                  </VStack>
-                </HStack>
-              </Pressable>
-            );
-          }}
+                  )}
+                </VStack>
+              </HStack>
+            </Pressable>
+          )}
           keyExtractor={item => item.id}
           numColumns={getNumColumns()}
           estimatedItemSize={100}
@@ -224,11 +218,10 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
           {enhancedData.map(item => (
             <View key={item.id}>
               <Pressable
-                style={Object.assign(
-                  {},
-                  styles.preferenceCard,
-                  item.isSelected && styles.selectedCard
-                )}
+                style={{
+                  ...styles.preferenceCard,
+                  ...(item.isSelected && styles.selectedCard),
+                }}
                 onPress={() => togglePreferenceSelection(item)}
               >
                 <HStack space='md' style={styles.cardContent}>
@@ -242,21 +235,19 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
                   </Box>
                   <VStack style={styles.textContainer}>
                     <Text
-                      style={Object.assign(
-                        {},
-                        styles.cardTitle,
-                        item.isSelected && styles.selectedText
-                      )}
+                      style={{
+                        ...styles.cardTitle,
+                        ...(item.isSelected && styles.selectedText),
+                      }}
                     >
                       {item.label}
                     </Text>
                     {item.description && (
                       <Text
-                        style={Object.assign(
-                          {},
-                          styles.cardDescription,
-                          item.isSelected && styles.selectedText
-                        )}
+                        style={{
+                          ...styles.cardDescription,
+                          ...(item.isSelected && styles.selectedText),
+                        }}
                         numberOfLines={2}
                       >
                         {item.description}
@@ -321,109 +312,109 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
 
 const createStyles = (primaryColor: string) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      width: '100%',
-      height: 800,
-    },
-    content: {
-      width: '100%',
-      padding: 16,
-      height: 800,
-    },
-    searchInput: {
-      marginBottom: 16,
-      borderWidth: 1,
-      borderColor: '#ddd',
-      borderRadius: 8,
-    },
-    selectedContainer: {
-      marginBottom: 16,
-    },
-    selectedChipsContainer: {
-      height: 60, // Fixed height for horizontal FlashList
-    },
-    selectedScrollContent: {
-      paddingVertical: 8,
-    },
-    selectedChip: {
-      flexDirection: 'row',
+    cardContent: {
       alignItems: 'center',
-      backgroundColor: '#f0f0f0',
-      borderRadius: 20,
-      paddingHorizontal: 12,
-      paddingVertical: 8,
-      marginRight: 8,
     },
-    selectedChipText: {
-      fontSize: 14,
-      color: '#333',
-      marginRight: 6,
-    },
-    removeIcon: {
-      fontSize: 14,
+    cardDescription: {
       color: '#666',
+      fontSize: 14,
     },
-    sectionTitle: {
+    cardTitle: {
+      color: '#333',
       fontSize: 16,
       fontWeight: 'bold',
-      marginBottom: 8,
-      color: '#333',
     },
-    preferencesContainer: {
+    container: {
       flex: 1,
+      height: 800,
+      width: '100%',
+    },
+    content: {
+      height: 800,
+      padding: 16,
+      width: '100%',
     },
     flashListContainer: {
       flex: 1,
       height: 500, // Fixed height for FlashList
     },
-    preferencesGrid: {
-      paddingBottom: 200,
+    iconContainer: {
+      alignItems: 'center',
+      backgroundColor: '#eeeeee',
+      borderRadius: 25,
+      height: 50,
+      justifyContent: 'center',
+      width: 50,
+    },
+    noResultsText: {
+      color: '#666',
+      fontSize: 16,
+      padding: 20,
+      textAlign: 'center',
     },
     preferenceCard: {
       backgroundColor: '#f9f9f9',
-      borderRadius: 8,
-      padding: 16,
-      margin: 8,
-      borderWidth: 1,
       borderColor: '#eee',
+      borderRadius: 8,
+      borderWidth: 1,
       flex: 1,
+      margin: 8,
+      padding: 16,
+    },
+    preferencesContainer: {
+      flex: 1,
+    },
+    preferencesGrid: {
+      paddingBottom: 200,
+    },
+    removeIcon: {
+      color: '#666',
+      fontSize: 14,
+    },
+    searchInput: {
+      borderColor: '#ddd',
+      borderRadius: 8,
+      borderWidth: 1,
+      marginBottom: 16,
+    },
+    sectionTitle: {
+      color: '#333',
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginBottom: 8,
     },
     selectedCard: {
       backgroundColor: primaryColor,
       borderColor: primaryColor,
     },
-    cardContent: {
+    selectedChip: {
       alignItems: 'center',
+      backgroundColor: '#f0f0f0',
+      borderRadius: 20,
+      flexDirection: 'row',
+      marginRight: 8,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
     },
-    iconContainer: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      backgroundColor: '#eeeeee',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    textContainer: {
-      flex: 1,
-    },
-    cardTitle: {
-      fontSize: 16,
-      fontWeight: 'bold',
+    selectedChipText: {
       color: '#333',
-    },
-    cardDescription: {
       fontSize: 14,
-      color: '#666',
+      marginRight: 6,
+    },
+    selectedChipsContainer: {
+      height: 60, // Fixed height for horizontal FlashList
+    },
+    selectedContainer: {
+      marginBottom: 16,
+    },
+    selectedScrollContent: {
+      paddingVertical: 8,
     },
     selectedText: {
       color: '#FFFFFF',
     },
-    noResultsText: {
-      padding: 20,
-      textAlign: 'center',
-      color: '#666',
-      fontSize: 16,
+    textContainer: {
+      flex: 1,
     },
   });
 

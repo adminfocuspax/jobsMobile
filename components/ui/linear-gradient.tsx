@@ -13,13 +13,11 @@ const linearGradientStyle = tva({
 });
 
 export const LinearGradient = React.forwardRef(
-  ({ className, ...props }: any, ref?: any) => {
-    return (
-      <ExpoLinearGradient
-        {...props}
-        className={linearGradientStyle({ class: className })}
-        ref={ref}
-      />
-    );
-  }
+  ({ className, ...props }: any, ref?: any) => (
+    <ExpoLinearGradient
+      {...props}
+      className={linearGradientStyle({ class: className })}
+      ref={ref}
+    />
+  )
 );

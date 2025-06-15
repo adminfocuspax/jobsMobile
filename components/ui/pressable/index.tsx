@@ -23,17 +23,15 @@ type IPressableProps = Omit<
 const Pressable = React.forwardRef<
   React.ComponentRef<typeof UIPressable>,
   IPressableProps
->(function Pressable({ className, ...props }, ref) {
-  return (
-    <UIPressable
-      {...props}
-      ref={ref}
-      className={pressableStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIPressable
+    {...props}
+    ref={ref}
+    className={pressableStyle({
+      class: className,
+    })}
+  />
+));
 
 Pressable.displayName = 'Pressable';
 export { Pressable };

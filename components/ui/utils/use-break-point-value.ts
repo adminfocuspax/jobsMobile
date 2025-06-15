@@ -46,9 +46,9 @@ export const getBreakPointValue = (
     const isValid = isValidBreakpoint(resolveScreenWidth[key], width);
 
     mediaQueriesBreakpoints.push({
-      key: key,
+      key,
       breakpoint: resolveScreenWidth[key],
-      isValid: isValid,
+      isValid,
     });
   });
 

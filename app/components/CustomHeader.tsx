@@ -12,7 +12,6 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../i18n/i18n';
-import JobsDrawer from './Drawer';
 import {
   Avatar,
   AvatarBadge,
@@ -20,6 +19,7 @@ import {
   AvatarImage,
 } from '@/components/ui/avatar';
 import { Box } from '@/components/ui/box';
+import JobsDrawer from './Drawer';
 import CompleteProfile from './CompleteProfile';
 import CenterAligned from './CenterAligned';
 
@@ -161,74 +161,89 @@ export default function CustomHeader({
 }
 
 const styles = StyleSheet.create({
+  clearButton: {
+    padding: 4,
+  },
   container: {
     backgroundColor: '#FFFFFF',
-    borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
+    borderBottomWidth: 1,
     marginTop: 40,
   },
-  header: {
-    paddingHorizontal: 24,
-    paddingVertical: 0,
-    backgroundColor: '#FFFFFF',
-    marginTop: 0,
-  },
   greetingContainer: {
-    flexDirection: 'row',
     alignItems: 'flex-start',
+    flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  greetingRow: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
   },
   greetingTextContainer: {
     flex: 1,
   },
-  greetingRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    gap: 8,
+  header: {
+    backgroundColor: '#FFFFFF',
+    marginTop: 0,
+    paddingHorizontal: 24,
+    paddingVertical: 0,
   },
   logoImage: {
-    width: 190,
     height: 60,
-    marginRight: 8,
     marginLeft: -16,
+    marginRight: 8,
     marginTop: 0,
-  },
-  subText: {
-    fontSize: 14,
-    color: '#000',
-    marginBottom: 8,
-    fontWeight: '500',
-  },
-  searchWrapper: {
-    paddingHorizontal: 16,
-    paddingBottom: 12,
+    width: 190,
   },
   searchContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F5F5F5',
     borderRadius: 8,
-    paddingHorizontal: 12,
+    flexDirection: 'row',
     height: 40,
+    paddingHorizontal: 12,
   },
   searchIcon: {
     marginRight: 8,
   },
   searchInput: {
+    color: '#333',
     flex: 1,
     fontSize: 16,
-    color: '#333',
     height: '100%',
   },
-  clearButton: {
-    padding: 4,
+  searchWrapper: {
+    paddingBottom: 12,
+    paddingHorizontal: 16,
+  },
+  subText: {
+    color: '#000',
+    fontSize: 14,
+    fontWeight: '500',
+    marginBottom: 8,
+  },
+  suggestionIcon: {
+    marginRight: 12,
+  },
+  suggestionItem: {
+    alignItems: 'center',
+    borderBottomColor: '#F0F0F0',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    padding: 12,
+  },
+  suggestionText: {
+    color: '#333',
+    fontSize: 14,
   },
   suggestionsContainer: {
     backgroundColor: '#FFFFFF',
-    maxHeight: 200,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
+    elevation: 3,
+    maxHeight: 200,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -236,20 +251,5 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
-  },
-  suggestionItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  suggestionIcon: {
-    marginRight: 12,
-  },
-  suggestionText: {
-    fontSize: 14,
-    color: '#333',
   },
 });

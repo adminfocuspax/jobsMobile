@@ -19,8 +19,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   mainContent: {
+    backgroundColor: '#fff',
     margin: 0,
     padding: 0,
-    backgroundColor: '#fff',
   },
 });

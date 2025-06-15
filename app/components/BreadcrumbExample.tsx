@@ -83,34 +83,34 @@ const BreadcrumbExample: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  button: {
+    minWidth: 120,
+  },
+  buttonContainer: {
+    borderTopColor: '#E5E7EB',
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 16,
+  },
   container: {
-    flex: 1,
     backgroundColor: '#FFFFFF',
+    flex: 1,
   },
   content: {
-    flex: 1,
-    padding: 16,
-    justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  description: {
+    color: '#6B7280',
+    marginBottom: 24,
+    textAlign: 'center',
   },
   title: {
     marginBottom: 16,
     textAlign: 'center',
-  },
-  description: {
-    textAlign: 'center',
-    color: '#6B7280',
-    marginBottom: 24,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-  },
-  button: {
-    minWidth: 120,
   },
 });
 

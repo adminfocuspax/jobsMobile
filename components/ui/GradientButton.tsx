@@ -32,35 +32,31 @@ export const GradientButton = ({
   style,
   textStyle,
   disabled = false,
-}: GradientButtonProps) => {
-  return (
-    <Pressable
-      style={[width !== undefined ? { width } : undefined, style]}
-      disabled={disabled}
-      onPress={onPress}
+}: GradientButtonProps) => (
+  <Pressable
+    style={[width !== undefined ? { width } : undefined, style]}
+    disabled={disabled}
+    onPress={onPress}
+  >
+    <LinearGradient
+      className='rounded-[8vw] items-center justify-center'
+      style={[styles.button, { padding }]}
+      colors={colors}
+      start={[0, 0]}
+      end={[1, 0]}
     >
-      <LinearGradient
-        className='rounded-[8vw] items-center justify-center'
-        style={[styles.button, { padding: padding }]}
-        colors={colors}
-        start={[0, 0]}
-        end={[1, 0]}
-      >
-        <ThemedText
-          style={[styles.buttonText, { fontSize: fontSize }, textStyle]}
-        >
-          {text}
-        </ThemedText>
-      </LinearGradient>
-    </Pressable>
-  );
-};
+      <ThemedText style={[styles.buttonText, { fontSize }, textStyle]}>
+        {text}
+      </ThemedText>
+    </LinearGradient>
+  </Pressable>
+);
 
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    justifyContent: 'center',
     elevation: 2,
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

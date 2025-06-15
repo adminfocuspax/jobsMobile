@@ -68,7 +68,7 @@ export default function LoginScreen() {
               style={[styles.logo, { height: 160, width: 160 }]}
               resizeMode='contain'
             />
-            <Text bold size={'xl'} className='text-center'>
+            <Text bold size='xl' className='text-center'>
               {t('auth.authMessage')}
             </Text>
 
@@ -76,11 +76,11 @@ export default function LoginScreen() {
               {/* <FormControlLabel>
                 <FormControlLabelText>{t('auth.email')}</FormControlLabelText>
               </FormControlLabel> */}
-              <Text size={'md'} className='text-center'>
+              <Text size='md' className='text-center'>
                 {t('auth.emailMessage')}
               </Text>
               <Input
-                variant={values.inputStyle as 'outline' | 'underlined'}
+                variant={values.inputStyle}
                 size='md'
                 className='w-full mb-4 px-3 py-2 mt-4'
                 style={{ height: values.inputHeight }}
@@ -121,7 +121,7 @@ export default function LoginScreen() {
             <View style={styles.termsContainer}>
               <Checkbox
                 onChange={setAcceptedTerms}
-                value={'true'}
+                value='true'
                 size='sm'
                 isInvalid={false}
                 isDisabled={false}
@@ -162,7 +162,7 @@ export default function LoginScreen() {
           />
 
           <View style={styles.infoDiv}>
-            <Text size={'sm'} className='text-center'>
+            <Text size='sm' className='text-center'>
               {t('auth.allirightReserved')}
             </Text>
           </View>
@@ -173,43 +173,43 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-  },
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: '#FFFFFF',
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginTop: 50,
     minHeight: '100%',
     width: '100%',
-    marginTop: 50,
-  },
-  logo: {
-    width: '100%',
-    marginBottom: 8,
-    alignSelf: 'center',
-  },
-  inputContainer: {
-    width: '100%',
-    marginBottom: 30,
-    padding: 0,
   },
   infoDiv: {
-    marginTop: 'auto',
     marginBottom: 80,
+    marginTop: 'auto',
   },
-  termsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-    paddingHorizontal: 5,
+  inputContainer: {
+    marginBottom: 30,
+    padding: 0,
+    width: '100%',
   },
   link: {
     textDecorationLine: 'underline',
+  },
+  logo: {
+    alignSelf: 'center',
+    marginBottom: 8,
+    width: '100%',
+  },
+  scrollContent: {
+    backgroundColor: '#FFFFFF',
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  termsContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 20,
+    marginTop: 10,
+    paddingHorizontal: 5,
   },
   // Button styles moved to GradientButton component
 });

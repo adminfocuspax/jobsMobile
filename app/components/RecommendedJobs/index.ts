@@ -1,1 +1,1 @@
-export { default as RecommendedJobs } from '../RecommendedJobs/RecommendedJobs';
+export { default as RecommendedJobs } from './RecommendedJobs';

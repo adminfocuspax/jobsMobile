@@ -31,9 +31,10 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
   const scrollViewRef = React.useRef(null);
 
   // Find the active item index
-  const activeIndex = React.useMemo(() => {
-    return items.findIndex(item => item.isActive);
-  }, [items]);
+  const activeIndex = React.useMemo(
+    () => items.findIndex(item => item.isActive),
+    [items]
+  );
 
   // Scroll to the active item on mount and when active item changes
   React.useEffect(() => {
@@ -81,13 +82,14 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
                 <View style={styles.verticalContainer}>
                   {/* Number circle */}
                   <View
-                    style={Object.assign(
-                      {},
-                      styles.numberCircle,
-                      item.isActive ? { backgroundColor: '#FFD93F' } : {},
+                    style={{
+                      ...styles.numberCircle,
+                      ...(item.isActive ? { backgroundColor: '#FFD93F' } : {}),
                       // Add green background for completed items (items before the active one)
-                      activeIndex > index ? { backgroundColor: '#4CAF50' } : {}
-                    )}
+                      ...(activeIndex > index
+                        ? { backgroundColor: '#4CAF50' }
+                        : {}),
+                    }}
                   >
                     {activeIndex > index ? (
                       // Show check icon for completed items
@@ -95,12 +97,11 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
                     ) : (
                       // Show number for current and future items
                       <Text
-                        style={Object.assign(
-                          {},
-                          styles.numberText,
+                        style={{
+                          ...styles.numberText,
                           // Change text color for completed items for better contrast
-                          activeIndex > index ? { color: '#FFFFFF' } : {}
-                        )}
+                          ...(activeIndex > index ? { color: '#FFFFFF' } : {}),
+                        }}
                       >
                         {index + 1}
                       </Text>
@@ -111,14 +112,13 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
                   <View style={styles.textContainer}>
                     <Text
                       size='xs'
-                      style={Object.assign(
-                        {},
-                        styles.itemText,
-                        item.isActive ? styles.activeItem : {},
-                        !item.path ? styles.disabledItem : {},
+                      style={{
+                        ...styles.itemText,
+                        ...(item.isActive ? styles.activeItem : {}),
+                        ...(!item.path ? styles.disabledItem : {}),
                         // Style for completed items
-                        activeIndex > index ? styles.completedItem : {}
-                      )}
+                        ...(activeIndex > index ? styles.completedItem : {}),
+                      }}
                     >
                       {item.label}
                     </Text>
@@ -134,18 +134,17 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
               {index < items.length - 1 && (
                 <View style={styles.separatorContainer}>
                   <View
-                    style={Object.assign(
-                      {},
-                      styles.separatorLine,
+                    style={{
+                      ...styles.separatorLine,
                       // Green separator for completed sections
-                      activeIndex > index + 1
+                      ...(activeIndex > index + 1
                         ? { backgroundColor: '#4CAF50' }
-                        : {},
+                        : {}),
                       // Yellow separator if connecting to active item
-                      activeIndex === index + 1
+                      ...(activeIndex === index + 1
                         ? { backgroundColor: '#FFD93F' }
-                        : {}
-                    )}
+                        : {}),
+                    }}
                   />
                   {/* <Icon style={styles.separatorIcon} as={ChevronRightIcon} size="sm" /> */}
                 </View>
@@ -160,30 +159,47 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, onItemPress }) => {
 
 const createStyles = (primaryColor: string) =>
   StyleSheet.create({
-    container: {
-      marginTop: 10,
-      paddingVertical: 24,
-      backgroundColor: primaryColor,
-    },
-    scrollContentContainer: {
-      paddingHorizontal: 16,
-      flexGrow: 1,
-      justifyContent: 'center',
+    activeItem: {
+      color: '#FFD93F',
+      fontSize: 12,
+      fontWeight: 'bold',
     },
     breadcrumbContainer: {
       alignItems: 'center',
       justifyContent: 'flex-start', // Changed from center to flex-start for better scrolling
       flexDirection: 'row',
     },
+    checkIcon: {
+      color: '#FFFFFF',
+      height: 14,
+      width: 14,
+    },
+    completedItem: {
+      fontWeight: 'bold',
+      color: '#4CAF50', // Green color to match the number background
+      fontSize: 12,
+    },
+    container: {
+      backgroundColor: primaryColor,
+      marginTop: 10,
+      paddingVertical: 24,
+    },
+    disabledItem: {
+      fontSize: 12,
+      fontWeight: 'bold',
+      opacity: 0.7,
+    },
     itemContainer: {
       alignItems: 'center',
       marginHorizontal: 2,
       width: 80, // Fixed width to help with scroll positioning
     },
-    verticalContainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      maxWidth: 80, // Limit width to keep items compact
+    itemText: {
+      color: '#FFF',
+    },
+    jobsIcon: {
+      color: '#FFFFFF',
+      marginLeft: 4,
     },
     numberCircle: {
       width: 22,
@@ -210,53 +226,36 @@ const createStyles = (primaryColor: string) =>
       includeFontPadding: false,
       textAlignVertical: 'center',
     },
-    textContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
+    scrollContentContainer: {
+      flexGrow: 1,
       justifyContent: 'center',
-      fontSize: 16,
-    },
-    itemText: {
-      color: '#FFF',
-    },
-    activeItem: {
-      fontWeight: 'bold',
-      color: '#FFD93F',
-      fontSize: 12,
-    },
-    completedItem: {
-      fontWeight: 'bold',
-      color: '#4CAF50', // Green color to match the number background
-      fontSize: 12,
-    },
-    disabledItem: {
-      fontWeight: 'bold',
-      opacity: 0.7,
-      fontSize: 12,
-    },
-    jobsIcon: {
-      color: '#FFFFFF',
-      marginLeft: 4,
-    },
-    checkIcon: {
-      color: '#FFFFFF',
-      width: 14,
-      height: 14,
+      paddingHorizontal: 16,
     },
     separatorContainer: {
-      flexDirection: 'row',
       alignItems: 'flex-start',
-      marginHorizontal: 6,
       alignSelf: 'center',
-    },
-    separatorLine: {
-      height: 1,
-      width: 20,
-      backgroundColor: '#FFFFFF',
-      marginHorizontal: 0,
+      flexDirection: 'row',
+      marginHorizontal: 6,
     },
     separatorIcon: {
       color: '#FFFFFF',
+    },
+    separatorLine: {
+      backgroundColor: '#FFFFFF',
+      height: 1,
+      marginHorizontal: 0,
+      width: 20,
+    },
+    textContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      fontSize: 16,
+      justifyContent: 'center',
+    },
+    verticalContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      maxWidth: 80, // Limit width to keep items compact
     },
   });
 

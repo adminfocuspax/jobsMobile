@@ -38,7 +38,7 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
           {
             maxWidth: 520,
             width: width < 520 ? '100%' : 520,
-            padding: padding,
+            padding,
             backgroundColor: 'white',
           },
           style,
@@ -51,15 +51,15 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
 };
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFF',
-  },
   container: {
     backgroundColor: 'white',
     borderRadius: 8,
+  },
+  outerContainer: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFF',
+    justifyContent: 'center',
+    width: '100%',
   },
 });
 

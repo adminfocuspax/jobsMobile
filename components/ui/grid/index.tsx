@@ -8,12 +8,12 @@ import React, {
 } from 'react';
 import type { VariantProps } from '@gluestack-ui/nativewind-utils';
 import { View, Dimensions, Platform, ViewProps } from 'react-native';
-import { gridStyle, gridItemStyle } from './styles';
 import { cssInterop } from 'nativewind';
 import {
   useBreakpointValue,
   getBreakPointValue,
 } from '@/components/ui/utils/use-break-point-value';
+import { gridStyle, gridItemStyle } from './styles';
 
 const { width: DEVICE_WIDTH } = Dimensions.get('window');
 
@@ -127,7 +127,7 @@ type IGridProps = ViewProps &
   };
 
 const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
-  function Grid({ className, _extra, children, ...props }, ref) {
+  ({ className, _extra, children, ...props }, ref) => {
     const [calculatedWidth, setCalculatedWidth] = useState<number | null>(null);
 
     const gridClass = _extra?.className;
@@ -143,7 +143,7 @@ const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
           generateResponsiveColSpans({ gridItemClassName }),
           DEVICE_WIDTH
         );
-        const colSpan = colSpan2 ? colSpan2 : 1;
+        const colSpan = colSpan2 || 1;
 
         if (colSpan > responsiveNumColumns) {
           return responsiveNumColumns;
@@ -165,7 +165,7 @@ const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
 
     const childrenWithProps = React.Children.map(children, (child, index) => {
       if (React.isValidElement(child)) {
-        return React.cloneElement(child, { key: index, index: index } as any);
+        return React.cloneElement(child, { key: index, index } as any);
       }
 
       return child;
@@ -175,16 +175,17 @@ const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
       web: gridClass ?? '',
     })}`;
 
-    const contextValue = useMemo(() => {
-      return {
+    const contextValue = useMemo(
+      () => ({
         calculatedWidth,
         numColumns: responsiveNumColumns,
         itemsPerRow,
         flexDirection: props?.flexDirection || 'row',
         gap: props?.gap || 0,
         columnGap: props?.columnGap || 0,
-      };
-    }, [calculatedWidth, itemsPerRow, responsiveNumColumns, props]);
+      }),
+      [calculatedWidth, itemsPerRow, responsiveNumColumns, props]
+    );
 
     const borderLeftWidth = props?.borderLeftWidth || props?.borderWidth || 0;
     const borderRightWidth = props?.borderRightWidth || props?.borderWidth || 0;
@@ -195,7 +196,7 @@ const Grid = forwardRef<React.ComponentRef<typeof View>, IGridProps>(
         <View
           ref={ref}
           className={gridStyle({
-            class: className + ' ' + gridClassMerged,
+            class: `${className} ${gridClassMerged}`,
           })}
           onLayout={event => {
             const paddingLeftToSubtract =
@@ -250,7 +251,7 @@ type IGridItemProps = ViewProps &
   };
 
 const GridItem = forwardRef<React.ComponentRef<typeof View>, IGridItemProps>(
-  function GridItem({ className, _extra, ...props }, ref) {
+  ({ className, _extra, ...props }, ref) => {
     const [flexBasisValue, setFlexBasisValue] = useState<
       number | string | null
     >('auto');
@@ -277,9 +278,9 @@ const GridItem = forwardRef<React.ComponentRef<typeof View>, IGridItemProps>(
         responsiveColSpan > 0
       ) {
         // find out in which row of itemsPerRow the current item's index is
-        const row = Object.keys(itemsPerRow).find(key => {
-          return itemsPerRow[key].includes(props?.index);
-        });
+        const row = Object.keys(itemsPerRow).find(key =>
+          itemsPerRow[key].includes(props?.index)
+        );
 
         const rowColsCount = itemsPerRow[row as string]?.length;
 
@@ -291,14 +292,13 @@ const GridItem = forwardRef<React.ComponentRef<typeof View>, IGridItemProps>(
             ? 2
             : rowColsCount - 1);
 
-        const flexBasisVal =
-          Math.min(
-            (((calculatedWidth - gutterOffset) * responsiveColSpan) /
-              numColumns /
-              calculatedWidth) *
-              100,
-            100
-          ) + '%';
+        const flexBasisVal = `${Math.min(
+          (((calculatedWidth - gutterOffset) * responsiveColSpan) /
+            numColumns /
+            calculatedWidth) *
+            100,
+          100
+        )}%`;
 
         setFlexBasisValue(flexBasisVal);
       }

@@ -16,9 +16,9 @@ import './i18n/i18n';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import * as eva from '@eva-design/eva';
-import { lightTheme } from './custom-theme'; //
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { ResponsiveProvider } from '@/context/ResponsiveContext';
+import { lightTheme } from './custom-theme'; //
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

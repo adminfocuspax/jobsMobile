@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import { useResponsive } from '@/context/ResponsiveContext';
 import JobCategorySelector, {
   JobCategoryInterface,
 } from './JobCategorySelector';
-import { useResponsive } from '@/context/ResponsiveContext';
 
 const JobCategory: React.FC = () => {
   const { primaryColor } = useResponsive();
@@ -56,53 +56,53 @@ const JobCategory: React.FC = () => {
 const createStyles = (primaryColor: string) =>
   StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: '#FFFFFF',
+      flex: 1,
     },
     content: {
       padding: 16,
     },
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: '#000',
-      textAlign: 'center',
-      marginBottom: 16,
+    noSelection: {
+      alignItems: 'center',
+      backgroundColor: '#F5F5F5',
+      borderRadius: 8,
+      padding: 16,
+    },
+    noSelectionText: {
+      color: '#999999',
+      fontSize: 14,
+      fontStyle: 'italic',
     },
     selectedInfo: {
       backgroundColor: '#F0F8FF',
-      color: '#333333',
-      padding: 16,
+      borderColor: primaryColor,
       borderRadius: 8,
       borderWidth: 1,
-      borderColor: primaryColor,
-    },
-    selectedTitle: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: primaryColor,
-      marginBottom: 8,
+      color: '#333333',
+      padding: 16,
     },
     selectedText: {
-      fontSize: 14,
       color: '#333333',
+      fontSize: 14,
       marginBottom: 4,
     },
+    selectedTitle: {
+      color: primaryColor,
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginBottom: 8,
+    },
     selectedValue: {
-      fontSize: 12,
       color: '#666666',
+      fontSize: 12,
       fontStyle: 'italic',
     },
-    noSelection: {
-      backgroundColor: '#F5F5F5',
-      padding: 16,
-      borderRadius: 8,
-      alignItems: 'center',
-    },
-    noSelectionText: {
-      fontSize: 14,
-      color: '#999999',
-      fontStyle: 'italic',
+    title: {
+      color: '#000',
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 16,
+      textAlign: 'center',
     },
   });
 

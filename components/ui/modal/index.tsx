@@ -37,7 +37,7 @@ const UIModal = createModal({
   CloseButton: Pressable,
   Footer: View,
   Header: View,
-  AnimatePresence: AnimatePresence,
+  AnimatePresence,
 });
 
 cssInterop(AnimatedPressable, { className: 'style' });
@@ -125,40 +125,38 @@ const Modal = React.forwardRef<React.ComponentRef<typeof UIModal>, IModalProps>(
 const ModalBackdrop = React.forwardRef<
   React.ComponentRef<typeof UIModal.Backdrop>,
   IModalBackdropProps
->(function ModalBackdrop({ className, ...props }, ref) {
-  return (
-    <UIModal.Backdrop
-      ref={ref}
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 0.5,
-      }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        type: 'spring',
-        damping: 18,
-        stiffness: 250,
-        opacity: {
-          type: 'timing',
-          duration: 250,
-        },
-      }}
-      {...props}
-      className={modalBackdropStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIModal.Backdrop
+    ref={ref}
+    initial={{
+      opacity: 0,
+    }}
+    animate={{
+      opacity: 0.5,
+    }}
+    exit={{
+      opacity: 0,
+    }}
+    transition={{
+      type: 'spring',
+      damping: 18,
+      stiffness: 250,
+      opacity: {
+        type: 'timing',
+        duration: 250,
+      },
+    }}
+    {...props}
+    className={modalBackdropStyle({
+      class: className,
+    })}
+  />
+));
 
 const ModalContent = React.forwardRef<
   React.ComponentRef<typeof UIModal.Content>,
   IModalContentProps
->(function ModalContent({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -200,62 +198,54 @@ const ModalContent = React.forwardRef<
 const ModalHeader = React.forwardRef<
   React.ComponentRef<typeof UIModal.Header>,
   IModalHeaderProps
->(function ModalHeader({ className, ...props }, ref) {
-  return (
-    <UIModal.Header
-      ref={ref}
-      {...props}
-      className={modalHeaderStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIModal.Header
+    ref={ref}
+    {...props}
+    className={modalHeaderStyle({
+      class: className,
+    })}
+  />
+));
 
 const ModalBody = React.forwardRef<
   React.ComponentRef<typeof UIModal.Body>,
   IModalBodyProps
->(function ModalBody({ className, ...props }, ref) {
-  return (
-    <UIModal.Body
-      ref={ref}
-      {...props}
-      className={modalBodyStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIModal.Body
+    ref={ref}
+    {...props}
+    className={modalBodyStyle({
+      class: className,
+    })}
+  />
+));
 
 const ModalFooter = React.forwardRef<
   React.ComponentRef<typeof UIModal.Footer>,
   IModalFooterProps
->(function ModalFooter({ className, ...props }, ref) {
-  return (
-    <UIModal.Footer
-      ref={ref}
-      {...props}
-      className={modalFooterStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIModal.Footer
+    ref={ref}
+    {...props}
+    className={modalFooterStyle({
+      class: className,
+    })}
+  />
+));
 
 const ModalCloseButton = React.forwardRef<
   React.ComponentRef<typeof UIModal.CloseButton>,
   IModalCloseButtonProps
->(function ModalCloseButton({ className, ...props }, ref) {
-  return (
-    <UIModal.CloseButton
-      ref={ref}
-      {...props}
-      className={modalCloseButtonStyle({
-        class: className,
-      })}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIModal.CloseButton
+    ref={ref}
+    {...props}
+    className={modalCloseButtonStyle({
+      class: className,
+    })}
+  />
+));
 
 Modal.displayName = 'Modal';
 ModalBackdrop.displayName = 'ModalBackdrop';

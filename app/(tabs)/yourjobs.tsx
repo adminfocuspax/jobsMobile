@@ -14,19 +14,19 @@ export default function YourJobsScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
+  },
+  subtitle: {
+    color: '#666',
+    fontSize: 16,
+    textAlign: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
   },
 });

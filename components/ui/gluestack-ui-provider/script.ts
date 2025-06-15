@@ -1,5 +1,5 @@
 export const script = (mode: string) => {
-  const documentElement = document.documentElement;
+  const { documentElement } = document;
 
   function getSystemColorMode() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches

@@ -218,7 +218,7 @@ type IFormControlLabelAstrickProps = React.ComponentPropsWithoutRef<
 const FormControlLabelAstrick = React.forwardRef<
   React.ComponentRef<typeof Text>,
   IFormControlLabelAstrickProps
->(function FormControlLabelAstrick({ className, ...props }, ref) {
+>(({ className, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -264,16 +264,14 @@ type IFormControlProps = React.ComponentProps<typeof UIFormControl> &
 const FormControl = React.forwardRef<
   React.ComponentRef<typeof UIFormControl>,
   IFormControlProps
->(function FormControl({ className, size = 'md', ...props }, ref) {
-  return (
-    <UIFormControl
-      ref={ref}
-      className={formControlStyle({ size, class: className })}
-      {...props}
-      context={{ size }}
-    />
-  );
-});
+>(({ className, size = 'md', ...props }, ref) => (
+  <UIFormControl
+    ref={ref}
+    className={formControlStyle({ size, class: className })}
+    {...props}
+    context={{ size }}
+  />
+));
 
 type IFormControlErrorProps = React.ComponentProps<typeof UIFormControl.Error> &
   VariantProps<typeof formControlErrorStyle>;
@@ -281,15 +279,13 @@ type IFormControlErrorProps = React.ComponentProps<typeof UIFormControl.Error> &
 const FormControlError = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Error>,
   IFormControlErrorProps
->(function FormControlError({ className, ...props }, ref) {
-  return (
-    <UIFormControl.Error
-      ref={ref}
-      className={formControlErrorStyle({ class: className })}
-      {...props}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIFormControl.Error
+    ref={ref}
+    className={formControlErrorStyle({ class: className })}
+    {...props}
+  />
+));
 
 type IFormControlErrorTextProps = React.ComponentProps<
   typeof UIFormControl.Error.Text
@@ -299,7 +295,7 @@ type IFormControlErrorTextProps = React.ComponentProps<
 const FormControlErrorText = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Error.Text>,
   IFormControlErrorTextProps
->(function FormControlErrorText({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
   return (
     <UIFormControl.Error.Text
@@ -325,7 +321,7 @@ type IFormControlErrorIconProps = React.ComponentProps<
 const FormControlErrorIcon = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Error.Icon>,
   IFormControlErrorIconProps
->(function FormControlErrorIcon({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   if (typeof size === 'number') {
@@ -337,7 +333,8 @@ const FormControlErrorIcon = React.forwardRef<
         size={size}
       />
     );
-  } else if (
+  }
+  if (
     (props.height !== undefined || props.width !== undefined) &&
     size === undefined
   ) {
@@ -367,15 +364,13 @@ type IFormControlLabelProps = React.ComponentProps<typeof UIFormControl.Label> &
 const FormControlLabel = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Label>,
   IFormControlLabelProps
->(function FormControlLabel({ className, ...props }, ref) {
-  return (
-    <UIFormControl.Label
-      ref={ref}
-      className={formControlLabelStyle({ class: className })}
-      {...props}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIFormControl.Label
+    ref={ref}
+    className={formControlLabelStyle({ class: className })}
+    {...props}
+  />
+));
 
 type IFormControlLabelTextProps = React.ComponentProps<
   typeof UIFormControl.Label.Text
@@ -385,7 +380,7 @@ type IFormControlLabelTextProps = React.ComponentProps<
 const FormControlLabelText = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Label.Text>,
   IFormControlLabelTextProps
->(function FormControlLabelText({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (
@@ -409,17 +404,15 @@ type IFormControlHelperProps = React.ComponentProps<
 const FormControlHelper = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Helper>,
   IFormControlHelperProps
->(function FormControlHelper({ className, ...props }, ref) {
-  return (
-    <UIFormControl.Helper
-      ref={ref}
-      className={formControlHelperStyle({
-        class: className,
-      })}
-      {...props}
-    />
-  );
-});
+>(({ className, ...props }, ref) => (
+  <UIFormControl.Helper
+    ref={ref}
+    className={formControlHelperStyle({
+      class: className,
+    })}
+    {...props}
+  />
+));
 
 type IFormControlHelperTextProps = React.ComponentProps<
   typeof UIFormControl.Helper.Text
@@ -429,7 +422,7 @@ type IFormControlHelperTextProps = React.ComponentProps<
 const FormControlHelperText = React.forwardRef<
   React.ComponentRef<typeof UIFormControl.Helper.Text>,
   IFormControlHelperTextProps
->(function FormControlHelperText({ className, size, ...props }, ref) {
+>(({ className, size, ...props }, ref) => {
   const { size: parentSize } = useStyleContext(SCOPE);
 
   return (

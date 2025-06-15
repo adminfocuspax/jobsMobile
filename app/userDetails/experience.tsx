@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { StyleSheet, ScrollView, Alert } from 'react-native';
 import { Box } from '@/components/ui/box';
 import { HStack } from '@/components/ui/hstack';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
-import ExperienceForm, { Experience } from '../components/ExperienceForm';
 import { VStack } from '@/components/ui/vstack';
+import ExperienceForm, { Experience } from '../components/ExperienceForm';
+import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import CenterAligned from '../components/CenterAligned';
 
 const TRANSLATION_KEY = 'userInfo.experience';
@@ -89,7 +89,7 @@ const ExperienceDetails: React.FC = () => {
         {/* Navigation Buttons */}
         <VStack style={styles.buttonContainer} space='md'>
           <GradientButton
-            width={'100%'}
+            width='100%'
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text={t('common.back')}
@@ -98,7 +98,7 @@ const ExperienceDetails: React.FC = () => {
           />
 
           <GradientButton
-            width={'100%'}
+            width='100%'
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text={t('common.next')}
@@ -111,26 +111,26 @@ const ExperienceDetails: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 0,
+    marginTop: 16,
+    maxWidth: 520,
+    width: '90%',
+  },
+  container: {
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
   scrollContainer: {
     flexGrow: 1,
     paddingVertical: 24,
-  },
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    marginTop: 16,
-    marginBottom: 0,
-    width: '90%',
-    maxWidth: 520,
   },
 });
 

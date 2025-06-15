@@ -14,13 +14,14 @@ import {
   FormControlLabelText,
   FormControlHelperText,
 } from '@/components/ui/form-control';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router, useNavigation } from 'expo-router';
 import { EDUCATION_LEVELS, DEGREE_OPTIONS } from '@/constants/educationOptions';
+import JobsBreadcrumb from '../components/JobsBreadcrumb';
 import CenterAligned from '../components/CenterAligned';
+
 const TRANSLATION_KEY = 'userInfo.education';
 
 const EducationDetails: React.FC = () => {
@@ -94,8 +95,8 @@ const EducationDetails: React.FC = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps='handled'
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={true}
+        scrollEnabled
+        showsVerticalScrollIndicator
       >
         <Pressable onPress={handleOutsidePress} style={{ flex: 1 }}>
           <JobsBreadcrumb currentStep='education' />
@@ -253,8 +254,8 @@ const EducationDetails: React.FC = () => {
                       <ScrollView
                         style={styles.fullScreenScrollView}
                         keyboardShouldPersistTaps='handled'
-                        scrollEnabled={true}
-                        showsVerticalScrollIndicator={true}
+                        scrollEnabled
+                        showsVerticalScrollIndicator
                         contentContainerStyle={{ paddingBottom: 20 }}
                       >
                         {filteredDegrees.length > 0 ? (
@@ -292,7 +293,7 @@ const EducationDetails: React.FC = () => {
         <Box style={styles.buttonContainer}>
           <VStack space='md' style={styles.buttonRow}>
             <GradientButton
-              width={'100%'}
+              width='100%'
               padding={values.buttonPadding}
               fontSize={values.fontSize}
               text='Back'
@@ -301,7 +302,7 @@ const EducationDetails: React.FC = () => {
             />
 
             <GradientButton
-              width={'100%'}
+              width='100%'
               padding={values.buttonPadding}
               fontSize={values.fontSize}
               text='Next'
@@ -326,126 +327,126 @@ const createStyles = (primaryColor: string) =>
       justifyContent: 'space-between',
     },
     container: {
-      padding: 16,
       backgroundColor: '#FFFFFF',
-      width: '100%',
       minHeight: '100%',
+      padding: 16,
+      width: '100%',
     },
     content: {
-      width: '100%',
       paddingBottom: 20,
+      width: '100%',
     },
     heading: {
-      textAlign: 'center',
       marginBottom: 8,
+      textAlign: 'center',
     },
     encouragementText: {
-      fontSize: 16,
       color: '#666',
-      textAlign: 'center',
+      fontSize: 16,
       marginBottom: 16,
+      textAlign: 'center',
     },
     educationOptionsContainer: {
       marginTop: 12,
       width: '100%',
     },
     optionsRow: {
-      width: '100%',
       justifyContent: 'space-between',
+      width: '100%',
     },
     educationOption: {
-      flex: 1,
-      marginHorizontal: 4,
-      height: 70,
-      minHeight: 70,
-      borderRadius: 8,
-      justifyContent: 'center',
-      borderWidth: 1,
       borderColor: '#ccc',
+      borderRadius: 8,
+      borderWidth: 1,
+      flex: 1,
+      height: 70,
+      justifyContent: 'center',
+      marginHorizontal: 4,
+      minHeight: 70,
     },
     selectedOption: {
       borderColor: primaryColor,
       borderWidth: 2,
     },
     buttonContainer: {
-      width: '100%',
-      paddingVertical: 16,
-      backgroundColor: '#FFFFFF',
-      justifyContent: 'center',
       alignItems: 'center',
-      position: 'absolute',
+      backgroundColor: '#FFFFFF',
       bottom: 50,
-      left: 0,
-      right: 0,
       elevation: 0,
+      justifyContent: 'center',
+      left: 0,
+      paddingVertical: 16,
+      position: 'absolute',
+      right: 0,
+      width: '100%',
     },
     buttonRow: {
-      maxWidth: 520,
-      width: '90%',
-      justifyContent: 'center',
       alignItems: 'center',
-      paddingHorizontal: 16,
       backgroundColor: '#FFFFFF',
+      justifyContent: 'center',
       marginHorizontal: 'auto',
+      maxWidth: 520,
+      paddingHorizontal: 16,
+      width: '90%',
     },
     // Full screen styles
     fullScreenOverlay: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
       backgroundColor: '#FFFFFF',
-      zIndex: 2000,
+      bottom: 0,
       elevation: 5,
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      zIndex: 2000,
     },
     fullScreenContent: {
       flex: 1,
-      padding: 16,
       height: '100%',
+      padding: 16,
     },
     fullScreenHeader: {
-      justifyContent: 'space-between',
       alignItems: 'center',
+      justifyContent: 'space-between',
       marginBottom: 16,
     },
     fullScreenTitle: {
+      color: '#333',
       fontSize: 18,
       fontWeight: 'bold',
-      color: '#333',
     },
     closeButton: {
       padding: 8,
     },
     closeButtonText: {
-      fontSize: 20,
       color: '#666',
+      fontSize: 20,
     },
     fullScreenSearchInput: {
-      marginBottom: 16,
-      borderWidth: 1,
       borderColor: '#ddd',
       borderRadius: 8,
+      borderWidth: 1,
+      marginBottom: 16,
     },
     fullScreenScrollView: {
       flex: 1,
       height: '100%',
     },
     fullScreenItem: {
-      paddingVertical: 16,
-      paddingHorizontal: 16,
-      borderBottomWidth: 1,
       borderBottomColor: '#eee',
+      borderBottomWidth: 1,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     fullScreenItemText: {
-      fontSize: 16,
       color: '#333',
+      fontSize: 16,
     },
     noResultsText: {
-      padding: 20,
-      textAlign: 'center',
       color: '#666',
       fontSize: 16,
+      padding: 20,
+      textAlign: 'center',
     },
   });
 

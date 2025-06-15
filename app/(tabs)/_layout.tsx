@@ -6,8 +6,8 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import CustomHeader from '../components/CustomHeader';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import CustomHeader from '../components/CustomHeader';
 import CenterAligned from '../components/CenterAligned';
 
 export default function TabLayout() {
@@ -20,7 +20,7 @@ export default function TabLayout() {
         headerShown: true,
         header: (props: BottomTabHeaderProps) => {
           // With our type declaration, TypeScript now knows about this property
-          const headerSearchEnabled = props.options.headerSearchEnabled;
+          const { headerSearchEnabled } = props.options;
           return (
             <CustomHeader
               title={props.options.title || props.route.name}
