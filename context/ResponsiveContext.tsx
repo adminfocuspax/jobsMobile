@@ -26,6 +26,8 @@ type ResponsiveContextType = {
   values: ResponsiveValues;
   primaryColor: string;
   secondaryColor: string;
+  themeBackGroundColor: string;
+  successColor: string,
 };
 
 // Create the context with a default value
@@ -105,6 +107,8 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({
     values,
     primaryColor: '#CC0000',
     secondaryColor: '#71c6eb',
+    successColor: '#00cc00',
+    themeBackGroundColor: '#ffffff',
   };
 
   return (

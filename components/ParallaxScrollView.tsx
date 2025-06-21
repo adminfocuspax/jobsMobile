@@ -1,20 +1,24 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
+import Carousel from 'react-native-reanimated-carousel';
 
 import { ThemedView } from '@/components/ThemedView';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { sampleJobs } from '../app/components/constant';
+import React from 'react';
+import JobCard from '../app/components/JobCard';
 
 const HEADER_HEIGHT = 230;
 
 type Props = PropsWithChildren<{
-  headerImage: ReactElement;
+  headerImage: ReactElement | null;
   headerBackgroundColor: { dark: string; light: string };
 }>;
 
@@ -27,6 +31,22 @@ export default function ParallaxScrollView({
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
   const bottom = useBottomTabOverflow();
+
+  // Get screen dimensions for carousel
+  const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
+  // Job handlers
+  const handleViewDetails = (job: any) => {
+    console.log('View details for:', job.title);
+  };
+
+  const handleApply = (job: any) => {
+    console.log('Apply to:', job.title);
+  };
+
+  const handleToggleFavorite = (job: any) => {
+    console.log('Toggle favorite for:', job.title);
+  };
   const headerAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -47,22 +67,60 @@ export default function ParallaxScrollView({
   }));
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView>
+      {!headerImage && (
+        <Text style={styles.title}>Featured Jobs</Text>
+      )}
       <Animated.ScrollView
         ref={scrollRef}
         scrollEventThrottle={16}
         scrollIndicatorInsets={{ bottom }}
         contentContainerStyle={{ paddingBottom: bottom }}
       >
-        <Animated.View
-          style={[
-            styles.header,
-            { backgroundColor: headerBackgroundColor[colorScheme] },
-            headerAnimatedStyle,
-          ]}
-        >
-          {headerImage}
-        </Animated.View>
+        {!headerImage && (
+          <View style={styles.carouselContainer} >
+            <Carousel
+              loop
+              width={screenWidth}
+              height={screenHeight * 0.6}
+              autoPlay={true}
+              autoPlayInterval={6000}
+              data={sampleJobs}
+              snapEnabled={true}
+              mode='horizontal-stack'
+              pagingEnabled={true}
+              scrollAnimationDuration={1000}
+              modeConfig={{
+                snapDirection: 'left',
+                stackInterval: 18,
+              }}
+              customConfig={() => ({ type: 'positive', viewCount: 5 })}
+              renderItem={({ item, index }) => (
+                <View style={styles.carouselItem}>
+                  <JobCard
+                    job={item}
+                    isFavorite={false}
+                    onViewDetails={handleViewDetails}
+                    onApply={handleApply}
+                    onToggleFavorite={handleToggleFavorite}
+                    isGradient={true}
+                  />
+                </View>
+              )}
+            />
+          </View>
+        )}
+        {headerImage &&
+          <Animated.View
+            style={[
+              styles.header,
+              { backgroundColor: headerBackgroundColor[colorScheme] },
+              headerAnimatedStyle,
+            ]}
+          >
+            {headerImage}
+          </Animated.View>
+        }
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
     </ThemedView>
@@ -70,17 +128,35 @@ export default function ParallaxScrollView({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  title: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    height: 40,
+    marginLeft: 16,
   },
   content: {
-    flex: 1,
+
     gap: 16,
     overflow: 'hidden',
-    padding: 32,
+    padding: 8,
   },
   header: {
     height: HEADER_HEIGHT,
     overflow: 'hidden',
+  },
+  carouselContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 20,
+    height: HEADER_HEIGHT + 90,
+  },
+  carouselItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    height: HEADER_HEIGHT + 20,
   },
 });

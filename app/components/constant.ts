@@ -1,0 +1,163 @@
+import { JobInterface } from "./JobCard";
+
+  // Sample job data for demonstration
+  const sampleJob: JobInterface = {
+    id: '1',
+    title: 'Senior Sales Associate',
+    company: {
+      name: 'Target Corporation',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+      location: 'New York, NY'
+    },
+    keywords: ['Sales', 'Customer Service', 'Retail'],
+    postedDate: '2 days ago',
+    description: 'Join our dynamic sales team and help customers find what they need.',
+    salary: '$45,000 - $55,000',
+    type: 'Full-time'
+  };
+
+
+    // Sample job data array for demonstration
+    export const sampleJobs: JobInterface[] = [
+        {
+          id: '1',
+          title: 'Senior Sales Associate',
+          company: {
+            name: 'Target Corporation',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'New York, NY'
+          },
+          keywords: ['Sales', 'Customer Service', 'Retail'],
+          postedDate: '2 days ago',
+          description: 'Join our dynamic sales team and help customers find what they need.',
+          salary: '$45,000 - $55,000',
+          type: 'Full-time'
+        },
+        {
+          id: '2',
+          title: 'Software Engineer',
+          company: {
+            name: 'Tech Solutions Inc',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'San Francisco, CA'
+          },
+          keywords: ['JavaScript', 'React', 'Node.js'],
+          postedDate: '1 day ago',
+          description: 'Build innovative web applications using modern technologies.',
+          salary: '$80,000 - $120,000',
+          type: 'Full-time'
+        },
+        {
+          id: '3',
+          title: 'Marketing Manager',
+          company: {
+            name: 'Creative Agency',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Los Angeles, CA'
+          },
+          keywords: ['Digital Marketing', 'SEO', 'Content Strategy'],
+          postedDate: '3 days ago',
+          description: 'Lead marketing campaigns and drive brand awareness.',
+          salary: '$60,000 - $75,000',
+          type: 'Full-time'
+        },
+        {
+          id: '4',
+          title: 'Data Analyst',
+          company: {
+            name: 'Analytics Pro',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Chicago, IL'
+          },
+          keywords: ['Python', 'SQL', 'Data Visualization'],
+          postedDate: '5 days ago',
+          description: 'Analyze complex datasets to drive business insights.',
+          salary: '$55,000 - $70,000',
+          type: 'Full-time'
+        },
+        {
+          id: '5',
+          title: 'UX Designer',
+          company: {
+            name: 'Design Studio',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Austin, TX'
+          },
+          keywords: ['Figma', 'User Research', 'Prototyping'],
+          postedDate: '1 week ago',
+          description: 'Create intuitive user experiences for digital products.',
+          salary: '$65,000 - $85,000',
+          type: 'Full-time'
+        },
+        {
+          id: '6',
+          title: 'Customer Support Specialist',
+          company: {
+            name: 'Service First',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Remote'
+          },
+          keywords: ['Customer Service', 'Communication', 'Problem Solving'],
+          postedDate: '4 days ago',
+          description: 'Provide exceptional support to our valued customers.',
+          salary: '$35,000 - $45,000',
+          type: 'Full-time'
+        },
+        {
+          id: '7',
+          title: 'Project Manager',
+          company: {
+            name: 'Global Enterprises',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Boston, MA'
+          },
+          keywords: ['Agile', 'Scrum', 'Team Leadership'],
+          postedDate: '6 days ago',
+          description: 'Lead cross-functional teams to deliver successful projects.',
+          salary: '$70,000 - $90,000',
+          type: 'Full-time'
+        },
+        {
+          id: '8',
+          title: 'Graphic Designer',
+          company: {
+            name: 'Visual Arts Co',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Miami, FL'
+          },
+          keywords: ['Adobe Creative Suite', 'Branding', 'Print Design'],
+          postedDate: '2 weeks ago',
+          description: 'Create stunning visual designs for various media.',
+          salary: '$40,000 - $55,000',
+          type: 'Part-time'
+        },
+        {
+          id: '9',
+          title: 'Financial Analyst',
+          company: {
+            name: 'Finance Corp',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Seattle, WA'
+          },
+          keywords: ['Excel', 'Financial Modeling', 'Reporting'],
+          postedDate: '1 week ago',
+          description: 'Analyze financial data and prepare comprehensive reports.',
+          salary: '$58,000 - $72,000',
+          type: 'Full-time'
+        },
+        {
+          id: '10',
+          title: 'Content Writer',
+          company: {
+            name: 'Media House',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2BpLryfOPE_W4zr2-grBJ5DCrv50dGAiaQ&s',
+            location: 'Denver, CO'
+          },
+          keywords: ['Writing', 'SEO', 'Content Marketing'],
+          postedDate: '3 days ago',
+          description: 'Create engaging content for web and social media platforms.',
+          salary: '$42,000 - $52,000',
+          type: 'Contract'
+        }
+      ];
+    

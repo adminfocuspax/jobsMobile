@@ -91,10 +91,10 @@ export default function CustomHeader({
     </TouchableOpacity> */}
         </View>
       </View>
-      <CenterAligned>
-        <Box style={{ height: 120 }}>
+      {/* <CenterAligned> */}
+        {/* <Box style={{ height: 120 }}>
           <CompleteProfile />
-        </Box>
+        </Box> */}
         {showSearch && (
           <View style={styles.searchWrapper}>
             <ThemedText style={styles.subText} type='subtitle'>
@@ -155,7 +155,7 @@ export default function CustomHeader({
             />
           </View>
         )}
-      </CenterAligned>
+      {/* </CenterAligned> */}
     </View>
   );
 }
