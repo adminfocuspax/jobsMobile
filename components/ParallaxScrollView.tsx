@@ -11,9 +11,9 @@ import Carousel from 'react-native-reanimated-carousel';
 import { ThemedView } from '@/components/ThemedView';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { sampleJobs } from '../app/components/constant';
+import { sampleJobs } from './app-components/constant';
 import React from 'react';
-import JobCard from '../app/components/JobsCard/JobCard';
+import JobCard from './app-components/JobsCard/JobCard';
 
 const HEADER_HEIGHT = 230;
 

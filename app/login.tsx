@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/form-control';
 import { Input, InputField, InputIcon, InputSlot } from '@/components/ui/input';
 import { Icon, EyeIcon, EyeOffIcon, CheckIcon } from '@/components/ui/icon';
+import { Button, ButtonText } from '@/components/ui/button';
 import { useState } from 'react';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { GradientButton } from '@/components/ui/GradientButton';
@@ -28,7 +29,7 @@ import {
   CheckboxIndicator,
   CheckboxLabel,
 } from '@/components/ui/checkbox';
-import './i18n/i18n';
+import '../i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { useNavigationGuard } from '../hooks/useNavigationGuard';
 
@@ -46,6 +47,7 @@ export default function LoginScreen() {
 
 
   const handleLogin = () => {
+
     if (acceptedTerms) {
       safeReplace({ pathname: './userDetails/userInfo' });
     } else {
@@ -131,26 +133,26 @@ export default function LoginScreen() {
 
             <View style={styles.termsContainer}>
               <Checkbox
+                isChecked={acceptedTerms}
                 onChange={setAcceptedTerms}
-                value='true'
                 size='sm'
                 isInvalid={false}
-                isDisabled={false}
-              >
+                isDisabled={false} value={''}              >
                 <CheckboxIndicator>
                   <CheckboxIcon as={CheckIcon} />
                 </CheckboxIndicator>
                 <CheckboxLabel>
                   <Text size='sm'>
                     I accept the{' '}
-                    <Text
-                      size='sm'
-                      className='text-primary-600'
-                      onPress={openTermsAndConditions}
-                      style={styles.link}
-                    >
-                      Terms and Conditions
-                    </Text>
+                    <TouchableOpacity onPress={openTermsAndConditions}>
+                      <Text
+                        size='sm'
+                        className='text-primary-600'
+                        style={styles.link}
+                      >
+                        Terms and Conditions
+                      </Text>
+                    </TouchableOpacity>
                   </Text>
                 </CheckboxLabel>
               </Checkbox>

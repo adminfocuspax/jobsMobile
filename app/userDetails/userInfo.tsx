@@ -17,9 +17,12 @@ import { GradientButton } from '@/components/ui/GradientButton';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
-import ProfileAvatar from '../components/ProfileAvatar';
-import CenterAligned from '../components/CenterAligned';
+;
+
+
+import JobsBreadcrumb from '../../components/app-components/JobsBreadcrumb';
+import CenterAligned from '../../components/app-components/CenterAligned';
+import ProfileAvatar from '../../components/app-components/ProfileAvatar';
 
 const UserInfo: React.FC = () => {
   // State for form fields
@@ -235,9 +238,9 @@ const UserInfo: React.FC = () => {
                         ...styles.checkbox,
                         ...(userStatus.includes(status)
                           ? {
-                              borderColor: primaryColor,
-                              backgroundColor: primaryColor,
-                            }
+                            borderColor: primaryColor,
+                            backgroundColor: primaryColor,
+                          }
                           : {}),
                       }}
                     >

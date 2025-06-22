@@ -19,9 +19,10 @@ import {
   JobPreference,
   SUPERMARKET_JOB_PREFERENCES,
 } from '@/constants/supermarketJobOptions';
-import CenterAligned from '../components/CenterAligned';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
-import JobPreferencesSelector from '../components/JobPreferencesSelector';
+import CenterAligned from '../../components/app-components/CenterAligned';
+import JobPreferencesSelector from '../../components/app-components/JobPreferencesSelector';
+import JobsBreadcrumb from '../../components/app-components/JobsBreadcrumb';
+
 
 const TRANSLATION_KEY = 'userInfo.preferences';
 

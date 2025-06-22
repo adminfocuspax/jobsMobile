@@ -16,7 +16,7 @@ const SCOPE = 'BUTTON';
 const Root = withStyleContext(Pressable, SCOPE);
 
 const UIButton = createButton({
-  Root,
+  Root: Root,
   Text,
   Group: View,
   Spinner: ActivityIndicator,
@@ -257,11 +257,11 @@ const buttonGroupStyle = tva({
   base: '',
   variants: {
     space: {
-      xs: 'gap-1',
-      sm: 'gap-2',
-      md: 'gap-3',
-      lg: 'gap-4',
-      xl: 'gap-5',
+      'xs': 'gap-1',
+      'sm': 'gap-2',
+      'md': 'gap-3',
+      'lg': 'gap-4',
+      'xl': 'gap-5',
       '2xl': 'gap-6',
       '3xl': 'gap-7',
       '4xl': 'gap-8',
@@ -270,8 +270,8 @@ const buttonGroupStyle = tva({
       true: 'gap-0',
     },
     flexDirection: {
-      row: 'flex-row',
-      column: 'flex-col',
+      'row': 'flex-row',
+      'column': 'flex-col',
       'row-reverse': 'flex-row-reverse',
       'column-reverse': 'flex-col-reverse',
     },
@@ -287,19 +287,19 @@ type IButtonProps = Omit<
 const Button = React.forwardRef<
   React.ComponentRef<typeof UIButton>,
   IButtonProps
->(
-  (
-    { className, variant = 'solid', size = 'md', action = 'primary', ...props },
-    ref
-  ) => (
+>(function Button(
+  { className, variant = 'solid', size = 'md', action = 'primary', ...props },
+  ref
+) {
+  return (
     <UIButton
       ref={ref}
       {...props}
       className={buttonStyle({ variant, size, action, class: className })}
       context={{ variant, size, action }}
     />
-  )
-);
+  );
+});
 
 type IButtonTextProps = React.ComponentPropsWithoutRef<typeof UIButton.Text> &
   VariantProps<typeof buttonTextStyle> & { className?: string };
@@ -307,7 +307,7 @@ type IButtonTextProps = React.ComponentPropsWithoutRef<typeof UIButton.Text> &
 const ButtonText = React.forwardRef<
   React.ComponentRef<typeof UIButton.Text>,
   IButtonTextProps
->(({ className, variant, size, action, ...props }, ref) => {
+>(function ButtonText({ className, variant, size, action, ...props }, ref) {
   const {
     variant: parentVariant,
     size: parentSize,
@@ -346,7 +346,7 @@ type IButtonIcon = React.ComponentPropsWithoutRef<typeof UIButton.Icon> &
 const ButtonIcon = React.forwardRef<
   React.ComponentRef<typeof UIButton.Icon>,
   IButtonIcon
->(({ className, size, ...props }, ref) => {
+>(function ButtonIcon({ className, size, ...props }, ref) {
   const {
     variant: parentVariant,
     size: parentSize,
@@ -362,8 +362,7 @@ const ButtonIcon = React.forwardRef<
         size={size}
       />
     );
-  }
-  if (
+  } else if (
     (props.height !== undefined || props.width !== undefined) &&
     size === undefined
   ) {
@@ -398,17 +397,17 @@ type IButtonGroupProps = React.ComponentPropsWithoutRef<typeof UIButton.Group> &
 const ButtonGroup = React.forwardRef<
   React.ComponentRef<typeof UIButton.Group>,
   IButtonGroupProps
->(
-  (
-    {
-      className,
-      space = 'md',
-      isAttached = false,
-      flexDirection = 'column',
-      ...props
-    },
-    ref
-  ) => (
+>(function ButtonGroup(
+  {
+    className,
+    space = 'md',
+    isAttached = false,
+    flexDirection = 'column',
+    ...props
+  },
+  ref
+) {
+  return (
     <UIButton.Group
       className={buttonGroupStyle({
         class: className,
@@ -419,8 +418,8 @@ const ButtonGroup = React.forwardRef<
       {...props}
       ref={ref}
     />
-  )
-);
+  );
+});
 
 Button.displayName = 'Button';
 ButtonText.displayName = 'ButtonText';

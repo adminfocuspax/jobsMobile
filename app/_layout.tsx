@@ -12,13 +12,13 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 // Import i18n configuration
-import './i18n/i18n';
+import '../i18n/i18n';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { ResponsiveProvider } from '@/context/ResponsiveContext';
-import { lightTheme } from './custom-theme'; //
+import { lightTheme } from '../theme/custom-theme';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

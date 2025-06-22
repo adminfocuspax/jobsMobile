@@ -19,8 +19,9 @@ import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router, useNavigation } from 'expo-router';
 import { EDUCATION_LEVELS, DEGREE_OPTIONS } from '@/constants/educationOptions';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
-import CenterAligned from '../components/CenterAligned';
+import JobsBreadcrumb from '../../components/app-components/JobsBreadcrumb';
+import CenterAligned from '../../components/app-components/CenterAligned';
+
 
 const TRANSLATION_KEY = 'userInfo.education';
 
@@ -136,7 +137,7 @@ const EducationDetails: React.FC = () => {
                           style={[
                             styles.educationOption,
                             educationLevel === option.value &&
-                              styles.selectedOption,
+                            styles.selectedOption,
                           ]}
                           onPress={() => setEducationLevel(option.value)}
                         >
@@ -160,7 +161,7 @@ const EducationDetails: React.FC = () => {
                           style={[
                             styles.educationOption,
                             educationLevel === option.value &&
-                              styles.selectedOption,
+                            styles.selectedOption,
                           ]}
                           onPress={() => setEducationLevel(option.value)}
                         >
@@ -183,7 +184,7 @@ const EducationDetails: React.FC = () => {
                           style={[
                             styles.educationOption,
                             educationLevel === option.value &&
-                              styles.selectedOption,
+                            styles.selectedOption,
                           ]}
                           onPress={() => setEducationLevel(option.value)}
                         >
@@ -199,25 +200,25 @@ const EducationDetails: React.FC = () => {
                 {/* Degree Input with Suggestions */}
                 {(educationLevel === 'graduation' ||
                   educationLevel === 'post_graduate') && (
-                  <FormControl size='md'>
-                    <FormControlLabel>
-                      <FormControlLabelText>
-                        {t(`${TRANSLATION_KEY}.degree_optional`)}
-                      </FormControlLabelText>
-                    </FormControlLabel>
-                    <Input>
-                      <InputField
-                        placeholder='Enter your degree (e.g., B.Tech, MBA)'
-                        value={degree}
-                        onChangeText={handleDegreeInputChange}
-                        onFocus={handleDegreeFocus}
-                      />
-                    </Input>
-                    <FormControlHelperText>
-                      {t(`${TRANSLATION_KEY}.specify_degree`)}
-                    </FormControlHelperText>
-                  </FormControl>
-                )}
+                    <FormControl size='md'>
+                      <FormControlLabel>
+                        <FormControlLabelText>
+                          {t(`${TRANSLATION_KEY}.degree_optional`)}
+                        </FormControlLabelText>
+                      </FormControlLabel>
+                      <Input>
+                        <InputField
+                          placeholder='Enter your degree (e.g., B.Tech, MBA)'
+                          value={degree}
+                          onChangeText={handleDegreeInputChange}
+                          onFocus={handleDegreeFocus}
+                        />
+                      </Input>
+                      <FormControlHelperText>
+                        {t(`${TRANSLATION_KEY}.specify_degree`)}
+                      </FormControlHelperText>
+                    </FormControl>
+                  )}
 
                 {/* Full Screen Degree Selection */}
                 {isFullScreenMode && (

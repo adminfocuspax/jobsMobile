@@ -8,9 +8,12 @@ import { useResponsive } from '@/context/ResponsiveContext';
 import { useTranslation } from 'react-i18next';
 import { router } from 'expo-router';
 import { VStack } from '@/components/ui/vstack';
-import ExperienceForm, { Experience } from '../components/ExperienceForm';
-import JobsBreadcrumb from '../components/JobsBreadcrumb';
-import CenterAligned from '../components/CenterAligned';
+
+
+import CenterAligned from '../../components/app-components/CenterAligned';
+import JobsBreadcrumb from '../../components/app-components/JobsBreadcrumb';
+import ExperienceForm, { Experience } from '../../components/app-components/ExperienceForm';
+
 
 const TRANSLATION_KEY = 'userInfo.experience';
 

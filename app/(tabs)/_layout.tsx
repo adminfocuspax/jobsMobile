@@ -7,8 +7,8 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
-import CustomHeader from '../components/CustomHeader';
-import CenterAligned from '../components/CenterAligned';
+import CustomHeader from '../../components/app-components/CustomHeader';
+
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

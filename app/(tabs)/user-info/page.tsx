@@ -1,14 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import UserInfo from '@/app/userDetails/userInfo';
-import JobsDrawer from '@/app/components/Drawer';
+import JobsDrawer from '@/components/app-components/Drawer';
 import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { ThemedText } from '@/components/ThemedText';
 import { SymbolViewProps } from 'expo-symbols';
-import i18n from '@/app/i18n/i18n';
+import i18n from '@/i18n/i18n';
 import { Box } from '@/components/ui/box';
-import ProfileAvatar from '@/app/components/ProfileAvatar';
+import ProfileAvatar from '@/components/app-components/ProfileAvatar';
 
 interface MenuItem {
   icon: SymbolViewProps['name'];
@@ -61,7 +61,7 @@ export default function UserInfoPage() {
               styles.menuItem,
               index === menuItems.length - 1 && styles.menuItemLast,
             ]}
-            onPress={item.onPress || (() => {})}
+            onPress={item.onPress || (() => { })}
           >
             <IconSymbol
               name={item.icon}
