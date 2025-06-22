@@ -1,4 +1,4 @@
-import { Stack, router } from 'expo-router';
+import { Href, Stack, router } from 'expo-router';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -30,16 +30,27 @@ import {
 } from '@/components/ui/checkbox';
 import './i18n/i18n';
 import { useTranslation } from 'react-i18next';
+import { useNavigationGuard } from '../hooks/useNavigationGuard';
 
 export default function LoginScreen() {
   const [hidePassword, setHidePassword] = useState(true);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { values, width, height } = useResponsive();
   const { t } = useTranslation();
-  console.log('WIDTH WIDTH WIDTH +++++++++++=', width);
+  const { safeReplace } = useNavigationGuard({ debounceTime: 1000 });
+
 
   const openTermsAndConditions = () => {
     Linking.openURL('https://example.com');
+  };
+
+
+  const handleLogin = () => {
+    if (acceptedTerms) {
+      safeReplace({ pathname: './userDetails/userInfo' });
+    } else {
+      alert('Please accept the Terms and Conditions to continue');
+    }
   };
   return (
     <KeyboardAvoidingView
@@ -151,13 +162,7 @@ export default function LoginScreen() {
             padding={values.buttonPadding}
             fontSize={values.fontSize}
             text={t('auth.login')}
-            onPress={() => {
-              if (acceptedTerms) {
-                router.replace('./userDetails/userInfo');
-              } else {
-                alert('Please accept the Terms and Conditions to continue');
-              }
-            }}
+            onPress={handleLogin}
             disabled={false}
           />
 

@@ -14,6 +14,7 @@ import {
   MapPin,
   Calendar,
 } from 'lucide-react-native';
+import { useNavigationGuard } from '@/hooks';
 
 export interface JobInterface {
   id: string;
@@ -49,9 +50,15 @@ const JobCard: React.FC<JobCardProps> = ({
 }) => {
   const { primaryColor, secondaryColor, thirdColor, values } = useResponsive();
   const styles = createStyles({ primaryColor, secondaryColor, isGradient, thirdColor });
+  const { safeNavigate } = useNavigationGuard({ debounceTime: 1000 });
 
   const handleViewDetails = () => {
-    onViewDetails?.(job);
+    console.log("view details", job);
+
+    safeNavigate(
+      { pathname: '/pages/jobDetails' },
+      () => onViewDetails?.(job)
+    );
   };
 
   const handleApply = () => {
