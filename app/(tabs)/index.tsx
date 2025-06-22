@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import '../i18n/i18n'; // Import the i18n configuration
-import JobCategory from '../components/JobCategory';
+import JobCategory from '../components/JobsCategorys/JobCategory';
 import CenterAligned from '../components/CenterAligned';
 import { View } from 'lucide-react-native';
 import { Box } from '../../components/ui/box';

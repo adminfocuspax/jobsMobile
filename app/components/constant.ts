@@ -1,4 +1,4 @@
-import { JobInterface } from "./JobCard";
+import { JobInterface } from "./JobsCard/JobCard";
 
   // Sample job data for demonstration
   const sampleJob: JobInterface = {

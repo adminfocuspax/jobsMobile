@@ -51,7 +51,7 @@ export default function RootLayout() {
             <Stack.Screen name='(tabs)' />
             <Stack.Screen name='+not-found' />
           </Stack>
-          <StatusBar style='auto' />
+          <StatusBar style='auto' backgroundColor='#000' translucent={true} />
         </ThemeProvider>
       </GluestackUIProvider>
     </ResponsiveProvider>

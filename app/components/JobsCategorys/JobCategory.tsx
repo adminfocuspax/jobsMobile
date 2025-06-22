@@ -8,9 +8,9 @@ import { Bell, CheckCheck } from "lucide-react-native";
 import JobCategorySelector, {
   JobCategoryInterface,
 } from './JobCategorySelector';
-import { RecommendedJobs } from './RecommendedJobs';
-import JobCard, { JobInterface } from './JobCard';
-import { sampleJobs } from './constant';
+import { RecommendedJobs } from '../RecommendedJobs';
+import JobCard, { JobInterface } from '../JobsCard/JobCard';
+import { sampleJobs } from '../constant';
 
 const JobCategory: React.FC = () => {
   const { primaryColor, successColor } = useResponsive();
@@ -64,7 +64,7 @@ const JobCategory: React.FC = () => {
               numberOfLines={2}
               ellipsizeMode="tail"
             >
-              {selectedCategory.label} Jobs
+              Top {selectedCategory.label} Jobs
             </Text>
 
             <Pressable
@@ -75,12 +75,12 @@ const JobCategory: React.FC = () => {
 
                 {isSubscribed && (<CheckCheck
                   size={14}
-                  color={isSubscribed ? '#FFF' : primaryColor}
+                  color={'#FFF'}
                 />)}
 
                 {!isSubscribed && (<Bell
                   size={14}
-                  color={isSubscribed ? '#FFF' : primaryColor}
+                  color={'#FFF'}
                 />)}
                 <Text numberOfLines={2} style={{ ...styles.subscribeText, ...(isSubscribed && styles.subscribeTextActive) }}>
                   {isSubscribed ? 'Subscribed to' : 'Subscribe to'} {selectedCategory.label}  jobs
@@ -97,7 +97,7 @@ const JobCategory: React.FC = () => {
           </View>
         )} */}
 
-        {sampleJobs.map((job, index) => (
+        {sampleJobs.slice(0, 4).map((job, index) => (
           <React.Fragment key={job.id}>
             <JobCard
               job={job}
@@ -150,7 +150,7 @@ const createStyles = (primaryColor: string, successColor: string) =>
       color: '#333333',
       fontSize: 24,
       flex: 1,
-      ...(Platform.OS !== 'web' && { lineHeight: 28 })
+      ...(Platform.OS !== 'web' && { lineHeight: 36 })
     },
     selectedTitle: {
       color: primaryColor,
@@ -173,7 +173,7 @@ const createStyles = (primaryColor: string, successColor: string) =>
       height: 28,
     },
     subscribeButton: {
-      backgroundColor: 'transparent',
+      backgroundColor: primaryColor,
       borderColor: primaryColor,
       borderWidth: 0,
       borderRadius: 6,
@@ -190,7 +190,7 @@ const createStyles = (primaryColor: string, successColor: string) =>
       justifyContent: 'center',
     },
     subscribeText: {
-      color: primaryColor,
+      color: "#FFF",
       fontSize: 12,
       fontWeight: '500',
     },

@@ -45,7 +45,7 @@ import {
   Facebook,
   Paperclip,
 } from "lucide-react-native"
-import { VStack } from '../../components/ui/vstack';
+import { VStack } from '../../../components/ui/vstack';
 
 export interface JobCategoryInterface {
   id: string;
@@ -304,7 +304,7 @@ const getIconComponent = (iconName: string) => {
 
 const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   selectedCategory = null,
-  onCategorySelect = () => {},
+  onCategorySelect = () => { },
 }) => {
   const [activeCategory, setActiveCategory] =
     useState<JobCategoryInterface | null>(selectedCategory);
@@ -338,10 +338,10 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   }, [])
 
   const handleCategoryPress = (category?: JobCategoryInterface | null) => {
-    
+
     const categoryToUse = category || JOB_CATEGORIES.find((cat) => cat.value === 'all') || null;
     const newSelection = activeCategory?.id === categoryToUse?.id ? null : categoryToUse;
-    if(newSelection){
+    if (newSelection) {
       setActiveCategory(newSelection);
       onCategorySelect?.(newSelection);
     }
@@ -393,10 +393,10 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   return (
     <View style={styles.container}>
 
-  
-        <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
-          <Icon as={ChevronLeft} size='md' color='#fff' />
-        </Pressable>
+
+      <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
+        <Icon as={ChevronLeft} size='md' color='#fff' />
+      </Pressable>
 
       <ScrollView
         ref={scrollViewRef}
@@ -412,11 +412,11 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
         </View>
       </ScrollView>
 
-  
-        <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
-          <Icon as={ChevronRight} size='md' color='#fff' />
-        </Pressable>
-   
+
+      <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
+        <Icon as={ChevronRight} size='md' color='#fff' />
+      </Pressable>
+
     </View>
   );
 };
@@ -435,20 +435,20 @@ const createStyles = ({
     categoriesContainer: {
       alignItems: 'flex-start',
       flexDirection: 'row',
-     
+
     },
     categoryButton: {
       alignItems: 'center',
       justifyContent: 'center',
       marginRight: 10,
       minHeight: 100,
-      width:  Platform.OS === 'web' ? buttonSize : buttonSize,
+      width: Platform.OS === 'web' ? buttonSize : buttonSize,
       height: buttonSize,
-      backgroundColor:'#fff'
+      backgroundColor: '#fff'
     },
     categoryLabel: {
       color: '#666666',
-      fontSize: Platform.OS === 'web' ? buttonSize/10 : (buttonSize/10)+2,
+      fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 10) + 2,
       fontWeight: 'bold',
       lineHeight: Platform.OS === 'web' ? 1.17 : 16,
       height: Platform.OS === 'web' ? 30 : 48,
@@ -457,7 +457,7 @@ const createStyles = ({
     container: {
       alignItems: 'center',
       flexDirection: 'row',
-      height: buttonSize+20,
+      height: buttonSize + 20,
       overflow: 'hidden',
       marginVertical: 0,
       //backgroundColor:secondaryColor
