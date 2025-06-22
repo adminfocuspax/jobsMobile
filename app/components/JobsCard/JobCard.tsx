@@ -36,7 +36,7 @@ interface JobCardProps {
   onApply?: (job: JobInterface) => void;
   onToggleFavorite?: (job: JobInterface) => void;
   isFavorite?: boolean;
-  isGradient?:boolean;
+  isGradient?: boolean;
 }
 
 const JobCard: React.FC<JobCardProps> = ({
@@ -45,10 +45,10 @@ const JobCard: React.FC<JobCardProps> = ({
   onApply,
   onToggleFavorite,
   isFavorite = false,
-  isGradient=false
+  isGradient = false
 }) => {
-  const { primaryColor, secondaryColor, values } = useResponsive();
-  const styles = createStyles({ primaryColor, secondaryColor,isGradient });
+  const { primaryColor, secondaryColor, thirdColor, values } = useResponsive();
+  const styles = createStyles({ primaryColor, secondaryColor, isGradient, thirdColor });
 
   const handleViewDetails = () => {
     onViewDetails?.(job);
@@ -67,14 +67,14 @@ const JobCard: React.FC<JobCardProps> = ({
     if (dateString.includes('ago') || dateString.includes('day') || dateString.includes('hour')) {
       return dateString;
     }
-    
+
     // Otherwise, try to parse and format the date
     try {
       const date = new Date(dateString);
       const now = new Date();
       const diffTime = Math.abs(now.getTime() - date.getTime());
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
+
       if (diffDays === 1) {
         return '1 day ago';
       } else if (diffDays < 7) {
@@ -113,7 +113,7 @@ const JobCard: React.FC<JobCardProps> = ({
               </Box>
             )}
           </Box>
-          
+
           {/* Company Name and Location */}
           <VStack style={styles.companyDetails}>
             <Text style={styles.companyName} numberOfLines={1}>
@@ -127,7 +127,7 @@ const JobCard: React.FC<JobCardProps> = ({
             </HStack>
           </VStack>
         </HStack>
-        
+
         {/* Favorite Icon */}
         <Pressable onPress={handleToggleFavorite} style={styles.favoriteButton}>
           <Icon
@@ -147,7 +147,7 @@ const JobCard: React.FC<JobCardProps> = ({
         <Text style={styles.jobTitle} numberOfLines={2}>
           {job.title}
         </Text>
-        
+
         {/* Keywords */}
         <HStack style={styles.keywordsContainer}>
           {job.keywords.slice(0, 3).map((keyword, index) => (
@@ -158,7 +158,7 @@ const JobCard: React.FC<JobCardProps> = ({
             </Box>
           ))}
         </HStack>
-        
+
         {/* Posted Date */}
         <HStack style={styles.postedDateContainer}>
           <Icon as={Calendar} size="xs" style={styles.dateIcon} />
@@ -181,7 +181,7 @@ const JobCard: React.FC<JobCardProps> = ({
             View Details
           </ButtonText>
         </Button>
-        
+
         <Button
           variant="solid"
           action="primary"
@@ -201,16 +201,18 @@ const JobCard: React.FC<JobCardProps> = ({
 const createStyles = ({
   primaryColor,
   secondaryColor,
+  thirdColor,
   isGradient,
 }: {
   primaryColor: string;
   secondaryColor: string;
-  isGradient:boolean;
+  thirdColor: string;
+  isGradient: boolean;
 }) =>
   StyleSheet.create({
     card: {
       padding: 16,
-      backgroundColor: isGradient ? 'linear-gradient(90deg, hsla(206, 91%, 66%, 1) 0%, hsla(190, 90%, 51%, 1) 100%)' : '#FFFFFF',
+      backgroundColor: isGradient ? thirdColor : '#FFFFFF',
       borderRadius: 12,
       shadowColor: '#000',
       shadowOffset: {
@@ -219,14 +221,14 @@ const createStyles = ({
       },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      minWidth:310,
+      minWidth: 310,
       elevation: 3,
       ...Platform.OS === 'web' && {
-        border:1,
-        borderWidth:1,
+        border: 1,
+        borderWidth: 1,
         borderColor: '#E5E7EB',
-        width:380,
-       
+        width: 380,
+
       }
     },
     header: {
@@ -275,12 +277,12 @@ const createStyles = ({
       alignItems: 'center',
     },
     locationIcon: {
-      ...(isGradient?{color:"#FFF"}:{ color: '#6B7280'}),
+      ...(isGradient ? { color: "#FFF" } : { color: '#6B7280' }),
       marginRight: 4,
     },
     locationText: {
       fontSize: 12,
-      ...(isGradient?{color:"#FFF"}:{ color: '#6B7280'})
+      ...(isGradient ? { color: "#FFF" } : { color: '#6B7280' })
     },
     favoriteButton: {
       padding: 4,
@@ -323,12 +325,12 @@ const createStyles = ({
     dateIcon: {
       color: '#9CA3AF',
       marginRight: 4,
-      ...(isGradient?{color:"#FFF"}:{})
+      ...(isGradient ? { color: "#FFF" } : {})
     },
     postedDateText: {
       fontSize: 12,
       color: '#9CA3AF',
-      ...(isGradient?{color:"#FFF"}:{})
+      ...(isGradient ? { color: "#FFF" } : {})
     },
     footer: {
       justifyContent: 'center',
@@ -340,11 +342,11 @@ const createStyles = ({
     },
     viewDetailsButton: {
       borderColor: isGradient ? primaryColor : secondaryColor,
-      ...(isGradient?{backgroundColor:primaryColor}:{})
+      ...(isGradient ? { backgroundColor: primaryColor } : {})
     },
     viewDetailsButtonText: {
       color: secondaryColor,
-      ...(isGradient?{color:"#FFF"}:{})
+      ...(isGradient ? { color: "#FFF" } : {})
     },
     applyButton: {
       backgroundColor: primaryColor,

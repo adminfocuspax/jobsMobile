@@ -26,6 +26,7 @@ type ResponsiveContextType = {
   values: ResponsiveValues;
   primaryColor: string;
   secondaryColor: string;
+  thirdColor: string;
   themeBackGroundColor: string;
   successColor: string,
 };
@@ -106,7 +107,8 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({
     height: dimensions.height,
     values,
     primaryColor: '#CC0000',
-    secondaryColor: '#71c6eb',
+    secondaryColor: '#1d3557',
+    thirdColor: '#8ecae6',
     successColor: '#00cc00',
     themeBackGroundColor: '#ffffff',
   };

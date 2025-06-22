@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet, Text, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useResponsive } from '../../../context/ResponsiveContext';
 
 interface JobData {
   id: string;
@@ -65,10 +66,11 @@ const defaultJobs: JobData[] = [
 const JobCard: React.FC<{ job: JobData }> = ({ job }) => {
   console.log('JobCard rendering for:', job.jobTitle);
 
+  const { primaryColor, secondaryColor, thirdColor, values } = useResponsive();
   return (
     <View style={styles.cardContainer}>
       <LinearGradient
-        colors={['#71c6eb', '#71c6eb', '#71c6eb']}
+        colors={[primaryColor, secondaryColor, thirdColor]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.gradientBackground}
