@@ -7,6 +7,7 @@ import {
   Platform,
 } from 'react-native';
 import { useResponsive } from '@/context/ResponsiveContext';
+import { useThemeColor, useThemeColors } from '@/hooks/useThemeColor';
 import { Box } from '@/components/ui/box';
 import { Text } from '@/components/ui/text';
 import { Icon } from '@/components/ui/icon';
@@ -44,8 +45,11 @@ import {
   Instagram,
   Facebook,
   Paperclip,
+  EditIcon,
 } from "lucide-react-native"
 import { VStack } from '../../../components/ui/vstack';
+import { ThemedText } from '../../ThemedText';
+import { ButtonText, Button, ButtonIcon } from '../../ui/button';
 
 export interface JobCategoryInterface {
   id: string;
@@ -58,6 +62,7 @@ export interface JobCategoryInterface {
 interface JobCategorySelectorProps {
   onCategorySelect?: (category: JobCategoryInterface | null) => void;
   selectedCategory?: JobCategoryInterface | null;
+  onSubscribe?: (category: JobCategoryInterface) => void;
 }
 
 // Job categories with appropriate icons
@@ -305,12 +310,13 @@ const getIconComponent = (iconName: string) => {
 const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   selectedCategory = null,
   onCategorySelect = () => { },
+  onSubscribe = () => { },
 }) => {
   const [activeCategory, setActiveCategory] =
     useState<JobCategoryInterface | null>(selectedCategory);
   const scrollViewRef = useRef<ScrollView>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const { primaryColor, secondaryColor } = useResponsive();
+  const { primaryColor, secondaryColor } = useThemeColors({}, ['primaryColor', 'secondaryColor']);
   const styles = createStyles({ primaryColor, secondaryColor });
 
   const SCROLL_DISTANCE = 300; // Distance to scroll each time
@@ -355,7 +361,7 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
     return (
       <Pressable
         key={category.id}
-        style={styles.categoryButton}
+        style={!isSelected ? styles.categoryButton : { ...styles.categoryButton, ...styles.selectedIconContainer, backgroundColor: secondaryColor }}
         onPress={() => handleCategoryPress(category)}
       >
         <Box
@@ -376,55 +382,107 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
           )} */}
           <Icon as={IconComponent} size='xl' color='#FFFFFF' />
         </Box>
-        <Text
-          style={
-            isSelected
-              ? { ...styles.categoryLabel, ...styles.selectedLabel }
-              : styles.categoryLabel
-          }
-          numberOfLines={2}
-        >
-          {category.label}
-        </Text>
+        {Platform.OS === 'web' ? (
+          <Text
+            style={
+              isSelected
+                ? { ...styles.categoryLabel, ...styles.selectedLabel }
+                : styles.categoryLabel
+            }
+            numberOfLines={2}
+          >
+            {category.label}
+          </Text>
+        ) : (
+          <ThemedText
+            type='link'
+            style={
+              isSelected
+                ? { ...styles.categoryLabel, ...styles.selectedLabel }
+                : styles.categoryLabel
+            }
+            numberOfLines={2}
+          >
+            {category.label}
+          </ThemedText>
+        )}
+        {Platform.OS === 'web' ? (
+          <Text
+            style={
+              isSelected
+                ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
+                : styles.categoryDescrition
+            }
+            numberOfLines={2}
+          >
+            {category.description}
+          </Text>
+        ) : (
+          <ThemedText
+            style={
+              isSelected
+                ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
+                : styles.categoryDescrition
+            }
+            numberOfLines={2}
+          >
+            {category.description}
+          </ThemedText>
+        )}
+
+        <Button size="xs" variant="solid" action="primary">
+          <ButtonText>Follow</ButtonText>
+        </Button>
+        {/* <Button size="lg" className="rounded-full p-3.5">
+          <ButtonIcon as={EditIcon} />
+        </Button> */}
+        {/* <Pressable style={styles.subscribeButton} onPress={() => onSubscribe?.(category)}>
+          <Icon as={Bell} size='sm' color='#FFFFFF' style={styles.subscribeIcon} />
+          {Platform.OS === 'web' ? (
+            <Text style={styles.subscribeText}>Subscribe </Text>
+          ) : (
+            <ThemedText style={styles.subscribeText}>Subscribe</ThemedText>
+          )}
+        </Pressable> */}
+
       </Pressable>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <VStack space="md">
+      <View style={styles.container}>
+        <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
+          <Icon as={ChevronLeft} size='md' color='#fff' />
+        </Pressable>
 
+        <ScrollView
+          ref={scrollViewRef}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+          style={styles.scrollView}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+        >
+          <View style={styles.categoriesContainer}>
+            {JOB_CATEGORIES.map(renderCategoryButton)}
+          </View>
+        </ScrollView>
 
-      <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
-        <Icon as={ChevronLeft} size='md' color='#fff' />
-      </Pressable>
+        <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
+          <Icon as={ChevronRight} size='md' color='#fff' />
+        </Pressable>
 
-      <ScrollView
-        ref={scrollViewRef}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-        style={styles.scrollView}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}
-      >
-        <View style={styles.categoriesContainer}>
-          {JOB_CATEGORIES.map(renderCategoryButton)}
-        </View>
-      </ScrollView>
-
-
-      <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
-        <Icon as={ChevronRight} size='md' color='#fff' />
-      </Pressable>
-
-    </View>
+      </View>
+    </VStack>
   );
 };
 
 const createStyles = ({
   primaryColor,
   secondaryColor,
-  buttonSize = 120,
+  buttonSize = 150,
 }: {
   primaryColor: string;
   secondaryColor: string;
@@ -435,33 +493,45 @@ const createStyles = ({
     categoriesContainer: {
       alignItems: 'flex-start',
       flexDirection: 'row',
-
     },
     categoryButton: {
       alignItems: 'center',
       justifyContent: 'center',
-      marginRight: 10,
+      marginRight: 8,
       minHeight: 100,
-      width: Platform.OS === 'web' ? buttonSize : buttonSize,
-      height: buttonSize,
-      backgroundColor: '#fff'
+      width: Platform.OS === 'web' ? buttonSize + 40 : buttonSize - 20,
+      height: buttonSize + 80,
+      borderColor: '#E5E7EB',
+      borderWidth: 1,
+      paddingVertical: 16,
+      paddingHorizontal: 8,
     },
     categoryLabel: {
-      color: '#666666',
-      fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 10) + 2,
+      fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 12),
       fontWeight: 'bold',
       lineHeight: Platform.OS === 'web' ? 1.17 : 16,
-      height: Platform.OS === 'web' ? 30 : 48,
+      height: Platform.OS === 'web' ? 64 : 48,
       textAlign: 'center',
+    },
+    categoryDescrition: {
+      fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 12),
+      fontWeight: 'bold',
+      lineHeight: Platform.OS === 'web' ? 1.17 : 16,
+      height: Platform.OS === 'web' ? 64 : 56,
+      textAlign: 'left',
+    },
+    selectedCategoryDescrition: {
+      color: '#FFF',
     },
     container: {
       alignItems: 'center',
       flexDirection: 'row',
-      height: buttonSize + 20,
+      height: buttonSize + 90,
       overflow: 'hidden',
       marginVertical: 0,
       //backgroundColor:secondaryColor
     },
+
     iconContainer: {
       alignItems: 'center',
       backgroundColor: primaryColor,
@@ -527,6 +597,27 @@ const createStyles = ({
     },
     selectedLabel: {
       color: primaryColor,
+      fontWeight: '600',
+    },
+    subscribeButton: {
+      alignItems: 'center',
+      backgroundColor: primaryColor,
+      borderRadius: 25,
+      elevation: 3,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+    },
+    subscribeIcon: {
+      marginRight: 8,
+    },
+    subscribeText: {
+      color: '#FFFFFF',
+      fontSize: 16,
       fontWeight: '600',
     },
   });

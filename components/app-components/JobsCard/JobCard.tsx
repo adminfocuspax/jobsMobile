@@ -229,7 +229,7 @@ const createStyles = ({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       minWidth: 310,
-      elevation: 3,
+      elevation: 8,
       ...Platform.OS === 'web' && {
         border: 1,
         borderWidth: 1,

@@ -16,7 +16,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].primaryColor,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tabIconSelected,
         headerShown: true,
         header: (props: BottomTabHeaderProps) => {
           // With our type declaration, TypeScript now knows about this property

@@ -25,7 +25,7 @@ export function GluestackUIProvider({
 
   useEffect(() => {
     if (mode === 'system') {
-      setColorScheme(systemColorScheme === 'dark' ? 'dark' : 'light');
+      setColorScheme(systemColorScheme === 'dark' ? 'light' : 'light');
     } else {
       setColorScheme(mode);
     }

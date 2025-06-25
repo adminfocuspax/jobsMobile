@@ -52,7 +52,7 @@ const Preferences: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <Box style={styles.scrollContainer}>
         <JobsBreadcrumb currentStep='preferences' />
 
@@ -100,7 +100,7 @@ const Preferences: React.FC = () => {
           />
         </VStack>
       </CenterAligned>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -113,22 +113,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
-    marginBottom: 32,
     width: '100%',
   },
   container: {
-    backgroundColor: '#FFFFFF',
     flex: 1,
     width: '100%',
   },
   content: {
-    paddingBottom: 250,
     width: '100%', // Space for the fixed button container
   },
   encouragementText: {
     color: '#666',
     fontSize: 16,
-    marginBottom: 16,
     paddingHorizontal: 16,
     textAlign: 'center',
   },
@@ -138,8 +134,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     backgroundColor: '#FFFFFF',
-    flexGrow: 1,
-    paddingVertical: 24,
   },
 });
 

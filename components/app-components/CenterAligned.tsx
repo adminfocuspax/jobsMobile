@@ -2,33 +2,68 @@ import React, { ReactNode } from 'react';
 import {
   View,
   StyleSheet,
-  useWindowDimensions,
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import { useResponsive } from '@/context/ResponsiveContext';
 
 interface CenterAlignedProps {
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
   padding?: number;
+  maxWidth?: number; // Allow custom max width override
 }
 
 /**
  * A responsive container component that centers content on the screen.
- * - Maximum width of 520px on larger screens
- * - Full width on screens smaller than 520px
+ * - Adapts to different screen sizes (mobile, tablet, desktop)
+ * - Uses responsive breakpoints for optimal layout
  * - Centered horizontally on the screen
+ * - Tablet-optimized with larger max widths and appropriate padding
  *
  * @param {ReactNode} children - The content to be displayed inside the container
  * @param {StyleProp<ViewStyle>} style - Additional styles to apply to the container (optional)
- * @param {number} padding - Padding to apply to the container (default: 16)
+ * @param {number} padding - Padding to apply to the container (uses responsive default if not provided)
+ * @param {number} maxWidth - Custom max width override (optional)
  */
 const CenterAligned: React.FC<CenterAlignedProps> = ({
   children,
   style = {},
-  padding = 4,
+  padding,
+  maxWidth,
 }) => {
-  const { width } = useWindowDimensions();
+  const {
+    width,
+    isTablet,
+    isSmallScreen,
+    isMediumScreen,
+    isLargeScreen,
+    values
+  } = useResponsive();
+
+  // Calculate responsive max width
+  const getMaxWidth = () => {
+    if (maxWidth) return maxWidth; // Use custom override if provided
+
+    if (isTablet) return 800; // Larger max width for tablets
+    if (isLargeScreen) return 520; // Original size for large phones
+    if (isMediumScreen) return 400; // Slightly smaller for medium phones
+    return 350; // Smaller for small screens
+  };
+
+  // Calculate responsive padding
+  const getPadding = () => {
+    if (padding !== undefined) return padding; // Use provided padding if specified
+    return values.padding; // Use responsive padding from context
+  };
+
+  // Calculate responsive width
+  const getWidth = () => {
+    const calculatedMaxWidth = getMaxWidth();
+
+    // Always use maxWidth for both mobile and tablet
+    return calculatedMaxWidth;
+  };
 
   return (
     <View style={styles.outerContainer}>
@@ -36,10 +71,11 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
         style={[
           styles.container,
           {
-            maxWidth: 520,
-            width: width < 520 ? '100%' : 520,
-            padding,
-            backgroundColor: 'white',
+            maxWidth: getMaxWidth(),
+            width: getWidth(),
+            padding: getPadding(),
+            // Add responsive margin for tablets
+            marginHorizontal: isTablet ? 20 : 10,
           },
           style,
         ]}
@@ -52,14 +88,17 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    borderRadius: 8,
+
+    // Ensure proper flex behavior for content
+    flexShrink: 1,
   },
   outerContainer: {
     alignItems: 'center',
-    backgroundColor: '#FFFFF',
     justifyContent: 'center',
     width: '100%',
+    flex: 1,
+    // Ensure proper layout on tablets
+    minHeight: 0,
   },
 });
 

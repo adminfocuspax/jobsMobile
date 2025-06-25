@@ -7,7 +7,7 @@ export const lightTheme = {
   'color-primary-200': '#ADC8FF',
   'color-primary-300': '#84A9FF',
   'color-primary-400': '#6690FF',
-  'color-primary-500': '#3366FF',
+  'color-primary-500': '#C00000',
   'color-primary-600': '#254EDB',
   'color-primary-700': '#1939B7',
   'color-primary-800': '#102693',
@@ -52,4 +52,5 @@ export const lightTheme = {
 
 export const darkTheme = {
   ...evaDark,
+  'color-primary-500': '#C00000',
 };

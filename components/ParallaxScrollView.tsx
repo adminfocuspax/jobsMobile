@@ -14,6 +14,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { sampleJobs } from './app-components/constant';
 import React from 'react';
 import JobCard from './app-components/JobsCard/JobCard';
+import { ThemedText } from './ThemedText';
 
 const HEADER_HEIGHT = 230;
 
@@ -69,7 +70,7 @@ export default function ParallaxScrollView({
   return (
     <ThemedView>
       {!headerImage && (
-        <Text style={styles.title}>Featured Jobs</Text>
+        <ThemedText type="subtitle">Featured Jobs</ThemedText>
       )}
       <Animated.ScrollView
         ref={scrollRef}
@@ -134,13 +135,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     height: 40,
-    marginLeft: 16,
   },
   content: {
-
-    gap: 16,
     overflow: 'hidden',
-    padding: 8,
   },
   header: {
     height: HEADER_HEIGHT,
@@ -156,7 +153,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
     height: HEADER_HEIGHT + 20,
   },
 });

@@ -22,6 +22,7 @@ import { Box } from '@/components/ui/box';
 import JobsDrawer from './Drawer';
 import CompleteProfile from './CompleteProfile';
 import CenterAligned from './CenterAligned';
+import { ThemedView } from '../ThemedView';
 
 interface CustomHeaderProps {
   title: string;
@@ -61,12 +62,10 @@ export default function CustomHeader({
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.greetingContainer}>
-          {/* <View>
-      <JobsDrawer />
-    </View> */}
+
           <View style={styles.greetingTextContainer}>
             <View style={styles.greetingRow}>
               <Image
@@ -74,6 +73,9 @@ export default function CustomHeader({
                 style={styles.logoImage}
               />
             </View>
+          </View>
+          <View>
+            <JobsDrawer />
           </View>
           {/* <TouchableOpacity 
       onPress={handleProfilePress}
@@ -156,7 +158,7 @@ export default function CustomHeader({
         </View>
       )}
       {/* </CenterAligned> */}
-    </View>
+    </ThemedView>
   );
 }
 
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     borderBottomColor: '#F0F0F0',
     borderBottomWidth: 1,
     marginTop: 40,
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     marginTop: 0,
     paddingHorizontal: 24,
     paddingVertical: 0,

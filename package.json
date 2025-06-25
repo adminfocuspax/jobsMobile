@@ -35,6 +35,7 @@
     "@gluestack-ui/modal": "^0.1.41",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
     "@gluestack-ui/overlay": "^0.1.22",
+    "@gluestack-ui/popover": "^0.1.49",
     "@gluestack-ui/pressable": "^0.1.23",
     "@gluestack-ui/radio": "^0.1.40",
     "@gluestack-ui/select": "^0.1.31",
@@ -53,6 +54,7 @@
     "expo": "^53.0.9",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.6",
+    "expo-dev-client": "~5.2.1",
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
     "expo-linear-gradient": "~14.1.4",
@@ -111,9 +113,6 @@
     "prettier": "^3.5.3",
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
-  },
-  "resolutions": {
-    "ajv": "6.12.6"
   },
   "private": true
 }

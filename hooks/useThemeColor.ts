@@ -18,3 +18,23 @@ export function useThemeColor(
   }
   return Colors[theme][colorName];
 }
+
+export function useThemeColors(
+  props: { light?: string; dark?: string },
+  colorNames: (keyof typeof Colors.light)[]
+) {
+  const theme = useColorScheme() ?? 'light';
+  const result: Record<string, string> = {};
+
+  colorNames.forEach(colorName => {
+    const colorFromProps = props[theme];
+
+    if (colorFromProps) {
+      result[colorName] = colorFromProps;
+    } else {
+      result[colorName] = Colors[theme][colorName];
+    }
+  });
+
+  return result;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View, StyleSheet, Text, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useResponsive } from '../../../context/ResponsiveContext';
+import { ThemedText } from '../../ThemedText';
 
 interface JobData {
   id: string;
@@ -108,7 +109,8 @@ export const RecommendedJobs: React.FC<RecommendedJobsProps> = ({
 }) => (
   <View style={styles.container}>
     {/* Section Title */}
-    <Text style={styles.sectionTitle}>{title}</Text>
+    {/* <Text style={styles.sectionTitle}>{title}</Text> */}
+    <ThemedText type="subtitle">{title}</ThemedText>
 
     {/* Debug info */}
     <Text style={styles.debugText}>Found {jobs?.length || 0} jobs</Text>

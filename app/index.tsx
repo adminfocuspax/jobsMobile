@@ -19,7 +19,7 @@ export default function IndexScreen() {
   };
 
   return (
-    <ThemedView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <ThemedView >
       {/* Optional: Add a button to directly navigate to user details */}
       {/* 
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

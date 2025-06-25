@@ -16,6 +16,7 @@ import { JobPreference } from '@/constants/supermarketJobOptions';
 import { FlashList } from '@shopify/flash-list';
 import { useResponsive } from '@/context/ResponsiveContext';
 import CenterAligned from './CenterAligned';
+import { Scroll } from 'lucide-react-native';
 
 interface JobPreferencesSelectorProps {
   preferences: JobPreference[];

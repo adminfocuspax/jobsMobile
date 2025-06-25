@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Platform, Pressable } from 'react-native';
 import { Text } from '@/components/ui/text';
+import { ThemedText } from '@/components/ThemedText';
 import { VStack } from '@/components/ui/vstack';
 import { HStack } from '@/components/ui/hstack';
 import { useResponsive } from '@/context/ResponsiveContext';
@@ -49,7 +50,7 @@ const JobCategory: React.FC = () => {
   return (
     <View style={styles.container}>
       <VStack space='lg' style={styles.content}>
-        <Text style={styles.title}>Select jobs category</Text>
+        <ThemedText type="subtitle">Select jobs category</ThemedText>
 
         <JobCategorySelector
           onCategorySelect={handleCategorySelect}
@@ -59,15 +60,24 @@ const JobCategory: React.FC = () => {
         {selectedCategory && (
           <VStack space='md'>
             {/* <HStack space='md' style={styles.selectedRow}> */}
-            <Text
+            <ThemedText
+              type='subtitle'
               style={styles.selectedText}
               numberOfLines={2}
               ellipsizeMode="tail"
             >
               Top {selectedCategory.label} Jobs
-            </Text>
+            </ThemedText>
+            <ThemedText
+              type='small'
+              style={styles.selectedTextDescription}
+              numberOfLines={3}
+              ellipsizeMode="tail"
+            >
+              {selectedCategory.description || ''}
+            </ThemedText>
 
-            <Pressable
+            {/* <Pressable
               style={[styles.subscribeButton, isSubscribed && styles.subscribeButtonActive]}
               onPress={handleSubscribe}
             >
@@ -86,7 +96,7 @@ const JobCategory: React.FC = () => {
                   {isSubscribed ? 'Subscribed to' : 'Subscribe to'} {selectedCategory.label}  jobs
                 </Text>
               </HStack>
-            </Pressable>
+            </Pressable> */}
             {/* </HStack> */}
           </VStack>
         )}
@@ -117,10 +127,10 @@ const JobCategory: React.FC = () => {
 const createStyles = (primaryColor: string, successColor: string) =>
   StyleSheet.create({
     container: {
-      backgroundColor: '#FFF',
+      backgroundColor: 'transparent',
     },
     content: {
-      padding: 16,
+      padding: 0,
     },
     noSelection: {
       alignItems: 'center',
@@ -147,10 +157,12 @@ const createStyles = (primaryColor: string, successColor: string) =>
       justifyContent: 'space-between',
     },
     selectedText: {
-      color: '#333333',
-      fontSize: 24,
       flex: 1,
       ...(Platform.OS !== 'web' && { lineHeight: 36 })
+    },
+    selectedTextDescription: {
+      flex: 1,
+
     },
     selectedTitle: {
       color: primaryColor,
@@ -163,14 +175,6 @@ const createStyles = (primaryColor: string, successColor: string) =>
       color: '#666666',
       fontSize: 12,
       fontStyle: 'italic',
-    },
-    title: {
-      color: '#000',
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 16,
-      textAlign: 'left',
-      height: 28,
     },
     subscribeButton: {
       backgroundColor: primaryColor,

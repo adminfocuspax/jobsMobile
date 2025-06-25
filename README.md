@@ -60,9 +60,8 @@ After starting simulator, use this command to see the app in it
 
 `npx expo start -a`
 
-
+npx expo start --clear
 
 npx expo prebuild --clean --platform android
-
 
 npx expo run:android
