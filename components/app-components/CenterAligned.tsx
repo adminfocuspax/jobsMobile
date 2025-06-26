@@ -6,6 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useResponsive } from '@/context/ResponsiveContext';
+import { Platform } from 'react-native';
 
 interface CenterAlignedProps {
   children: ReactNode;
@@ -73,9 +74,11 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
           {
             maxWidth: getMaxWidth(),
             width: getWidth(),
-            padding: getPadding(),
+            padding: 8,
             // Add responsive margin for tablets
-            marginHorizontal: isTablet ? 20 : 10,
+
+            // backgroundColor: '#000',
+            //marginHorizontal: isTablet ? 20 : 10,
           },
           style,
         ]}
@@ -88,9 +91,9 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-
     // Ensure proper flex behavior for content
     flexShrink: 1,
+    ...(Platform.OS === 'web' && { borderWidth: 1, borderColor: '#ccc' }),
   },
   outerContainer: {
     alignItems: 'center',

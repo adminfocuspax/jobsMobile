@@ -316,8 +316,8 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
     useState<JobCategoryInterface | null>(selectedCategory);
   const scrollViewRef = useRef<ScrollView>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const { primaryColor, secondaryColor } = useThemeColors({}, ['primaryColor', 'secondaryColor']);
-  const styles = createStyles({ primaryColor, secondaryColor });
+  const { primaryColor, secondaryColor, borderColor } = useThemeColors({}, ['primaryColor', 'secondaryColor', 'borderColor']);
+  const styles = createStyles({ primaryColor, secondaryColor, borderColor });
 
   const SCROLL_DISTANCE = 300; // Distance to scroll each time
 
@@ -364,75 +364,79 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
         style={!isSelected ? styles.categoryButton : { ...styles.categoryButton, ...styles.selectedIconContainer, backgroundColor: secondaryColor }}
         onPress={() => handleCategoryPress(category)}
       >
-        <Box
-          style={
-            isSelected
-              ? { ...styles.iconContainer, ...styles.selectedIconContainer }
-              : styles.iconContainer
-          }
-        >
-          {/* {Platform.OS === 'web' ? (
+        <View style={styles.categoryContent}>
+          <Box
+            style={
+              isSelected
+                ? { ...styles.iconContainer, ...styles.selectedIconContainer }
+                : styles.iconContainer
+            }
+          >
+            {/* {Platform.OS === 'web' ? (
+              <Text
+                style={{ color: '#FFFFFF', fontSize: 18, fontWeight: 'bold' }}
+              >
+                {category.label.charAt(0)}
+              </Text>
+            ) : (
+              <Icon as={IconComponent} size='xl' color='#FFFFFF' />
+            )} */}
+            <Icon as={IconComponent} size='xl' color='#FFFFFF' />
+          </Box>
+          {Platform.OS === 'web' ? (
             <Text
-              style={{ color: '#FFFFFF', fontSize: 18, fontWeight: 'bold' }}
+              style={
+                isSelected
+                  ? { ...styles.categoryLabel, ...styles.selectedLabel }
+                  : styles.categoryLabel
+              }
+              numberOfLines={2}
             >
-              {category.label.charAt(0)}
+              {category.label}
             </Text>
           ) : (
-            <Icon as={IconComponent} size='xl' color='#FFFFFF' />
-          )} */}
-          <Icon as={IconComponent} size='xl' color='#FFFFFF' />
-        </Box>
-        {Platform.OS === 'web' ? (
-          <Text
-            style={
-              isSelected
-                ? { ...styles.categoryLabel, ...styles.selectedLabel }
-                : styles.categoryLabel
-            }
-            numberOfLines={2}
-          >
-            {category.label}
-          </Text>
-        ) : (
-          <ThemedText
-            type='link'
-            style={
-              isSelected
-                ? { ...styles.categoryLabel, ...styles.selectedLabel }
-                : styles.categoryLabel
-            }
-            numberOfLines={2}
-          >
-            {category.label}
-          </ThemedText>
-        )}
-        {Platform.OS === 'web' ? (
-          <Text
-            style={
-              isSelected
-                ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
-                : styles.categoryDescrition
-            }
-            numberOfLines={2}
-          >
-            {category.description}
-          </Text>
-        ) : (
-          <ThemedText
-            style={
-              isSelected
-                ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
-                : styles.categoryDescrition
-            }
-            numberOfLines={2}
-          >
-            {category.description}
-          </ThemedText>
-        )}
+            <ThemedText
+              type='link'
+              style={
+                isSelected
+                  ? { ...styles.categoryLabel, ...styles.selectedLabel }
+                  : styles.categoryLabel
+              }
+              numberOfLines={2}
+            >
+              {category.label}
+            </ThemedText>
+          )}
+          {Platform.OS === 'web' ? (
+            <Text
+              style={
+                isSelected
+                  ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
+                  : styles.categoryDescrition
+              }
 
-        <Button size="xs" variant="solid" action="primary">
-          <ButtonText>Follow</ButtonText>
-        </Button>
+            >
+              {category.description}
+            </Text>
+          ) : (
+            <ThemedText
+              style={
+                isSelected
+                  ? { ...styles.categoryDescrition, ...styles.selectedCategoryDescrition }
+                  : styles.categoryDescrition
+              }
+              numberOfLines={2}
+            >
+              {category.description}
+            </ThemedText>
+          )}
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <Button size="xs" variant="solid" action="primary">
+            <ButtonText>Follow</ButtonText>
+          </Button>
+        </View>
         {/* <Button size="lg" className="rounded-full p-3.5">
           <ButtonIcon as={EditIcon} />
         </Button> */}
@@ -452,9 +456,11 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   return (
     <VStack space="md">
       <View style={styles.container}>
-        <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
-          <Icon as={ChevronLeft} size='md' color='#fff' />
-        </Pressable>
+        {Platform.OS === 'web' && (
+          <Pressable style={styles.scrollButtonLeft} onPress={scrollLeft}>
+            <Icon as={ChevronLeft} size='md' color='#fff' />
+          </Pressable>
+        )}
 
         <ScrollView
           ref={scrollViewRef}
@@ -470,9 +476,11 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
           </View>
         </ScrollView>
 
-        <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
-          <Icon as={ChevronRight} size='md' color='#fff' />
-        </Pressable>
+        {Platform.OS === 'web' && (
+          <Pressable style={styles.scrollButtonRight} onPress={scrollRight}>
+            <Icon as={ChevronRight} size='md' color='#fff' />
+          </Pressable>
+        )}
 
       </View>
     </VStack>
@@ -482,10 +490,12 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
 const createStyles = ({
   primaryColor,
   secondaryColor,
+  borderColor,
   buttonSize = 150,
 }: {
   primaryColor: string;
   secondaryColor: string;
+  borderColor: string;
   buttonSize?: number;
 
 }) =>
@@ -496,29 +506,44 @@ const createStyles = ({
     },
     categoryButton: {
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       marginRight: 8,
       minHeight: 100,
       width: Platform.OS === 'web' ? buttonSize + 40 : buttonSize - 20,
-      height: buttonSize + 80,
-      borderColor: '#E5E7EB',
+      height: Platform.OS === 'web' ? buttonSize + 180 : buttonSize + 80,
+      borderColor: borderColor,
       borderWidth: 1,
       paddingVertical: 16,
       paddingHorizontal: 8,
+      flexDirection: 'column',
+    },
+    categoryContent: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+    },
+    buttonContainer: {
+      width: '100%',
+      paddingTop: 8,
     },
     categoryLabel: {
       fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 12),
       fontWeight: 'bold',
       lineHeight: Platform.OS === 'web' ? 1.17 : 16,
       height: Platform.OS === 'web' ? 64 : 48,
-      textAlign: 'center',
+      textAlign: 'left',
     },
     categoryDescrition: {
       fontSize: Platform.OS === 'web' ? buttonSize / 10 : (buttonSize / 12),
       fontWeight: 'bold',
-      lineHeight: Platform.OS === 'web' ? 1.17 : 16,
-      height: Platform.OS === 'web' ? 64 : 56,
+      lineHeight: Platform.OS === 'web' ? 1.4 : 16,
+      height: Platform.OS === 'web' ? 40 : 56,
       textAlign: 'left',
+      overflow: 'hidden',
+      ...(Platform.OS === 'web' && {
+        textOverflow: 'ellipsis',
+
+      }),
     },
     selectedCategoryDescrition: {
       color: '#FFF',
@@ -526,7 +551,7 @@ const createStyles = ({
     container: {
       alignItems: 'center',
       flexDirection: 'row',
-      height: buttonSize + 90,
+      height: Platform.OS === 'web' ? buttonSize + 180 : buttonSize + 90,
       overflow: 'hidden',
       marginVertical: 0,
       //backgroundColor:secondaryColor
@@ -550,16 +575,16 @@ const createStyles = ({
       elevation: 3,
       height: 40,
       justifyContent: 'center',
-      left: 0,
+      left: 10,
       position: 'absolute',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      top: '50%',
+      top: '40%',
       transform: [{ translateY: -20 }],
       width: 40,
-      zIndex: 10,
+      zIndex: 999999,
     },
     scrollButtonRight: {
       alignItems: 'center',
@@ -569,12 +594,12 @@ const createStyles = ({
       height: 40,
       justifyContent: 'center',
       position: 'absolute',
-      right: 0,
+      right: 10,
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      top: '50%',
+      top: '40%',
       transform: [{ translateY: -20 }],
       width: 40,
       zIndex: 10,

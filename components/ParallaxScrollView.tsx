@@ -69,16 +69,16 @@ export default function ParallaxScrollView({
 
   return (
     <ThemedView>
-      {!headerImage && (
+      {/* {!headerImage && (
         <ThemedText type="subtitle">Featured Jobs</ThemedText>
-      )}
+      )} */}
       <Animated.ScrollView
         ref={scrollRef}
         scrollEventThrottle={16}
         scrollIndicatorInsets={{ bottom }}
         contentContainerStyle={{ paddingBottom: bottom }}
       >
-        {!headerImage && (
+        {/* {!headerImage && (
           <View style={styles.carouselContainer} >
             <Carousel
               loop
@@ -88,7 +88,7 @@ export default function ParallaxScrollView({
               autoPlayInterval={6000}
               data={sampleJobs}
               snapEnabled={true}
-              mode='horizontal-stack'
+              mode='vertical-stack'
               pagingEnabled={true}
               scrollAnimationDuration={1000}
               modeConfig={{
@@ -109,8 +109,9 @@ export default function ParallaxScrollView({
                 </View>
               )}
             />
+
           </View>
-        )}
+        )} */}
         {headerImage &&
           <Animated.View
             style={[

@@ -17,6 +17,7 @@ export const Colors = {
     primaryColor,
     secondaryColor: '#1d3557',
     thirdColor: '#8ecae6',
+    borderColor: '#E5E7EB',
     tabIconSelected: tintColorLight,
   },
   dark: {
@@ -28,6 +29,7 @@ export const Colors = {
     secondaryColor: '#1d3557',
     thirdColor: '#8ecae6',
     tabIconDefault: '#9BA1A6',
+    borderColor: '#1F2937',
     tabIconSelected: tintColorDark,
   },
 };

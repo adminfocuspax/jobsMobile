@@ -9,12 +9,17 @@ import { VStack } from '@/components/ui/vstack';
 import { Box } from '@/components/ui/box';
 import { Image } from '@/components/ui/image';
 import { useResponsive } from '@/context/ResponsiveContext';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Colors } from '@/constants/Colors';
 import {
   Heart,
   MapPin,
   Calendar,
 } from 'lucide-react-native';
 import { useNavigationGuard } from '@/hooks';
+import { useThemeColors } from '../../../hooks/useThemeColor';
+import { Badge, BadgeText } from '../../ui/badge';
+import { VideoComponent } from '../../video';
 
 export interface JobInterface {
   id: string;
@@ -48,9 +53,25 @@ const JobCard: React.FC<JobCardProps> = ({
   isFavorite = false,
   isGradient = false
 }) => {
-  const { primaryColor, secondaryColor, thirdColor, values } = useResponsive();
-  const styles = createStyles({ primaryColor, secondaryColor, isGradient, thirdColor });
+  const { thirdColor, values } = useResponsive();
+  const { primaryColor, secondaryColor, borderColor } = useThemeColors({}, ['primaryColor', 'secondaryColor', 'borderColor']);
+  const colorScheme = useColorScheme();
+  const isDarkTheme = colorScheme === 'dark';
+  const themeColors = Colors[colorScheme ?? 'light'];
+
+  console.log('Current theme:', colorScheme, 'isDark:', isDarkTheme);
+
+  const styles = createStyles({
+    primaryColor,
+    secondaryColor,
+    isGradient,
+    thirdColor,
+    isDarkTheme,
+    themeColors,
+    borderColor
+  });
   const { safeNavigate } = useNavigationGuard({ debounceTime: 1000 });
+
 
   const handleViewDetails = () => {
     console.log("view details", job);
@@ -158,11 +179,14 @@ const JobCard: React.FC<JobCardProps> = ({
         {/* Keywords */}
         <HStack style={styles.keywordsContainer}>
           {job.keywords.slice(0, 3).map((keyword, index) => (
-            <Box key={index} style={styles.keywordTag}>
-              <Text style={styles.keywordText}>
-                {keyword}
-              </Text>
-            </Box>
+            // <Box key={index} style={styles.keywordTag}>
+            //   <Text style={styles.keywordText}>
+            //     {keyword}
+            //   </Text>
+            // </Box>
+            <Badge key={`${keyword}-${index}`} action="success" variant="outline">
+              <BadgeText>{keyword}</BadgeText>
+            </Badge>
           ))}
         </HStack>
 
@@ -174,6 +198,14 @@ const JobCard: React.FC<JobCardProps> = ({
           </Text>
         </HStack>
       </VStack>
+      {/* <VideoComponent
+        url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+        height={180}
+        controls={false}
+        autoPlay={true}
+        muted={true}
+        resizeMode="cover"
+      /> */}
 
       {/* Footer with action buttons */}
       <HStack style={styles.footer}>
@@ -210,18 +242,24 @@ const createStyles = ({
   secondaryColor,
   thirdColor,
   isGradient,
+  isDarkTheme,
+  themeColors,
+  borderColor,
 }: {
   primaryColor: string;
   secondaryColor: string;
   thirdColor: string;
   isGradient: boolean;
+  isDarkTheme: boolean;
+  borderColor: string,
+  themeColors: typeof Colors.light;
 }) =>
   StyleSheet.create({
     card: {
       padding: 16,
-      backgroundColor: isGradient ? thirdColor : '#FFFFFF',
+      backgroundColor: isGradient ? thirdColor : !isDarkTheme ? '#FFFFFF' : '#000',
       borderRadius: 12,
-      shadowColor: '#000',
+      shadowColor: isDarkTheme ? '#FFFFFF' : '#000',
       shadowOffset: {
         width: 0,
         height: 2,
@@ -229,12 +267,16 @@ const createStyles = ({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       minWidth: 310,
-      elevation: 8,
+
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: borderColor,
       ...Platform.OS === 'web' && {
-        border: 1,
         borderWidth: 1,
-        borderColor: '#E5E7EB',
+        borderStyle: 'solid',
+        borderColor: borderColor,
         width: 380,
+        minWidth: !isGradient ? "100%" : 410,
 
       }
     },
@@ -277,7 +319,7 @@ const createStyles = ({
     companyName: {
       fontSize: 16,
       fontWeight: '600',
-      color: '#1F2937',
+      color: themeColors.text,
       marginBottom: 2,
     },
     locationContainer: {
@@ -306,7 +348,7 @@ const createStyles = ({
     jobTitle: {
       fontSize: 18,
       fontWeight: 'bold',
-      color: '#111827',
+      color: themeColors.text,
       marginBottom: 12,
       ...(Platform.OS !== 'web' && { lineHeight: 24 }),
     },

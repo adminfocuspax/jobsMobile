@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
+
   },
   scrollContent: {
     flexGrow: 1,

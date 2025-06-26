@@ -116,7 +116,7 @@ const JobCategory: React.FC = () => {
               onApply={handleApply}
               onToggleFavorite={handleToggleFavorite}
             />
-            {index === 1 && <RecommendedJobs />}
+            {/* {index === 1 && <RecommendedJobs />} */}
           </React.Fragment>
         ))}
       </VStack>
