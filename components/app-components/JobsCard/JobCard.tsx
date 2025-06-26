@@ -19,7 +19,7 @@ import {
 import { useNavigationGuard } from '@/hooks';
 import { useThemeColors } from '../../../hooks/useThemeColor';
 import { Badge, BadgeText } from '../../ui/badge';
-import { VideoComponent } from '../../video';
+
 
 export interface JobInterface {
   id: string;
