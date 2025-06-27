@@ -20,6 +20,7 @@ type ResponsiveContextType = {
   isMediumScreen: boolean;
   isLargeScreen: boolean;
   isTablet: boolean;
+  isDesktop: boolean;
   isWeb: boolean;
   width: number;
   height: number;
@@ -48,6 +49,7 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({
   const isMediumScreen = dimensions.width >= 375 && dimensions.width < 414; // iPhone 12, etc.
   const isLargeScreen = dimensions.width >= 414; // iPhone 12 Pro Max, etc.
   const isTablet = dimensions.width >= 768; // iPad, etc.
+  const isDesktop = dimensions.width > 1024; // Desktop screens
   const isWeb = Platform.OS === 'web';
 
   console.log('isSmallScreen', isSmallScreen);
@@ -103,6 +105,7 @@ export const ResponsiveProvider: React.FC<{ children: React.ReactNode }> = ({
     isLargeScreen,
     isTablet,
     isWeb,
+    isDesktop,
     width: dimensions.width,
     height: dimensions.height,
     values,

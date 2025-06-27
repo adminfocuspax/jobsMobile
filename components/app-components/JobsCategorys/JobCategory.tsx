@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Platform, Pressable } from 'react-native';
+import { View, StyleSheet, Platform, Pressable, ScrollView } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { ThemedText } from '@/components/ThemedText';
 import { VStack } from '@/components/ui/vstack';
@@ -47,6 +47,7 @@ const JobCategory: React.FC = () => {
   };
 
 
+  // For mobile/tablet: use original View structure (parent handles scrolling)
   return (
     <View style={styles.container}>
       <VStack space='lg' style={styles.content}>
@@ -65,6 +66,7 @@ const JobCategory: React.FC = () => {
               style={styles.selectedText}
               numberOfLines={2}
               ellipsizeMode="tail"
+              selectable={false}
             >
               Top {selectedCategory.label} Jobs
             </ThemedText>
@@ -73,6 +75,7 @@ const JobCategory: React.FC = () => {
               style={styles.selectedTextDescription}
               numberOfLines={3}
               ellipsizeMode="tail"
+              selectable={false}
             >
               {selectedCategory.description || ''}
             </ThemedText>
@@ -128,6 +131,11 @@ const createStyles = (primaryColor: string, successColor: string) =>
   StyleSheet.create({
     container: {
       backgroundColor: 'transparent',
+      flex: 1,
+    },
+    scrollContent: {
+      flexGrow: 1,
+      paddingBottom: 20,
     },
     content: {
       padding: 0,
@@ -158,11 +166,12 @@ const createStyles = (primaryColor: string, successColor: string) =>
     },
     selectedText: {
       flex: 1,
+
       ...(Platform.OS !== 'web' && { lineHeight: 36 })
     },
     selectedTextDescription: {
       flex: 1,
-
+      minHeight: 52,
     },
     selectedTitle: {
       color: primaryColor,

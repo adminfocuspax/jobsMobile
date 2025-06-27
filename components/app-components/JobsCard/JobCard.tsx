@@ -15,6 +15,7 @@ import {
   Heart,
   MapPin,
   Calendar,
+  Bookmark,
 } from 'lucide-react-native';
 import { useNavigationGuard } from '@/hooks';
 import { useThemeColors } from '../../../hooks/useThemeColor';
@@ -159,7 +160,7 @@ const JobCard: React.FC<JobCardProps> = ({
         {/* Favorite Icon */}
         <Pressable onPress={handleToggleFavorite} style={styles.favoriteButton}>
           <Icon
-            as={Heart}
+            as={Bookmark}
             size="md"
             style={[
               styles.favoriteIcon,
@@ -184,7 +185,7 @@ const JobCard: React.FC<JobCardProps> = ({
             //     {keyword}
             //   </Text>
             // </Box>
-            <Badge key={`${keyword}-${index}`} action="success" variant="outline">
+            <Badge key={`${keyword}-${index}`} action={isDarkTheme ? 'muted' : 'success'} variant="solid">
               <BadgeText>{keyword}</BadgeText>
             </Badge>
           ))}
@@ -267,7 +268,6 @@ const createStyles = ({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       minWidth: 310,
-
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: borderColor,
@@ -275,7 +275,7 @@ const createStyles = ({
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: borderColor,
-        width: 380,
+        width: 360,
         minWidth: !isGradient ? "100%" : 410,
 
       }

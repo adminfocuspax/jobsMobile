@@ -6,12 +6,12 @@ export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   type?:
-    | 'small'
-    | 'default'
-    | 'title'
-    | 'defaultSemiBold'
-    | 'subtitle'
-    | 'link';
+  | 'small'
+  | 'default'
+  | 'title'
+  | 'defaultSemiBold'
+  | 'subtitle'
+  | 'link';
 };
 
 export function ThemedText({
@@ -35,6 +35,7 @@ export function ThemedText({
         type === 'link' ? styles.link : undefined,
         style,
       ]}
+      selectable={false}
       {...rest}
     />
   );

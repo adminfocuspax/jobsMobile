@@ -6,7 +6,9 @@ import {
   ScrollView,
   GestureResponderEvent,
   Pressable,
+  useColorScheme,
 } from 'react-native';
+import { Menu, View } from 'lucide-react-native';
 import {
   Drawer,
   DrawerBackdrop,
@@ -25,6 +27,7 @@ import {
 } from '@/components/ui/avatar';
 import i18n from '../../i18n/i18n';
 import ProfileAvatar from './ProfileAvatar';
+import { useResponsive } from '../../context/ResponsiveContext';
 
 interface MenuItem {
   icon: SymbolViewProps['name'];
@@ -35,6 +38,9 @@ interface MenuItem {
 
 function JobsDrawer() {
   const [showDrawer, setShowDrawer] = useState(false);
+
+  const colorScheme = useColorScheme();
+  const isDarkTheme = colorScheme === 'dark';
 
   // Function to toggle language
   const toggleLanguage = () => {
@@ -70,11 +76,13 @@ function JobsDrawer() {
   return (
     <>
       <Pressable onPress={() => setShowDrawer(true)}>
-        <Image
-          source={require('@/assets/images/menu.png')}
-          style={{ width: 24, height: 24 }}
+        <Menu
+          style={{ paddingVertical: 32 }}
+          size={32}
+          color={isDarkTheme ? 'white' : 'black'}
         />
       </Pressable>
+
 
       <Drawer
         isOpen={showDrawer}

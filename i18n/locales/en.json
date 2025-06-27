@@ -102,6 +102,15 @@
     "exploreJobs": "Explore Jobs",
     "description": "1k+ jobs waiting for you"
   },
+  "menu": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "bookmarks": "Bookmarks",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
   "common": {
     "next": "Next",
     "previous": "Previous",

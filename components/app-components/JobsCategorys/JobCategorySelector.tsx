@@ -5,6 +5,7 @@ import {
   Pressable,
   View,
   Platform,
+  useColorScheme,
 } from 'react-native';
 import { useResponsive } from '@/context/ResponsiveContext';
 import { useThemeColor, useThemeColors } from '@/hooks/useThemeColor';
@@ -316,8 +317,10 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
     useState<JobCategoryInterface | null>(selectedCategory);
   const scrollViewRef = useRef<ScrollView>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  // const colorScheme = useColorScheme();
+  const isDarkTheme = true;
   const { primaryColor, secondaryColor, borderColor } = useThemeColors({}, ['primaryColor', 'secondaryColor', 'borderColor']);
-  const styles = createStyles({ primaryColor, secondaryColor, borderColor });
+  const styles = createStyles({ primaryColor, secondaryColor, borderColor, isDarkTheme });
 
   const SCROLL_DISTANCE = 300; // Distance to scroll each time
 
@@ -361,7 +364,7 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
     return (
       <Pressable
         key={category.id}
-        style={!isSelected ? styles.categoryButton : { ...styles.categoryButton, ...styles.selectedIconContainer, backgroundColor: secondaryColor }}
+        style={!isSelected ? styles.categoryButton : { ...styles.categoryButton, ...styles.selectedIconContainer, backgroundColor: 'transparent' }}
         onPress={() => handleCategoryPress(category)}
       >
         <View style={styles.categoryContent}>
@@ -433,8 +436,8 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button size="xs" variant="solid" action="primary">
-            <ButtonText>Follow</ButtonText>
+          <Button size="xs" variant="solid" action={isSelected ? 'secondary' : 'primary'}>
+            <ButtonText style={{ color: '#FFFFFF' }}>Follow</ButtonText>
           </Button>
         </View>
         {/* <Button size="lg" className="rounded-full p-3.5">
@@ -492,11 +495,13 @@ const createStyles = ({
   secondaryColor,
   borderColor,
   buttonSize = 150,
+  isDarkTheme
 }: {
   primaryColor: string;
   secondaryColor: string;
   borderColor: string;
   buttonSize?: number;
+  isDarkTheme: boolean;
 
 }) =>
   StyleSheet.create({
@@ -510,8 +515,9 @@ const createStyles = ({
       marginRight: 8,
       minHeight: 100,
       width: Platform.OS === 'web' ? buttonSize + 40 : buttonSize - 20,
-      height: Platform.OS === 'web' ? buttonSize + 180 : buttonSize + 80,
+      height: Platform.OS === 'web' ? buttonSize + 120 : buttonSize + 80,
       borderColor: borderColor,
+      borderRadius: 10,
       borderWidth: 1,
       paddingVertical: 16,
       paddingHorizontal: 8,
@@ -546,7 +552,7 @@ const createStyles = ({
       }),
     },
     selectedCategoryDescrition: {
-      color: '#FFF',
+      color: !isDarkTheme ? secondaryColor : primaryColor,
     },
     container: {
       alignItems: 'center',
@@ -581,7 +587,7 @@ const createStyles = ({
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      top: '40%',
+      top: '50%',
       transform: [{ translateY: -20 }],
       width: 40,
       zIndex: 999999,
@@ -599,7 +605,7 @@ const createStyles = ({
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
-      top: '40%',
+      top: '50%',
       transform: [{ translateY: -20 }],
       width: 40,
       zIndex: 10,

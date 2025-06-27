@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  useColorScheme,
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { useNavigation } from 'expo-router';
@@ -23,6 +24,7 @@ import JobsDrawer from './Drawer';
 import CompleteProfile from './CompleteProfile';
 import CenterAligned from './CenterAligned';
 import { ThemedView } from '../ThemedView';
+import { useResponsive } from '../../context/ResponsiveContext';
 
 interface CustomHeaderProps {
   title: string;
@@ -37,9 +39,15 @@ export default function CustomHeader({
 }: CustomHeaderProps) {
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
+  const { isDesktop } = useResponsive();
   const [searchText, setSearchText] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const colorScheme = useColorScheme();
+  const isDarkTheme = colorScheme === 'dark';
+  const logoImage = isDarkTheme
+    ? require('@/assets/images/header-logo-dark.png')
+    : require('@/assets/images/header-logo.png');
 
   const handleProfilePress = () => {
     // This function is simplified as we're not using animations or profile menu
@@ -61,22 +69,29 @@ export default function CustomHeader({
     }
   }, []);
 
-  return (
-    <ThemedView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.greetingContainer}>
+  const dynamicStyles = createStyles(isDarkTheme);
 
-          <View style={styles.greetingTextContainer}>
-            <View style={styles.greetingRow}>
-              <Image
-                source={require('@/assets/images/header-logo.png')}
-                style={styles.logoImage}
-              />
+  return (
+    <ThemedView style={dynamicStyles.container}>
+      <View style={dynamicStyles.header}>
+        <View style={dynamicStyles.greetingContainer}>
+
+          <View style={dynamicStyles.greetingTextContainer}>
+            <View style={dynamicStyles.greetingRow}>
+              {logoImage &&
+                <Image
+                  source={logoImage}
+                  style={dynamicStyles.logoImage}
+                />
+              }
+
             </View>
           </View>
           <View>
             <JobsDrawer />
           </View>
+
+
           {/* <TouchableOpacity 
       onPress={handleProfilePress}
       activeOpacity={0.8}
@@ -98,19 +113,19 @@ export default function CustomHeader({
           <CompleteProfile />
         </Box> */}
       {showSearch && (
-        <View style={styles.searchWrapper}>
-          <ThemedText style={styles.subText} type='subtitle'>
+        <View style={dynamicStyles.searchWrapper}>
+          <ThemedText style={dynamicStyles.subText} type='subtitle'>
             {t('header.opportunity')}
           </ThemedText>
-          <View style={styles.searchContainer}>
+          <View style={dynamicStyles.searchContainer}>
             <IconSymbol
               size={20}
               name='magnifyingglass'
               color='#666'
-              style={styles.searchIcon}
+              style={dynamicStyles.searchIcon}
             />
             <TextInput
-              style={styles.searchInput}
+              style={dynamicStyles.searchInput}
               placeholder='Search jobs...'
               value={searchText}
               onChangeText={handleSearch}
@@ -122,7 +137,7 @@ export default function CustomHeader({
                   setSearchText('');
                   setShowSuggestions(false);
                 }}
-                style={styles.clearButton}
+                style={dynamicStyles.clearButton}
               >
                 <IconSymbol size={20} name='xmark.circle.fill' color='#666' />
               </TouchableOpacity>
@@ -132,13 +147,13 @@ export default function CustomHeader({
       )}
 
       {showSuggestions && suggestions.length > 0 && (
-        <View style={styles.suggestionsContainer}>
+        <View style={dynamicStyles.suggestionsContainer}>
           <FlatList
             data={suggestions}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={styles.suggestionItem}
+                style={dynamicStyles.suggestionItem}
                 onPress={() => {
                   setSearchText(item);
                   setShowSuggestions(false);
@@ -148,9 +163,9 @@ export default function CustomHeader({
                   size={16}
                   name='magnifyingglass'
                   color='#666'
-                  style={styles.suggestionIcon}
+                  style={dynamicStyles.suggestionIcon}
                 />
-                <ThemedText style={styles.suggestionText}>{item}</ThemedText>
+                <ThemedText style={dynamicStyles.suggestionText}>{item}</ThemedText>
               </TouchableOpacity>
             )}
             keyboardShouldPersistTaps='handled'
@@ -162,7 +177,7 @@ export default function CustomHeader({
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (isDarkTheme: boolean) => StyleSheet.create({
   clearButton: {
     padding: 4,
   },
@@ -187,7 +202,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: 'transparent',
+    backgroundColor: !isDarkTheme ? '#FFFFFF' : '#000',
     marginTop: 0,
     paddingHorizontal: 24,
     paddingVertical: 0,
@@ -201,7 +216,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: isDarkTheme ? '#000' : '#FFFFFF',
     borderRadius: 8,
     flexDirection: 'row',
     height: 40,
@@ -211,7 +226,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   searchInput: {
-    color: '#333',
+    color: isDarkTheme ? '#FFFFFF' : '#333',
     flex: 1,
     fontSize: 16,
     height: '100%',
@@ -221,7 +236,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   subText: {
-    color: '#000',
+    color: isDarkTheme ? '#FFFFFF' : '#000',
     fontSize: 14,
     fontWeight: '500',
     marginBottom: 8,
@@ -237,16 +252,16 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   suggestionText: {
-    color: '#333',
+    color: isDarkTheme ? '#FFFFFF' : '#333',
     fontSize: 14,
   },
   suggestionsContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: isDarkTheme ? '#000' : '#FFFFFF',
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     elevation: 3,
     maxHeight: 200,
-    shadowColor: '#000',
+    shadowColor: isDarkTheme ? '#FFFFFF' : '#000',
     shadowOffset: {
       width: 0,
       height: 2,

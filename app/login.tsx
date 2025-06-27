@@ -32,6 +32,7 @@ import {
 import '../i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { useNavigationGuard } from '../hooks/useNavigationGuard';
+import CenterAligned from '../components/app-components/CenterAligned';
 
 export default function LoginScreen() {
   const [hidePassword, setHidePassword] = useState(true);
@@ -60,55 +61,59 @@ export default function LoginScreen() {
       style={{ flex: 1 }}
       keyboardVerticalOffset={Platform.OS === 'ios' ? -height * 0.1 : 0}
     >
+
+
+
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
         bounces={false}
       >
-        <ThemedView
-          style={[
-            styles.container,
-            {
-              padding: values.padding,
-              maxWidth: values.maxWidth,
-              alignSelf: 'center',
-            },
-          ]}
-        >
-          <View style={styles.inputContainer}>
-            <Image
-              source={require('../assets/images/login.png')}
-              style={[styles.logo, { height: 160, width: 160 }]}
-              resizeMode='contain'
-            />
-            <Text bold size='xl' className='text-center'>
-              {t('auth.authMessage')}
-            </Text>
+        <CenterAligned maxWidth={500}>
+          <ThemedView
+            style={[
+              styles.container,
+              {
+                padding: values.padding,
+                maxWidth: values.maxWidth,
+                alignSelf: 'center',
+              },
+            ]}
+          >
+            <View style={styles.inputContainer}>
+              <Image
+                source={require('../assets/images/login.png')}
+                style={[styles.logo, { height: 160, width: 160 }]}
+                resizeMode='contain'
+              />
+              <Text bold size='xl' className='text-center'>
+                {t('auth.authMessage')}
+              </Text>
 
-            <FormControl className='mt-8'>
-              {/* <FormControlLabel>
+              <FormControl className='mt-8'>
+                {/* <FormControlLabel>
                 <FormControlLabelText>{t('auth.email')}</FormControlLabelText>
               </FormControlLabel> */}
-              <Text size='md' className='text-center'>
-                {t('auth.emailMessage')}
-              </Text>
-              <Input
-                variant={values.inputStyle}
-                size='md'
-                className='w-full mb-4 px-3 py-2 mt-4'
-                style={{ height: values.inputHeight }}
-              >
-                <InputField
-                  placeholder={t('auth.email')}
-                  keyboardType='email-address'
-                  autoCapitalize='none'
-                  className='text-typography-900 h-full'
-                  style={{ fontSize: values.fontSize - 2 }}
-                />
-              </Input>
-            </FormControl>
+                <Text size='md' className='text-center'>
+                  {t('auth.emailMessage')}
+                </Text>
+                <Input
+                  variant={values.inputStyle}
+                  size='md'
+                  className='w-full mb-4 px-3 py-2 mt-4'
+                  style={{ height: values.inputHeight }}
+                >
+                  <InputField
+                    placeholder={t('auth.email')}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                    className='text-typography-900 h-full'
+                    style={{ fontSize: values.fontSize - 2 }}
+                  />
+                </Input>
+              </FormControl>
 
-            {/* <FormControl>
+              {/* <FormControl>
               <FormControlLabel>
                 <FormControlLabelText>Password</FormControlLabelText>
               </FormControlLabel>
@@ -131,49 +136,51 @@ export default function LoginScreen() {
               </Input>
             </FormControl> */}
 
-            <View style={styles.termsContainer}>
-              <Checkbox
-                isChecked={acceptedTerms}
-                onChange={setAcceptedTerms}
-                size='sm'
-                isInvalid={false}
-                isDisabled={false} value={''}              >
-                <CheckboxIndicator>
-                  <CheckboxIcon as={CheckIcon} />
-                </CheckboxIndicator>
-                <CheckboxLabel>
-                  <Text size='sm'>
-                    I accept the{' '}
-                    <TouchableOpacity onPress={openTermsAndConditions}>
-                      <Text
-                        size='sm'
-                        className='text-primary-600'
-                        style={styles.link}
-                      >
-                        Terms and Conditions
-                      </Text>
-                    </TouchableOpacity>
-                  </Text>
-                </CheckboxLabel>
-              </Checkbox>
+              <View style={styles.termsContainer}>
+                <Checkbox
+                  isChecked={acceptedTerms}
+                  onChange={setAcceptedTerms}
+                  size='sm'
+                  isInvalid={false}
+                  isDisabled={false} value={''}              >
+                  <CheckboxIndicator>
+                    <CheckboxIcon as={CheckIcon} />
+                  </CheckboxIndicator>
+                  <CheckboxLabel>
+                    <Text size='sm'>
+                      I accept the{' '}
+                      <TouchableOpacity onPress={openTermsAndConditions}>
+                        <Text
+                          size='sm'
+                          className='text-primary-600'
+                          style={styles.link}
+                        >
+                          Terms and Conditions
+                        </Text>
+                      </TouchableOpacity>
+                    </Text>
+                  </CheckboxLabel>
+                </Checkbox>
+              </View>
             </View>
-          </View>
 
-          <GradientButton
-            width={values.buttonWidth}
-            padding={values.buttonPadding}
-            fontSize={values.fontSize}
-            text={t('auth.login')}
-            onPress={handleLogin}
-            disabled={false}
-          />
+            <GradientButton
+              width={340}
+              padding={values.buttonPadding}
+              fontSize={values.fontSize}
+              text={t('auth.login')}
+              onPress={handleLogin}
+              disabled={false}
+            />
 
-          <View style={styles.infoDiv}>
-            <Text size='sm' className='text-center'>
-              {t('auth.allirightReserved')}
-            </Text>
-          </View>
-        </ThemedView>
+            <View style={styles.infoDiv}>
+              <Text size='sm' className='text-center'>
+                {t('auth.allirightReserved')}
+              </Text>
+            </View>
+          </ThemedView>
+        </CenterAligned>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -188,6 +195,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     minHeight: '100%',
     width: '100%',
+    // maxWidth: 340,
   },
   infoDiv: {
     marginBottom: 80,
@@ -197,6 +205,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     padding: 0,
     width: '100%',
+    maxWidth: 420,
   },
   link: {
     textDecorationLine: 'underline',

@@ -53,7 +53,7 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
     }
   }, []);
 
-  // Filter preferences based on search query - compute this on the fly instead of storing in state
+  // Filter preferences based on search query - compute this on the fly instead of storing iłn state
   const filteredPreferences = React.useMemo(() => {
     if (searchQuery.trim() === '') {
       return preferences;
@@ -65,6 +65,17 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
         pref.value.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery, preferences]);
+
+  // Create an enhanced data array that includes selection state
+  // This forces FlashList to re-render when selection state changes
+  const enhancedData = React.useMemo(
+    () =>
+      filteredPreferences.map(pref => ({
+        ...pref,
+        isSelected: selectedPreferences.some(p => p.id === pref.id),
+      })),
+    [filteredPreferences, selectedPreferences]
+  );
 
   // Handle preference selection/deselection
   const togglePreferenceSelection = (preference: JobPreference) => {
@@ -147,17 +158,6 @@ const JobPreferencesSelector: React.FC<JobPreferencesSelectorProps> = ({
 
   // Render all preferences based on platform
   const renderAllPreferences = () => {
-    // Create an enhanced data array that includes selection state
-    // This forces FlashList to re-render when selection state changes
-    const enhancedData = React.useMemo(
-      () =>
-        filteredPreferences.map(pref => ({
-          ...pref,
-          isSelected: selectedPreferences.some(p => p.id === pref.id),
-        })),
-      [filteredPreferences, selectedPreferences]
-    );
-
     // Use FlashList with try/catch fallback for native platforms
     try {
       return (
@@ -331,7 +331,7 @@ const createStyles = (primaryColor: string) =>
       width: '100%',
     },
     content: {
-      height: 800,
+      height: 700,
       padding: 16,
       width: '100%',
     },
@@ -366,7 +366,7 @@ const createStyles = (primaryColor: string) =>
       flex: 1,
     },
     preferencesGrid: {
-      paddingBottom: 200,
+      paddingBottom: 20,
     },
     removeIcon: {
       color: '#666',

@@ -36,6 +36,7 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
   const {
     width,
     isTablet,
+    isDesktop,
     isSmallScreen,
     isMediumScreen,
     isLargeScreen,
@@ -46,7 +47,7 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
   const getMaxWidth = () => {
     if (maxWidth) return maxWidth; // Use custom override if provided
 
-    if (isTablet) return 800; // Larger max width for tablets
+    if (isTablet || isDesktop) return 800; // Larger max width for tablets
     if (isLargeScreen) return 520; // Original size for large phones
     if (isMediumScreen) return 400; // Slightly smaller for medium phones
     return 350; // Smaller for small screens
@@ -74,7 +75,7 @@ const CenterAligned: React.FC<CenterAlignedProps> = ({
           {
             maxWidth: getMaxWidth(),
             width: getWidth(),
-            padding: 8,
+            padding: 16,
             // Add responsive margin for tablets
 
             // backgroundColor: '#000',
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   container: {
     // Ensure proper flex behavior for content
     flexShrink: 1,
-    ...(Platform.OS === 'web' && { borderWidth: 1, borderColor: '#ccc' }),
+    //...(Platform.OS === 'web' && { borderLeftWidth: 1, borderRightWidth: 1, borderColor: '#ccc' }),
   },
   outerContainer: {
     alignItems: 'center',
