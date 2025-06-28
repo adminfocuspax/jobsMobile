@@ -15,7 +15,8 @@ import DummyComponent from '../../components/app-components/DummyComponent';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { isDesktop } = useResponsive();
+  const { isDesktop, smallDesktop } = useResponsive();
+  const styles = createStyles(smallDesktop);
 
   const TabsComponent = (
     <Tabs
@@ -91,7 +92,7 @@ export default function TabLayout() {
           <View style={styles.tabsContainer}>
             {TabsComponent}
           </View>
-          <DummyComponent />
+          {/* <DummyComponent /> */}
         </View>
       </View>
     );
@@ -101,12 +102,12 @@ export default function TabLayout() {
   return TabsComponent;
 }
 
-const styles = StyleSheet.create({
+const createStyles = (smallDesktop: boolean) => StyleSheet.create({
   desktopContainer: {
     flex: 1,
     flexDirection: 'row',
     margin: 0,
-    paddingLeft: '20%',
+    paddingLeft: smallDesktop ? '0%' : '0%',
     backgroundColor: '#fff',
   },
   desktopContent: {

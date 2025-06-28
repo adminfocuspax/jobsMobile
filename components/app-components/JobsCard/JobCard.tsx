@@ -20,22 +20,9 @@ import {
 import { useNavigationGuard } from '@/hooks';
 import { useThemeColors } from '../../../hooks/useThemeColor';
 import { Badge, BadgeText } from '../../ui/badge';
+import { JobInterface } from '../constant';
 
 
-export interface JobInterface {
-  id: string;
-  title: string;
-  company: {
-    name: string;
-    logo?: string;
-    location: string;
-  };
-  keywords: string[];
-  postedDate: string; // ISO date string or relative time like "2 days ago"
-  description?: string;
-  salary?: string;
-  type?: string; // full-time, part-time, contract, etc.
-}
 
 interface JobCardProps {
   job: JobInterface;
@@ -123,7 +110,20 @@ const JobCard: React.FC<JobCardProps> = ({
   return (
     <Card variant="elevated" style={styles.card}>
       {/* Header with company logo, name, location and favorite icon */}
+      <HStack style={styles.keywordsContainer}>
+        {job.keywords.slice(0, 3).map((keyword, index) => (
+          // <Box key={index} style={styles.keywordTag}>
+          //   <Text style={styles.keywordText}>
+          //     {keyword}
+          //   </Text>
+          // </Box>
+          <Badge key={`${keyword}-${index}`} action={isDarkTheme ? 'muted' : 'success'} variant="solid">
+            <BadgeText>{keyword}</BadgeText>
+          </Badge>
+        ))}
+      </HStack>
       <HStack style={styles.header}>
+
         <HStack style={styles.companyInfo}>
           {/* Company Logo */}
           <Box style={styles.logoContainer}>
@@ -148,12 +148,22 @@ const JobCard: React.FC<JobCardProps> = ({
             <Text style={styles.companyName} numberOfLines={1}>
               {job.company.name}
             </Text>
-            <HStack style={styles.locationContainer}>
-              <Icon as={MapPin} size="xs" style={styles.locationIcon} />
-              <Text style={styles.locationText} numberOfLines={1}>
-                {job.company.location}
-              </Text>
-            </HStack>
+            {job.company.location.slice(0, 2).map((location, index) => (
+              <HStack key={`location-${index}`} style={styles.locationContainer}>
+                <Icon as={MapPin} size="xs" style={styles.locationIcon} />
+                <Text style={styles.locationText} numberOfLines={1}>
+                  {location.area}, {location.city}, {location.state}
+                </Text>
+              </HStack>
+            ))}
+            {job.company.location.length > 2 && (
+              <HStack style={styles.locationContainer}>
+                <Icon as={MapPin} size="xs" style={styles.locationIcon} />
+                <Text style={styles.locationText} numberOfLines={1}>
+                  +{job.company.location.length - 2} more location{job.company.location.length - 2 > 1 ? 's' : ''}
+                </Text>
+              </HStack>
+            )}
           </VStack>
         </HStack>
 
@@ -178,18 +188,7 @@ const JobCard: React.FC<JobCardProps> = ({
         </Text>
 
         {/* Keywords */}
-        <HStack style={styles.keywordsContainer}>
-          {job.keywords.slice(0, 3).map((keyword, index) => (
-            // <Box key={index} style={styles.keywordTag}>
-            //   <Text style={styles.keywordText}>
-            //     {keyword}
-            //   </Text>
-            // </Box>
-            <Badge key={`${keyword}-${index}`} action={isDarkTheme ? 'muted' : 'success'} variant="solid">
-              <BadgeText>{keyword}</BadgeText>
-            </Badge>
-          ))}
-        </HStack>
+
 
         {/* Posted Date */}
         <HStack style={styles.postedDateContainer}>
@@ -258,6 +257,8 @@ const createStyles = ({
   StyleSheet.create({
     card: {
       padding: 16,
+      marginBottom: 16,
+      marginHorizontal: 8,
       backgroundColor: isGradient ? thirdColor : !isDarkTheme ? '#FFFFFF' : '#000',
       borderRadius: 12,
       shadowColor: isDarkTheme ? '#FFFFFF' : '#000',

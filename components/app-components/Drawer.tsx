@@ -28,6 +28,7 @@ import {
 import i18n from '../../i18n/i18n';
 import ProfileAvatar from './ProfileAvatar';
 import { useResponsive } from '../../context/ResponsiveContext';
+import { isWeb } from '@gluestack-ui/nativewind-utils/IsWeb';
 
 interface MenuItem {
   icon: SymbolViewProps['name'];
@@ -75,11 +76,13 @@ function JobsDrawer() {
 
   return (
     <>
-      <Pressable onPress={() => setShowDrawer(true)}>
+      <Pressable
+        onPress={() => setShowDrawer(true)}
+        style={{ paddingVertical: 16 }}
+      >
         <Menu
-          style={{ paddingVertical: 32 }}
           size={32}
-          color={isDarkTheme ? 'white' : 'black'}
+          color={!isDarkTheme ? 'black' : 'white'}
         />
       </Pressable>
 

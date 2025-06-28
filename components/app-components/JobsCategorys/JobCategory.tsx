@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Platform, Pressable, ScrollView } from 'react-native';
+import { View, StyleSheet, Platform, Pressable, ScrollView, FlatList } from 'react-native';
 import { Text } from '@/components/ui/text';
 import { ThemedText } from '@/components/ThemedText';
 import { VStack } from '@/components/ui/vstack';
@@ -10,8 +10,9 @@ import JobCategorySelector, {
   JobCategoryInterface,
 } from './JobCategorySelector';
 import { RecommendedJobs } from '../RecommendedJobs';
-import JobCard, { JobInterface } from '../JobsCard/JobCard';
-import { sampleJobs } from '../constant';
+import JobCard from '../JobsCard/JobCard';
+import { JobInterface, sampleJobs } from '../constant';
+import CenterAligned from '../CenterAligned';
 
 const JobCategory: React.FC = () => {
   const { primaryColor, successColor } = useResponsive();
@@ -46,41 +47,51 @@ const JobCategory: React.FC = () => {
     // Add subscription logic here
   };
 
+  const renderJobItem = ({ item, index }: { item: JobInterface; index: number }) => (
+    <JobCard
+      job={item}
+      isFavorite={false}
+      onViewDetails={handleViewDetails}
+      onApply={handleApply}
+      onToggleFavorite={handleToggleFavorite}
+    />
+  );
+
 
   // For mobile/tablet: use original View structure (parent handles scrolling)
   return (
     <View style={styles.container}>
       <VStack space='lg' style={styles.content}>
-        <ThemedText type="subtitle">Select jobs category</ThemedText>
+        {/* <ThemedText type="subtitle">Select jobs category</ThemedText> */}
 
         <JobCategorySelector
           onCategorySelect={handleCategorySelect}
           selectedCategory={selectedCategory}
         />
+        <CenterAligned style={styles.scrollContent}>
+          {selectedCategory && (
+            <VStack space='md'>
+              {/* <HStack space='md' style={styles.selectedRow}> */}
+              <ThemedText
+                type='subtitle'
+                style={styles.selectedText}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+                selectable={false}
+              >
+                Top {selectedCategory.label} Jobs
+              </ThemedText>
+              <ThemedText
+                type='small'
+                style={styles.selectedTextDescription}
+                numberOfLines={3}
+                ellipsizeMode="tail"
+                selectable={false}
+              >
+                {selectedCategory.description || ''}
+              </ThemedText>
 
-        {selectedCategory && (
-          <VStack space='md'>
-            {/* <HStack space='md' style={styles.selectedRow}> */}
-            <ThemedText
-              type='subtitle'
-              style={styles.selectedText}
-              numberOfLines={2}
-              ellipsizeMode="tail"
-              selectable={false}
-            >
-              Top {selectedCategory.label} Jobs
-            </ThemedText>
-            <ThemedText
-              type='small'
-              style={styles.selectedTextDescription}
-              numberOfLines={3}
-              ellipsizeMode="tail"
-              selectable={false}
-            >
-              {selectedCategory.description || ''}
-            </ThemedText>
-
-            {/* <Pressable
+              {/* <Pressable
               style={[styles.subscribeButton, isSubscribed && styles.subscribeButtonActive]}
               onPress={handleSubscribe}
             >
@@ -100,28 +111,27 @@ const JobCategory: React.FC = () => {
                 </Text>
               </HStack>
             </Pressable> */}
-            {/* </HStack> */}
-          </VStack>
-        )}
+              {/* </HStack> */}
+            </VStack>
+          )}
 
-        {/* {!selectedCategory && (
+          {/* {!selectedCategory && (
           <View style={styles.noSelection}>
             <Text style={styles.noSelectionText}>No category selected</Text>
           </View>
         )} */}
 
-        {sampleJobs.slice(0, 4).map((job, index) => (
-          <React.Fragment key={job.id}>
-            <JobCard
-              job={job}
-              isFavorite={false}
-              onViewDetails={handleViewDetails}
-              onApply={handleApply}
-              onToggleFavorite={handleToggleFavorite}
-            />
-            {/* {index === 1 && <RecommendedJobs />} */}
-          </React.Fragment>
-        ))}
+
+          <FlatList
+            data={sampleJobs.slice(0, 4)}
+            renderItem={renderJobItem}
+            keyExtractor={(item) => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={false}
+          />
+
+        </CenterAligned>
+
       </VStack>
     </View>
   );
@@ -134,6 +144,7 @@ const createStyles = (primaryColor: string, successColor: string) =>
       flex: 1,
     },
     scrollContent: {
+      width: '100%',
       flexGrow: 1,
       paddingBottom: 20,
     },

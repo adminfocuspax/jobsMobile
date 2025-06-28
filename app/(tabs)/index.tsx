@@ -18,16 +18,16 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={true}
         nestedScrollEnabled={true}
       >
-        <CenterAligned>
-          <ParallaxScrollView
-            headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-            headerImage={null}
-          >
-            {/* <ThemedView style={styles.mainContent}> */}
-            <JobCategory />
-            {/* </ThemedView> */}
-          </ParallaxScrollView>
-        </CenterAligned>
+        {/* <CenterAligned> */}
+        <ParallaxScrollView
+          headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+          headerImage={null}
+        >
+          {/* <ThemedView style={styles.mainContent}> */}
+          <JobCategory />
+          {/* </ThemedView> */}
+        </ParallaxScrollView>
+        {/* </CenterAligned> */}
       </ScrollView>
     </>
   );

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, useColorScheme } from 'react-native';
 import { Box } from '@/components/ui/box';
 import { VStack } from '@/components/ui/vstack';
 import { HStack } from '@/components/ui/hstack';
@@ -22,12 +22,17 @@ import {
 import CenterAligned from '../../components/app-components/CenterAligned';
 import JobPreferencesSelector from '../../components/app-components/JobPreferencesSelector';
 import JobsBreadcrumb from '../../components/app-components/JobsBreadcrumb';
+import { useThemeColor } from '../../hooks/useThemeColor';
+import useNavigationGuard from '../../hooks/useNavigationGuard';
 
 
 const TRANSLATION_KEY = 'userInfo.preferences';
 
 const Preferences: React.FC = () => {
   const { values } = useResponsive();
+  const backgroundColor = useThemeColor({}, 'background');
+  const { safeReplace } = useNavigationGuard({ debounceTime: 1000 });
+
   const { t } = useTranslation();
   const [selectedPreferences, setSelectedPreferences] = useState<
     JobPreference[]
@@ -43,7 +48,9 @@ const Preferences: React.FC = () => {
   const handleSubmit = () => {
     console.log('Job preferences submitted:', selectedPreferences);
     // Navigate to the next page
-    router.push('/(tabs)');
+    // safeReplace('/(tabs)');
+    safeReplace({ pathname: '/(tabs)' });
+
   };
 
   // Handle back button
@@ -52,7 +59,7 @@ const Preferences: React.FC = () => {
   };
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor }}>
       <Box style={styles.scrollContainer}>
         <JobsBreadcrumb currentStep='preferences' />
 

@@ -322,7 +322,7 @@ const JobCategorySelector: React.FC<JobCategorySelectorProps> = ({
   const { primaryColor, secondaryColor, borderColor } = useThemeColors({}, ['primaryColor', 'secondaryColor', 'borderColor']);
   const styles = createStyles({ primaryColor, secondaryColor, borderColor, isDarkTheme });
 
-  const SCROLL_DISTANCE = 300; // Distance to scroll each time
+  const SCROLL_DISTANCE = 800; // Distance to scroll each time
 
   const scrollLeft = () => {
     const newPosition = Math.max(0, scrollPosition - SCROLL_DISTANCE);

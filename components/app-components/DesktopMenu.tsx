@@ -41,6 +41,9 @@ export default function DesktopMenu({ activeRoute }: DesktopMenuProps) {
     const { t } = useTranslation();
     const colorScheme = useColorScheme();
     const isDarkTheme = colorScheme === 'dark';
+    const logoImage = isDarkTheme
+        ? require('@/assets/images/header-logo-dark.png')
+        : require('@/assets/images/header-logo.png');
 
     const menuItems: MenuItem[] = [
         {
@@ -112,7 +115,12 @@ export default function DesktopMenu({ activeRoute }: DesktopMenuProps) {
         <ThemedView style={dynamicStyles.container}>
             {/* Logo Section */}
             <View style={dynamicStyles.logoSection}>
-                <ThemedText style={dynamicStyles.logoText}>imartJobs</ThemedText>
+                {logoImage &&
+                    <Image
+                        source={logoImage}
+                        style={{ width: 200, height: 45 }}
+                    />
+                }
             </View>
 
             {/* Navigation Menu */}
@@ -198,6 +206,10 @@ const createStyles = (isDarkTheme: boolean) =>
             paddingVertical: 20,
             paddingHorizontal: 16,
             justifyContent: 'space-between',
+        },
+        logoImage: {
+            width: 100,
+            height: 100,
         },
         logoSection: {
             paddingBottom: 20,

@@ -27,9 +27,9 @@ const TRANSLATION_KEY = 'userInfo.education';
 
 const EducationDetails: React.FC = () => {
   // State for form fields
-  const { values, primaryColor } = useResponsive();
+  const { values, primaryColor, isDesktop } = useResponsive();
   const { t } = useTranslation();
-  const styles = createStyles(primaryColor);
+  const styles = createStyles({ primaryColor, isDesktop });
   const [educationLevel, setEducationLevel] = useState('');
   const [degree, setDegree] = useState('');
   const [showDegreeOptions, setShowDegreeOptions] = useState(false);
@@ -101,7 +101,7 @@ const EducationDetails: React.FC = () => {
       >
         <Pressable onPress={handleOutsidePress} style={{ flex: 1 }}>
           <JobsBreadcrumb currentStep='education' />
-          <CenterAligned>
+          <CenterAligned maxWidth={isDesktop ? 520 : 420}>
             <Box style={styles.container}>
               <VStack space='xl' style={styles.content}>
                 <Heading size='xl' style={styles.heading}>
@@ -317,7 +317,7 @@ const EducationDetails: React.FC = () => {
   );
 };
 
-const createStyles = (primaryColor: string) =>
+const createStyles = ({ primaryColor, isDesktop }: { primaryColor: string, isDesktop: boolean }) =>
   StyleSheet.create({
     scrollContainer: {
       flexGrow: 1,
@@ -372,13 +372,11 @@ const createStyles = (primaryColor: string) =>
     buttonContainer: {
       alignItems: 'center',
       backgroundColor: '#FFFFFF',
-      bottom: 50,
       elevation: 0,
       justifyContent: 'center',
-      left: 0,
-      paddingVertical: 16,
       position: 'absolute',
-      right: 0,
+      paddingVertical: 16,
+      bottom: 40,
       width: '100%',
     },
     buttonRow: {

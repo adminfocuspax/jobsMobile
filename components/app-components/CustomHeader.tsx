@@ -87,11 +87,9 @@ export default function CustomHeader({
 
             </View>
           </View>
-          <View>
+          {!isDesktop && <View>
             <JobsDrawer />
-          </View>
-
-
+          </View>}
           {/* <TouchableOpacity 
       onPress={handleProfilePress}
       activeOpacity={0.8}
