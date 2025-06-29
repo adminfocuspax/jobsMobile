@@ -55,7 +55,7 @@ export function IconSymbol({
       color={color}
       size={size}
       name={MAPPING[name] || 'help-outline'}
-      style={style}
+    // style={style}
     />
   );
 }

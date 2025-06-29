@@ -49,7 +49,8 @@ const Preferences: React.FC = () => {
     console.log('Job preferences submitted:', selectedPreferences);
     // Navigate to the next page
     // safeReplace('/(tabs)');
-    safeReplace({ pathname: '/(tabs)' });
+    router.push('/(app)/(tabs)')
+    // safeReplace({ pathname: '/(apps)/(tabs)' });
 
   };
 

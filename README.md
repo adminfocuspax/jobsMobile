@@ -65,3 +65,5 @@ npx expo start --clear
 npx expo prebuild --clean --platform android
 
 npx expo run:android
+
+npx expo-router-sitemap
