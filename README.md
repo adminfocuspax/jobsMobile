@@ -66,4 +66,4 @@ npx expo prebuild --clean --platform android
 
 npx expo run:android
 
-npx expo-router-sitemap
+npx tsc --noEmit npx expo-router-sitemap
